@@ -1,0 +1,70 @@
+// navbar dashboard
+.navbarDashboard {
+  border-radius: 0 !important;
+  height: 67px;
+  align-items: center;
+  .responsive {
+    display: none;
+    svg {
+      font-size: 30px;
+    }
+  }
+  b {
+    font-size: 20px;
+  }
+  .nav-rigthSide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+.dropdownNav {
+  position: relative;
+  .compte {
+    display: flex;
+    align-items: center;
+    margin: 0px 20px;
+    cursor: pointer;
+    height: 100%;
+  }
+  svg {
+    font-size: 30px;
+  }
+  .compte-contant {
+    display: none;
+    top: 100%;
+    flex-direction: column;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+
+    right: auto;
+    bottom: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1;
+    a {
+      display: flex;
+      padding: 25px;
+      transition-duration: 0.5s;
+      cursor: pointer;
+      width: 100%;
+      color: #aeaeae !important;
+      svg {
+        margin-right: 10px;
+      }
+    }
+    a:hover {
+      background-color: #4cbc9a;
+      color: #fff;
+    }
+  }
+}
+@media screen and (max-width: 991px) {
+  .Navbarcomponent {
+    .responsive {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.StudentParent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 500px;
+  .StudentParentInput {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 250px;
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+    .ParentInput {
+      margin: 20px 0;
+      input {
+        width: 100%;
+        margin: 10px 0;
+        padding: 5px;
+      }
+    }
+    a {
+      width: 100%;
+    }
+    button {
+      width: 100%;
+      outline: none;
+      border: none;
+      color: #fff;
+      background-color: #4cbc9a;
+      border-radius: 5px;
+      font-size: 20px;
+    }
+    b {
+      color: #4cbc9a;
+      font-size: 30px;
+    }
+  }
+}

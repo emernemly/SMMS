@@ -1,0 +1,121 @@
+.Dashboard {
+  margin: 50px;
+  border-radius: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 50px !important;
+  .tableLogDashboard {
+    background-color: #fff;
+
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    overflow-y: scroll;
+    height: 300px;
+    .titleDashboard {
+      input {
+        width: 50%;
+        padding: 9px;
+      }
+    }
+    .All-btn {
+      display: flex;
+      gap: 10px;
+      button {
+        background-color: #4cbc9a;
+        border-radius: 5px;
+      }
+      a {
+        color: #4cbc9a;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    table {
+      width: 100%;
+      thead {
+        tr {
+          th {
+            //  #;
+
+            padding: 10px;
+            border: 0.5px solid #000;
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-bottom: 1px solid #e1e1e1;
+          td {
+            padding: 12px;
+            color: #777;
+            border-right: 0.5px solid #000;
+
+            .btn-Setting {
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              padding: 0 12px;
+
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .espace {
+    margin: 30px 0;
+  }
+  .lineBar {
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 300px !important;
+    margin-bottom: 20px;
+    canvas {
+      height: 100% !important;
+      width: 100% !important;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black !important;
+
+    .cordonnee {
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition-duration: 0.5s;
+      b {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+a:hover {
+  .clrown {
+    background-color: #f7eae8;
+  }
+}
+a:hover {
+  .clrtow {
+    background-color: #edfbf4;
+  }
+}
+a:hover {
+  .clrthree {
+    background-color: #eeedfb;
+  }
+}
+a:hover {
+  .clrfour {
+    background-color: #e8f2f5;
+  }
+}

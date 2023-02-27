@@ -1,0 +1,98 @@
+.sidebar {
+  width: 100%;
+  position: absolute;
+  top: 66px;
+  bottom: 0;
+  left: 0px;
+  overflow-y: scroll;
+  background-color: #fff;
+  color: #fff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  z-index: 999;
+  transition-duration: 0.5s;
+
+  ul {
+    padding-left: 0;
+    margin: 12px 0;
+    a {
+      text-decoration: none;
+      width: 100%;
+    }
+    li {
+      padding: 20px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition-duration: 0.3s;
+    }
+    .activeSideBare {
+      background-color: #4cbc9a;
+
+      color: #fff !important;
+    }
+    a:hover {
+      color: #fff !important;
+
+      li {
+        background-color: #4cbc9a;
+      }
+    }
+    a {
+      color: #aeaeae !important;
+
+      svg {
+        font-size: 18px;
+        margin: 0 7px;
+      }
+    }
+    .dropdown {
+      transition-duration: 0.5s;
+      .drop {
+        display: none;
+      }
+      .dropOpne {
+        display: block;
+      }
+    }
+  }
+}
+.userName {
+  color: #fff !important;
+  padding: 17px;
+  background-color: #4cbc9a;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    font-size: 27px;
+  }
+}
+.main-content {
+  flex: 1;
+}
+.sidebarcontainer {
+  background-color: #fff;
+  padding-right: 0px !important;
+}
+.parentcontainer {
+  position: relative;
+  min-height: 100vh;
+}
+
+.offcanvas-header {
+  background-color: #fff !important;
+  color: #4cbc9a !important;
+}
+.offcanvas-title {
+  color: #4cbc9a !important;
+}
+.offcanvas-body {
+  background-color: #fff !important;
+}
+@media screen and (max-width: 991px) {
+  .parentcontainer {
+    display: none !important;
+  }
+}

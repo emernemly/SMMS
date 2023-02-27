@@ -1,0 +1,126 @@
+.titleDashboard {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  h3 {
+    color: #777;
+  }
+  button {
+    background-color: #fe7c00;
+    color: #fff;
+    border: none;
+    padding: 7px 20px;
+  }
+}
+.tableDashboard {
+  background-color: #fff;
+  margin: 50px;
+  border-radius: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 50px !important;
+  overflow-y: scroll;
+  height: 600px;
+  .titleDashboard {
+    input {
+      width: 27%;
+      padding: 9px;
+    }
+  }
+  .All-btn {
+    display: flex;
+    gap: 10px;
+    button {
+      background-color: #4cbc9a;
+      border-radius: 5px;
+    }
+    a {
+      color: #4cbc9a;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  table {
+    width: 100%;
+    thead {
+      tr {
+        th {
+          //  #;
+
+          padding: 10px;
+          border: 0.5px solid #000;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #e1e1e1;
+        td {
+          padding: 12px;
+          color: #777;
+          border-right: 0.5px solid #000;
+
+          .btn-Setting {
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 0 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+    .Permissions {
+      .OwnPermissions {
+        background-color: #17a2b8;
+        color: #fff;
+        display: inline-block;
+        padding: 0.25em 0.4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin: 5px;
+      }
+    }
+  }
+}
+.btn-add {
+  display: flex;
+  gap: 20px;
+}
+.bg-ver {
+  background-color: #f2f2f2;
+}
+@media screen and (max-width: 900px) {
+  .tableDashboard {
+    background-color: #fff;
+    margin: 28px !important;
+    border-radius: 12px;
+    padding-left: 11px !important;
+    padding-right: 11px !important;
+    margin-bottom: 50px !important;
+    overflow-y: scroll;
+    height: 600px;
+  }
+}
+@media screen and (max-width: 838px) {
+  .tableDashboard {
+    .titleDashboard {
+      flex-direction: column !important;
+      height: max-content !important;
+      margin-bottom: 20px !important;
+      gap: 20px !important;
+      input {
+        width: 100% !important;
+      }
+    }
+  }
+}

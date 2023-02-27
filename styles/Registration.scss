@@ -1,0 +1,60 @@
+//dashboard content
+.Role {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    p {
+      color: #000;
+    }
+  }
+  .RegistrationSection {
+    display: flex;
+    flex-direction: column;
+    transition-duration: 0.5s;
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    height: 130px;
+    margin: 12px;
+    padding: 20px;
+    cursor: pointer;
+
+    .role-img {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  .RegistrationSection:hover {
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+  }
+}
+
+//input Form
+.formInput {
+  background-color: #fff;
+  padding: 30px;
+  margin: 30px;
+  button {
+    padding: 3px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #4cbc9a;
+    border: none;
+  }
+  .inputType {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  .radioType {
+    display: flex;
+    gap: 20px;
+  }
+}
+.dropNav {
+  display: flex !important;
+}

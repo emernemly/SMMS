@@ -1,0 +1,40 @@
+.Navbarcomponent {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: 0 0 12px 12px;
+  border-bottom: 3px solid #4cbc9a;
+  a {
+    text-decoration: none;
+  }
+  h3 {
+    color: #4cbc9a;
+  }
+  .navbar__button {
+    color: #000;
+    text-decoration: none;
+    margin: 0 12px;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+  }
+  .navbar__button:hover {
+    color: #fff !important;
+    background-color: #4cbc9a !important;
+  }
+  .activeNav {
+    color: #fff !important;
+    background-color: #4cbc9a !important;
+  }
+}
+.navbar-expand-lg {
+  .navbar-collapse {
+    justify-content: flex-end;
+    .navbar-nav {
+      margin-right: 0 !important;
+    }
+  }
+}

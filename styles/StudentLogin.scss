@@ -1,0 +1,38 @@
+.studentLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  .login {
+    background-color: #fff;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 400px;
+    a {
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 5px 10px;
+      margin: 15px 0;
+    }
+    button {
+      background-color: #4cbc9a;
+      outline: none;
+      border: none;
+      padding: 5px;
+      color: #fff;
+      border-radius: 5px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}

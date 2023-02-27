@@ -1,0 +1,38 @@
+.role-card {
+  .title {
+    padding: 12px;
+    border-bottom: 0.5px solid #000;
+  }
+  button {
+    padding: 3px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #4cbc9a;
+    border: none;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .role-input {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin: 12px 0;
+    }
+    input {
+      width: 100%;
+      padding: 9px;
+    }
+    .selection {
+      position: relative;
+      border: 1px solid #000;
+      .select2-selection__rendered {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          list-style: none;
+        }
+      }
+    }
+  }
+}
