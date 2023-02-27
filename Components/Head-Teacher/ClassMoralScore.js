@@ -57,9 +57,16 @@ const ClassMoralScore = () => {
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
-    html2canvas(input).then((canvas) => {
+    html2canvas(document.body, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
+      const pdf = new jsPDF({
+        unit: 'px',
+        format: 'a4',
+        orientation: 'portrait',
+        lineHeight: 1.5,
+        compress: true,
+        resolution: 96,
+      });
       pdf.addImage(
         imgData,
         'PNG',

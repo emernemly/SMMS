@@ -74,7 +74,7 @@ const NavbarHeadTeacher = () => {
                   {' '}
                   <RiContactsFill /> <p>Profile</p>
                 </Link>
-                <Link href="/Dashboard-System-Administrator/Setting-Admin">
+                <Link href="/">
                   <FiLogIn />
                   <p>Log Out</p>
                 </Link>

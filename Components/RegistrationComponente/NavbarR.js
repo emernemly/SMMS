@@ -87,11 +87,11 @@ const NavbarR = () => {
               {' '}
               <AiFillSetting /> <p>Setting</p>
             </Link>
-            <a>
+            <Link href="/">
               {' '}
               <FiLogIn />
               <p>Log Out</p>
-            </a>
+            </Link>
           </div>
         </div>
         <>

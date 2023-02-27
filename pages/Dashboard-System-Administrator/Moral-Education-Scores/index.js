@@ -96,7 +96,7 @@ const MoralEducationScores = () => {
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
-    html2canvas(input).then((canvas) => {
+    html2canvas(document.body, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       pdf.addImage(
