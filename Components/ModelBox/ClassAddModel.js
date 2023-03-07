@@ -80,7 +80,7 @@ const ClassAddModel = () => {
                       </b>
 
                       <input
-                        type="text"
+                        type="date"
                         name="time"
                         {...register('time', { required: true })}
                       />

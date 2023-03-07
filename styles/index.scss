@@ -98,3 +98,20 @@ h2 {
     border-radius: 10px;
   }
 }
+.dropdown {
+  transition-duration: 0.5s;
+  .drop {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #eee;
+
+    margin: 0px !important;
+  }
+  .dropOpne {
+    max-height: 500px;
+  }
+}
+.mr {
+  margin: 0 0 0 7px;
+}

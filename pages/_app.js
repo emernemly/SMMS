@@ -10,6 +10,7 @@ import '../styles/DashboardSA.scss';
 import '../styles/ProfileAdmin.scss';
 import '../styles/NavDashboard.scss';
 import '../styles/StudentParent.scss';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {

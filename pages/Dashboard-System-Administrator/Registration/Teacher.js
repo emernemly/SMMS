@@ -3,8 +3,43 @@ import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
 import { useForm } from 'react-hook-form';
-
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 const Teacher = () => {
+  const animatedComponents = makeAnimated();
+  const Permissions = [
+    { title: 'import users', role: 'admin' },
+    { title: 'set permissions', role: 'admin' },
+    { title: 'import basic student data', role: 'admin' },
+    { title: 'import teacher', role: 'admin' },
+    { title: 'class schedules', role: 'admin' },
+    { title: 'manage the overall moral education system', role: 'admin' },
+    { title: 'defining roles ', role: 'admin' },
+    { title: 'managing the system information', role: 'admin' },
+    { title: 'database management', role: 'admin' },
+    { title: 'log management', role: 'admin' },
+    { title: 'maintaining the security', role: 'admin' },
+
+    { title: 'import users', role: 'HeadTeacher' },
+    { title: 'set permissions', role: 'HeadTeacher' },
+    { title: 'import basic student data', role: 'HeadTeacher' },
+    { title: 'import teacher', role: 'HeadTeacher' },
+    { title: 'class schedules', role: 'HeadTeacher' },
+    {
+      title: 'manage the overall moral education system',
+      role: 'HeadTeacher',
+    },
+
+    { title: 'import users', role: 'Teacher' },
+    { title: 'set permissions', role: 'Teacher' },
+    { title: 'import basic student data', role: 'Teacher' },
+    { title: 'import teacher', role: 'Teacher' },
+
+    { title: 'import users', role: 'Student' },
+    { title: 'set permissions', role: 'Student' },
+    { title: 'import basic student data', role: 'Student' },
+  ];
+
   const {
     register,
     handleSubmit,
@@ -156,42 +191,6 @@ const Teacher = () => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
-                  {' '}
-                  <div className="inputType">
-                    <b>
-                      Class Name<sup>*</sup>
-                    </b>
-                    <input
-                      type="text"
-                      name="className"
-                      {...register('className', { required: true })}
-                    />
-                    <p className="err">
-                      {errors.className && '! this field is required'}
-                    </p>
-                  </div>
-                </Col>
-
-                <Col md={6}>
-                  {' '}
-                  <div className="inputType">
-                    <b>
-                      Class<sup>*</sup>
-                    </b>
-
-                    <input
-                      type="email"
-                      name="Class"
-                      {...register('Class', { required: true })}
-                    />
-                    <p className="err">
-                      {errors.Class && '! this field is required'}
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
                 {' '}
                 <Col md={6}>
                   {' '}
@@ -229,6 +228,45 @@ const Teacher = () => {
               </Row>{' '}
             </Row>
             <Row>
+              <hr></hr>
+              <h2>Class Information </h2>
+              <Row>
+                <Col md={6}>
+                  {' '}
+                  <div className="inputType">
+                    <b>
+                      Class<sup>*</sup>
+                    </b>
+
+                    <Select
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      options={Permissions.map((el) => {
+                        return { value: el.title, label: el.title };
+                      })}
+                    />
+                  </div>
+                </Col>
+                <Col md={6}>
+                  {' '}
+                  <div className="inputType">
+                    <b>
+                      Class Name<sup>*</sup>
+                    </b>
+                    <Select
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      options={Permissions.map((el) => {
+                        return { value: el.title, label: el.title };
+                      })}
+                    />
+                    <p className="err">
+                      {errors.Zip && '! this field is required'}
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+              <hr></hr>
               <h2>Information Account </h2>
               <Col md={6}>
                 {' '}
@@ -263,6 +301,21 @@ const Teacher = () => {
                   </p>
                 </div>
               </Col>{' '}
+              <Col md={12}>
+                {' '}
+                <div className="inputType">
+                  <b>
+                    Role<sup>*</sup>
+                  </b>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    options={Permissions.map((el) => {
+                      return { value: el.role, label: el.role };
+                    })}
+                  />
+                </div>
+              </Col>
               <button type="sumbit"> Save</button>{' '}
             </Row>
           </section>{' '}

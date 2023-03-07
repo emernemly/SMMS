@@ -1,13 +1,21 @@
 import React from 'react';
-import NavbarStudent from '../../../Components/StudentComponent/NavbarStudent';
+import { Col, Row } from 'react-bootstrap';
+import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
+import SideBarStudent from '../../../Components/SideBarStudent';
 import StudentResult from '../../../Components/StudentComponent/StudentResult';
 
 const MoralEducationResult = () => {
   return (
-    <div>
-      <NavbarStudent />
-      <StudentResult />
-    </div>
+    <Row>
+      {' '}
+      <Col lg={2} md={2} className="pd-l parentcontainer">
+        <SideBarStudent />
+      </Col>
+      <Col lg={10} className="dashboardContent">
+        <NavbarR />
+        <StudentResult />
+      </Col>
+    </Row>
   );
 };
 

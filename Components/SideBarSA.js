@@ -5,7 +5,8 @@ import {
 } from 'react-icons/md';
 import { RiShieldUserLine } from 'react-icons/ri';
 import { GiTeacher } from 'react-icons/gi';
-import { FiUsers, FiActivity } from 'react-icons/fi';
+import { GrTableAdd } from 'react-icons/gr';
+import { FiUsers, FiActivity, FiUser } from 'react-icons/fi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import {
@@ -23,6 +24,8 @@ const SideBarSA = () => {
   const router = useRouter();
   const [open, setopen] = useState(false);
   const [path, setpath] = useState(null);
+  const [MoralDrop, setMoralDrop] = useState(false);
+  const [healthDrop, sethealthDrop] = useState(false);
   useEffect(() => {
     setpath(router.pathname);
     console.log(router.pathname);
@@ -63,6 +66,42 @@ const SideBarSA = () => {
               Registration
             </li>
           </Link>
+          <div className="dropdown">
+            <a>
+              {' '}
+              <li onClick={() => setopen(!open)}>
+                <HiOutlineUserGroup /> User Management <MdKeyboardArrowDown />{' '}
+              </li>{' '}
+            </a>
+
+            <ul className={`drop ${open && 'dropOpne'}`}>
+              {' '}
+              <Link href="/Dashboard-System-Administrator/User-Management/Permissions">
+                <li
+                  className={
+                    path ===
+                    '/Dashboard-System-Administrator/User-Management/Permissions'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Permissions
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/Dashboard-System-Administrator/User-Management/Role">
+                <li
+                  className={
+                    path ===
+                    '/Dashboard-System-Administrator/User-Management/Role'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Role
+                </li>{' '}
+              </Link>{' '}
+            </ul>
+          </div>
           <Link href="/Dashboard-System-Administrator/Head-Teacher">
             <li
               className={
@@ -111,46 +150,157 @@ const SideBarSA = () => {
               <SiGoogleclassroom /> classes
             </li>{' '}
           </Link>
-          <Link href="/Dashboard-System-Administrator/Moral-Education-Scores">
-            {' '}
-            <li>
-              <FiActivity /> Moral Education Scores
+          <Link href="/Dashboard-System-Administrator/Class/ClassesTimeTable">
+            <li
+              className={
+                path
+                  ? path ===
+                      '/Dashboard-System-Administrator/Class/ClassesTimeTable' &&
+                    `activeSideBare`
+                  : ''
+              }
+            >
+              <GrTableAdd /> Classes Time Table
             </li>{' '}
           </Link>
           <div className="dropdown">
             <a>
               {' '}
-              <li onClick={() => setopen(!open)}>
-                <HiOutlineUserGroup /> User Management <MdKeyboardArrowDown />{' '}
+              <li onClick={() => setMoralDrop(!MoralDrop)}>
+                <FiActivity /> Moral Education Scores <MdKeyboardArrowDown />{' '}
               </li>{' '}
             </a>
 
-            <ul className={`drop ${open && 'dropOpne'}`}>
+            <ul className={`drop ${MoralDrop && 'dropOpne'}`}>
               {' '}
-              <Link href="/Dashboard-System-Administrator/User-Management/Permissions">
+              <Link href="/Moral-Education-Management-Office">
                 <li
                   className={
-                    path
-                      ? path ===
-                          '/Dashboard-System-Administrator/User-Management/Permissions' &&
-                        `activeSideBare`
-                      : ''
+                    path === '/Moral-Education-Management-Office'
+                      ? `mr activeSideBare`
+                      : 'mr'
                   }
                 >
-                  <SiOpenaccess /> Permissions
+                  Students Moral Education
                 </li>{' '}
               </Link>{' '}
-              <Link href="/Dashboard-System-Administrator/User-Management/Role">
+              <Link href="/Head-Teacher">
                 <li
                   className={
-                    path
-                      ? path ===
-                          '/Dashboard-System-Administrator/User-Management/Role' &&
-                        `activeSideBare`
-                      : ''
+                    path === '/Head-Teacher' ? `activeSideBare mr` : 'mr'
                   }
                 >
-                  <CgToolbox /> Role
+                  Class Moral Education
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/Head-Teacher/Reviews">
+                <li
+                  className={
+                    path === '/Head-Teacher/Reviews'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Reviews
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/Dashboard-System-Administrator/Moral-Education-Scores">
+                <li
+                  className={
+                    path ===
+                    '/Dashboard-System-Administrator/Moral-Education-Scores'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Moral Score History
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/Dashboard-System-Administrator/Score-Recorded-Data-Statistics">
+                <li
+                  className={
+                    path ===
+                    '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Score Recorded Data Statistics
+                </li>{' '}
+              </Link>{' '}
+            </ul>
+          </div>
+          <Link href="/StudentLeaves">
+            <li
+              className={
+                path ? path === '/StudentLeaves' && `activeSideBare` : ''
+              }
+            >
+              <GrTableAdd /> Students Leaves
+            </li>{' '}
+          </Link>
+          <Link href="/StudentAttendanceReport">
+            <li
+              className={
+                path
+                  ? path === '/StudentAttendanceReport' && `activeSideBare`
+                  : ''
+              }
+            >
+              <GrTableAdd /> Attendance Report
+            </li>{' '}
+          </Link>
+          <Link href="/StudentActivities">
+            <li
+              className={
+                path ? path === '/StudentActivities' && `activeSideBare` : ''
+              }
+            >
+              <GrTableAdd /> Students Activities
+            </li>{' '}
+          </Link>
+          <div className="dropdown">
+            <a>
+              {' '}
+              <li onClick={() => sethealthDrop(!healthDrop)}>
+                <HiOutlineUserGroup /> Students health <MdKeyboardArrowDown />{' '}
+              </li>{' '}
+            </a>
+
+            <ul className={`drop ${healthDrop && 'dropOpne'}`}>
+              {' '}
+              <Link href="/StudentHealth/StudentHeterogeneity">
+                <li
+                  className={
+                    path === '/StudentHealth/StudentHeterogeneity'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Students Heterogeneity
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/StudentHealth/ClassMorningCheck">
+                <li
+                  className={
+                    path === '/StudentHealth/ClassMorningCheck'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Class morning check details
+                </li>{' '}
+              </Link>{' '}
+              <Link href="/StudentHealth/ClassMorningCheck/ClassMoringHistory">
+                <li
+                  className={
+                    path ===
+                    '/StudentHealth/ClassMorningCheck/ClassMoringHistory'
+                      ? `activeSideBare mr`
+                      : 'mr'
+                  }
+                >
+                  Class morning check details history
                 </li>{' '}
               </Link>{' '}
             </ul>

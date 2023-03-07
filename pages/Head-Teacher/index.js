@@ -5,7 +5,7 @@ import NavbarHeadTeacher from '../../Components/Head-Teacher/NavbarHeadTeacher';
 const moralScroeClass = () => {
   return (
     <div>
-      <NavbarHeadTeacher />
+      {/*       <NavbarHeadTeacher /> */}
       <ClassMoralScore />
     </div>
   );

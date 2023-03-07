@@ -5,7 +5,7 @@ import StudentClassroom from '../../Components/MoralEducationManagementOffice/St
 const MoralEducationManagementOffice = () => {
   return (
     <div>
-      <NavbarTeacher />
+      {/*       <NavbarTeacher /> */}
       <StudentClassroom />
     </div>
   );

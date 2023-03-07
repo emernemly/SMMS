@@ -5,7 +5,7 @@ import StudentHeadTeacher from '../../Components/Head-Teacher/StudentHeadTeacher
 const StudentClass = () => {
   return (
     <div>
-      <NavbarHeadTeacher />
+      {/*       <NavbarHeadTeacher /> */}
       <StudentHeadTeacher />
     </div>
   );

@@ -50,6 +50,26 @@ const NavbarStudent = () => {
             >
               Moral Education
             </Link>{' '}
+            <Link
+              href="/StudentParent/AttendanceReport"
+              className={`navbar__button ${
+                path
+                  ? path === '/StudentParent/AttendanceReport' && 'activeNav'
+                  : ''
+              }`}
+            >
+              Attendance Report
+            </Link>{' '}
+            <Link
+              href="/StudentParent/LeaveRequest"
+              className={`navbar__button ${
+                path
+                  ? path === '/StudentParent/LeaveRequest' && 'activeNav'
+                  : ''
+              }`}
+            >
+              Leave Request
+            </Link>
             <div className="icons-nav dropdownNav">
               <div
                 className="compte"

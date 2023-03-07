@@ -67,7 +67,9 @@ const Role = () => {
             <input type="search" placeholder="search Title" />
             <div className="All-btn">
               <button onClick={downloadPDF}>Download PDF</button>
-              <button className="dashboard-btn">Add </button>
+              <Link href="/Dashboard-System-Administrator/User-Management/Role/AddRole">
+                <button className="dashboard-btn">Add </button>
+              </Link>
               <ReactToPrint
                 trigger={() => (
                   <button className="dashboard-btn">Print </button>

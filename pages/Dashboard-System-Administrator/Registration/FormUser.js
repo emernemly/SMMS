@@ -3,8 +3,42 @@ import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
 import { useForm } from 'react-hook-form';
-
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 const FormUser = () => {
+  const animatedComponents = makeAnimated();
+  const Permissions = [
+    { title: 'import users', role: 'admin' },
+    { title: 'set permissions', role: 'admin' },
+    { title: 'import basic student data', role: 'admin' },
+    { title: 'import teacher', role: 'admin' },
+    { title: 'class schedules', role: 'admin' },
+    { title: 'manage the overall moral education system', role: 'admin' },
+    { title: 'defining roles ', role: 'admin' },
+    { title: 'managing the system information', role: 'admin' },
+    { title: 'database management', role: 'admin' },
+    { title: 'log management', role: 'admin' },
+    { title: 'maintaining the security', role: 'admin' },
+
+    { title: 'import users', role: 'HeadTeacher' },
+    { title: 'set permissions', role: 'HeadTeacher' },
+    { title: 'import basic student data', role: 'HeadTeacher' },
+    { title: 'import teacher', role: 'HeadTeacher' },
+    { title: 'class schedules', role: 'HeadTeacher' },
+    {
+      title: 'manage the overall moral education system',
+      role: 'HeadTeacher',
+    },
+
+    { title: 'import users', role: 'Teacher' },
+    { title: 'set permissions', role: 'Teacher' },
+    { title: 'import basic student data', role: 'Teacher' },
+    { title: 'import teacher', role: 'Teacher' },
+
+    { title: 'import users', role: 'Student' },
+    { title: 'set permissions', role: 'Student' },
+    { title: 'import basic student data', role: 'Student' },
+  ];
   const {
     register,
     handleSubmit,
@@ -260,6 +294,21 @@ const FormUser = () => {
                   </p>
                 </div>
               </Col>{' '}
+              <Col md={12}>
+                {' '}
+                <div className="inputType">
+                  <b>
+                    Role<sup>*</sup>
+                  </b>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    options={Permissions.map((el) => {
+                      return { value: el.role, label: el.role };
+                    })}
+                  />
+                </div>
+              </Col>
               <button type="sumbit"> Save</button>{' '}
             </Row>
           </section>{' '}

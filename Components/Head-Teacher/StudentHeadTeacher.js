@@ -6,6 +6,8 @@ import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import DeductionScore from '../ModelBox/DeductionScore';
 import Cancelling from '../ModelBox/Cancelling';
+import SideBarSA from '../SideBarSA';
+import NavbarR from '../RegistrationComponente/NavbarR';
 const StudentHeadTeacher = () => {
   const student = [
     {
@@ -98,7 +100,11 @@ const StudentHeadTeacher = () => {
   return (
     <Row>
       {' '}
-      <Col lg={12} className="dashboardContent">
+      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+        <SideBarSA />
+      </Col>
+      <Col lg={10} className="dashboardContent">
+        <NavbarR />
         <section className="tableDashboard">
           <div className="titleDashboard">
             <h3>Student</h3>

@@ -5,6 +5,8 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Link from 'next/link';
 import ReactToPrint from 'react-to-print';
+import SideBarSA from '../SideBarSA';
+import NavbarR from '../RegistrationComponente/NavbarR';
 
 const ClassMoralScore = () => {
   const componentRef = useRef();
@@ -80,7 +82,11 @@ const ClassMoralScore = () => {
   };
   return (
     <Row>
-      <Col lg={12} className="dashboardContent">
+      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+        <SideBarSA />
+      </Col>
+      <Col lg={10} className="dashboardContent">
+        <NavbarR />
         <section className="tableDashboard" ref={componentRef}>
           <div className="titleDashboard">
             <h3>Class</h3>

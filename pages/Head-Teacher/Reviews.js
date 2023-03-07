@@ -5,7 +5,7 @@ import ReviewsHeadTeacher from '../../Components/Head-Teacher/ReviewsHeadTeacher
 const Reviews = () => {
   return (
     <div>
-      <NavbarHeadTeacher />
+      {/*  <NavbarHeadTeacher /> */}
       <ReviewsHeadTeacher />
     </div>
   );
