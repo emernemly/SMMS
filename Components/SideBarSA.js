@@ -7,16 +7,13 @@ import { RiShieldUserLine } from 'react-icons/ri';
 import { GiTeacher } from 'react-icons/gi';
 import { GrTableAdd } from 'react-icons/gr';
 import { FiUsers, FiActivity, FiUser } from 'react-icons/fi';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdOutlinePeopleAlt } from 'react-icons/md';
 import { HiOutlineUserGroup } from 'react-icons/hi';
-import {
-  SiGoogleclassroom,
-  SiGoogleanalytics,
-  SiOpenaccess,
-} from 'react-icons/si';
-import { CgToolbox } from 'react-icons/cg';
+import { SiGoogleclassroom, SiGoogleanalytics } from 'react-icons/si';
+import { RxActivityLog } from 'react-icons/rx';
+import { CgFileAdd } from 'react-icons/cg';
 import { TbDatabaseExport } from 'react-icons/tb';
-import { AiOutlineDashboard } from 'react-icons/ai';
+import { AiOutlineDashboard, AiOutlineLogout } from 'react-icons/ai';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -236,7 +233,7 @@ const SideBarSA = () => {
                 path ? path === '/StudentLeaves' && `activeSideBare` : ''
               }
             >
-              <GrTableAdd /> Students Leaves
+              <AiOutlineLogout /> Students Leaves
             </li>{' '}
           </Link>
           <Link href="/StudentAttendanceReport">
@@ -247,7 +244,7 @@ const SideBarSA = () => {
                   : ''
               }
             >
-              <GrTableAdd /> Attendance Report
+              <MdOutlinePeopleAlt /> Attendance Report
             </li>{' '}
           </Link>
           <Link href="/StudentActivities">
@@ -256,14 +253,14 @@ const SideBarSA = () => {
                 path ? path === '/StudentActivities' && `activeSideBare` : ''
               }
             >
-              <GrTableAdd /> Students Activities
+              <RxActivityLog /> Students Activities
             </li>{' '}
           </Link>
           <div className="dropdown">
             <a>
               {' '}
               <li onClick={() => sethealthDrop(!healthDrop)}>
-                <HiOutlineUserGroup /> Students health <MdKeyboardArrowDown />{' '}
+                <CgFileAdd /> Students health <MdKeyboardArrowDown />{' '}
               </li>{' '}
             </a>
 

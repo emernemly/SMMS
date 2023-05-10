@@ -31,22 +31,6 @@ const Navbarcomponent = () => {
               }`}
             >
               System Administrator
-            </Link>{' '}
-            <Link
-              href="/Login-Head-Teacher"
-              className={`navbar__button ${
-                path ? path === '/Login-Head-Teacher' && 'activeNav' : ''
-              }`}
-            >
-              Head Teacher
-            </Link>
-            <Link
-              href="/Login-Teacher"
-              className={`navbar__button ${
-                path ? path === '/Login-Teacher' && 'activeNav' : ''
-              }`}
-            >
-              Teacher
             </Link>
           </Nav>
         </Navbar.Collapse>
