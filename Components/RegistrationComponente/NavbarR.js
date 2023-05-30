@@ -59,12 +59,13 @@ const NavbarR = () => {
       </div>
       <div className="nav-rigthSide">
         {' '}
-        <div className="icons-nav dropdownNav">
+        {/*   <div className="icons-nav dropdownNav">
           <IoMdNotifications />
           <Badge pill bg="danger">
             0
           </Badge>
-        </div>
+        </div>{' '} */}
+        {/*  */}
         <div className="icons-nav dropdownNav">
           <div
             className="compte"

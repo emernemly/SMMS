@@ -6,6 +6,7 @@ import Link from 'next/link';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import Hoc from '../../../../Components/HOC/Hoc';
 const Role = () => {
   const Permissions = [
     { title: 'import users', role: 'admin' },
@@ -54,41 +55,42 @@ const Role = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Role</h3>
-            <input type="search" placeholder="search Title" />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <Link href="/Dashboard-System-Administrator/User-Management/Role/AddRole">
-                <button className="dashboard-btn">Add </button>
-              </Link>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Role</h3>
+              <input type="search" placeholder="search Title" />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <Link href="/Dashboard-System-Administrator/User-Management/Role/AddRole">
+                  <button className="dashboard-btn">Add </button>
+                </Link>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>Title</th>
-                <th>Permissions</th>
-                <th>Setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {/* Permissions.map((titles, i) => {
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>Title</th>
+                  <th>Permissions</th>
+                  <th>Setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {/* Permissions.map((titles, i) => {
                 return (
                  <tr className={i % 2 === 0 && `bg-ver`}>
                     <td>{titles.title}</td>
@@ -105,95 +107,96 @@ const Role = () => {
               
                 );
               })  */}{' '}
-              <tr className="bg-ver">
-                <td>Admin</td>
+                <tr className="bg-ver">
+                  <td>Admin</td>
 
-                <td className="Permissions">
-                  {Permissions.filter((el) => el.role === 'admin').map(
-                    (OwnPermissions, i) => (
-                      <span className="OwnPermissions" key={i}>
-                        {OwnPermissions.title}
-                      </span>
-                    )
-                  )}
-                </td>
-                <td>
-                  <Link href="/Dashboard-System-Administrator/User-Management/Role/RoleProfile">
-                    <button className="bg-primary btn-Setting">See</button>
-                  </Link>{' '}
-                  <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                    <button className="bg-success btn-Setting">Edit</button>
-                  </Link>
-                  <button className="bg-danger btn-Setting">Delete</button>{' '}
-                </td>
-              </tr>
-              <tr>
-                <td>Head Teacher</td>
+                  <td className="Permissions">
+                    {Permissions.filter((el) => el.role === 'admin').map(
+                      (OwnPermissions, i) => (
+                        <span className="OwnPermissions" key={i}>
+                          {OwnPermissions.title}
+                        </span>
+                      )
+                    )}
+                  </td>
+                  <td>
+                    <Link href="/Dashboard-System-Administrator/User-Management/Role/RoleProfile">
+                      <button className="bg-primary btn-Setting">See</button>
+                    </Link>{' '}
+                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
+                      <button className="bg-success btn-Setting">Edit</button>
+                    </Link>
+                    <button className="bg-danger btn-Setting">Delete</button>{' '}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Head Teacher</td>
 
-                <td className="Permissions">
-                  {Permissions.filter((el) => el.role === 'HeadTeacher').map(
-                    (OwnPermissions, i) => (
-                      <span className="OwnPermissions" key={i}>
-                        {OwnPermissions.title}
-                      </span>
-                    )
-                  )}
-                </td>
-                <td>
-                  <button className="bg-primary btn-Setting">See</button>{' '}
-                  <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                    <button className="bg-success btn-Setting">Edit</button>
-                  </Link>
-                  <button className="bg-danger btn-Setting">Delete</button>{' '}
-                </td>
-              </tr>
-              <tr>
-                <td>Teacher</td>
+                  <td className="Permissions">
+                    {Permissions.filter((el) => el.role === 'HeadTeacher').map(
+                      (OwnPermissions, i) => (
+                        <span className="OwnPermissions" key={i}>
+                          {OwnPermissions.title}
+                        </span>
+                      )
+                    )}
+                  </td>
+                  <td>
+                    <button className="bg-primary btn-Setting">See</button>{' '}
+                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
+                      <button className="bg-success btn-Setting">Edit</button>
+                    </Link>
+                    <button className="bg-danger btn-Setting">Delete</button>{' '}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Teacher</td>
 
-                <td className="Permissions">
-                  {' '}
-                  {Permissions.filter((el) => el.role === 'Teacher').map(
-                    (OwnPermissions, i) => (
-                      <span className="OwnPermissions" key={i}>
-                        {OwnPermissions.title}
-                      </span>
-                    )
-                  )}
-                </td>
-                <td>
-                  <button className="bg-primary btn-Setting">See</button>{' '}
-                  <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                    <button className="bg-success btn-Setting">Edit</button>
-                  </Link>
-                  <button className="bg-danger btn-Setting">Delete</button>{' '}
-                </td>
-              </tr>
-              <tr>
-                <td>Student/parent</td>
+                  <td className="Permissions">
+                    {' '}
+                    {Permissions.filter((el) => el.role === 'Teacher').map(
+                      (OwnPermissions, i) => (
+                        <span className="OwnPermissions" key={i}>
+                          {OwnPermissions.title}
+                        </span>
+                      )
+                    )}
+                  </td>
+                  <td>
+                    <button className="bg-primary btn-Setting">See</button>{' '}
+                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
+                      <button className="bg-success btn-Setting">Edit</button>
+                    </Link>
+                    <button className="bg-danger btn-Setting">Delete</button>{' '}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Student/parent</td>
 
-                <td className="Permissions">
-                  {' '}
-                  {Permissions.filter((el) => el.role === 'Student').map(
-                    (OwnPermissions, i) => (
-                      <span className="OwnPermissions" key={i}>
-                        {OwnPermissions.title}
-                      </span>
-                    )
-                  )}
-                </td>
-                <td>
-                  <button className="bg-primary btn-Setting">See</button>{' '}
-                  <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                    <button className="bg-success btn-Setting">Edit</button>
-                  </Link>
-                  <button className="bg-danger btn-Setting">Delete</button>{' '}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                  <td className="Permissions">
+                    {' '}
+                    {Permissions.filter((el) => el.role === 'Student').map(
+                      (OwnPermissions, i) => (
+                        <span className="OwnPermissions" key={i}>
+                          {OwnPermissions.title}
+                        </span>
+                      )
+                    )}
+                  </td>
+                  <td>
+                    <button className="bg-primary btn-Setting">See</button>{' '}
+                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
+                      <button className="bg-success btn-Setting">Edit</button>
+                    </Link>
+                    <button className="bg-danger btn-Setting">Delete</button>{' '}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

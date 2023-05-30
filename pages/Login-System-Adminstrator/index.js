@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Navbarcomponent from '../../Components/Navbarcomponent';
 import { useForm } from 'react-hook-form';
+import { Hoc } from '../../Components/HOC/Hoc';
 const LoginAd = () => {
   const {
     register,

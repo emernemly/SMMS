@@ -6,6 +6,7 @@ import PermissionModel from '../../../Components/ModelBox/PermissionModel';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import Hoc from '../../../Components/HOC/Hoc';
 const Permissions = () => {
   const [search, setsearch] = useState('');
   const Permissions = [
@@ -39,59 +40,63 @@ const Permissions = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Permissions</h3>
-            <input
-              type="search"
-              placeholder="search Permissions"
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Permissions</h3>
+              <input
+                type="search"
+                placeholder="search Permissions"
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>Title</th>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>Title</th>
 
-                <th>Setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {Permissions.filter((el) =>
-                el.title.toLowerCase().includes(search.toLowerCase())
-              ).map((titles, i) => {
-                return (
-                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{titles.title}</td>
-                    <td>
-                      <PermissionModel titles={titles} />{' '}
-                      <button className="bg-danger btn-Setting">Delete</button>{' '}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                  <th>Setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {Permissions.filter((el) =>
+                  el.title.toLowerCase().includes(search.toLowerCase())
+                ).map((titles, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{titles.title}</td>
+                      <td>
+                        <PermissionModel titles={titles} />{' '}
+                        <button className="bg-danger btn-Setting">
+                          Delete
+                        </button>{' '}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

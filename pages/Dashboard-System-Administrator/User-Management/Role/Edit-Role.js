@@ -5,6 +5,7 @@ import NavbarR from '../../../../Components/RegistrationComponente/NavbarR';
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import Hoc from '../../../../Components/HOC/Hoc';
 const EditRole = () => {
   const animatedComponents = makeAnimated();
 
@@ -38,36 +39,37 @@ const EditRole = () => {
     { title: 'import basic student data', role: 'Student' },
   ];
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard role-card">
-          <div className="title">
-            {' '}
-            <h3>Edit Role</h3>
-          </div>
-          <div className="role-card-body">
-            <div className="role-input">
-              <label>
-                <b>
-                  {' '}
-                  Title<sup>*</sup>
-                </b>
-              </label>
-              <input type="text" name="Title" value="admin" />
+    <Hoc inRole={['admin']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard role-card">
+            <div className="title">
+              {' '}
+              <h3>Edit Role</h3>
             </div>
-            <div className="role-input">
-              <label>
-                <b>
-                  {' '}
-                  Permissions<sup>*</sup>
-                </b>
-              </label>
-              {/*  <select name="Title" />
+            <div className="role-card-body">
+              <div className="role-input">
+                <label>
+                  <b>
+                    {' '}
+                    Title<sup>*</sup>
+                  </b>
+                </label>
+                <input type="text" name="Title" value="admin" />
+              </div>
+              <div className="role-input">
+                <label>
+                  <b>
+                    {' '}
+                    Permissions<sup>*</sup>
+                  </b>
+                </label>
+                {/*  <select name="Title" />
               <span className="selection">
                 <span
                   className="select2-selection"
@@ -88,28 +90,29 @@ const EditRole = () => {
                   </ul>
                 </span>
               </span> */}{' '}
-            </div>
-            <Select
-              closeMenuOnSelect={false}
-              components={animatedComponents}
-              defaultValue={Permissions.filter((el) => el.role === 'admin').map(
-                (OwnPermissions) => {
+              </div>
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                defaultValue={Permissions.filter(
+                  (el) => el.role === 'admin'
+                ).map((OwnPermissions) => {
                   return {
                     value: OwnPermissions.title,
                     label: OwnPermissions.title,
                   };
-                }
-              )}
-              isMulti
-              options={Permissions.map((el) => {
-                return { value: el.title, label: el.title };
-              })}
-            />
-            <button type="sumbit">Save</button>
-          </div>
-        </section>
-      </Col>
-    </Row>
+                })}
+                isMulti
+                options={Permissions.map((el) => {
+                  return { value: el.title, label: el.title };
+                })}
+              />
+              <button type="sumbit">Save</button>
+            </div>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 
