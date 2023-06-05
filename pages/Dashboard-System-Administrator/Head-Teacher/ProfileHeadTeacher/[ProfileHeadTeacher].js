@@ -6,7 +6,21 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../../Components/HOC/Hoc';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ownheadTeacher } from '../../../../Redux/Action/HeadTeacherAction';
 const ProfileHeadTeacher = () => {
+  const router = useRouter();
+  const _id = router.query.ProfileHeadTeacher;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    _id && dispatch(ownheadTeacher(_id));
+  }, []);
+  const OwnheadTeacher = useSelector(
+    (state) => state.HeadTeacherReducer.UserHeadTeacher
+  );
+  console.log(OwnheadTeacher);
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -41,71 +55,71 @@ const ProfileHeadTeacher = () => {
               <Col md={4}>
                 <div className="profilContent ">
                   <b>First Name:</b>
-                  <p>emer</p>
+                  <p>{OwnheadTeacher.FirstName}</p>
                 </div>
               </Col>
 
               <Col md={4}>
                 <div className="profilContent">
                   <b>Middel Name:</b>
-                  <p>emer</p>
+                  <p>{OwnheadTeacher.MiddelName}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b>Last Name:</b>
-                  <p>emer</p>
+                  <p>{OwnheadTeacher.LastName}</p>
                 </div>
               </Col>
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent">
                   <b>Gender:</b>
-                  <p>Male</p>
+                  <p>{OwnheadTeacher.Gender}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Date of Birth:</b>
-                  <p>09/02/2023</p>
+                  <p>{OwnheadTeacher.Birth}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Educational Institution:</b>
-                  <p>school</p>
+                  <p>{OwnheadTeacher.Educational}</p>
                 </div>
               </Col>
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Subject Teacher:</b>
-                  <p>English</p>
+                  <p>{OwnheadTeacher.Subject}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Class Name:</b>
-                  <p>7eme annee</p>
+                  <p>{OwnheadTeacher.className}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Class:</b>
-                  <p>7eme annee B</p>
+                  <p>{OwnheadTeacher.Class}</p>
                 </div>
               </Col>
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent">
                   <b> City:</b>
-                  <p>tunis</p>
+                  <p>{OwnheadTeacher.City}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Zip:</b>
-                  <p>2009</p>
+                  <p>{OwnheadTeacher.Zip}</p>
                 </div>
               </Col>
               <hr></hr>
@@ -114,13 +128,17 @@ const ProfileHeadTeacher = () => {
               <Col md={4}>
                 <div className="profilContent">
                   <b> User Name:</b>
-                  <p>Emer Nemly</p>
+                  <p>{OwnheadTeacher.UserName}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> Password:</b>
-                  <input type="password" disabled value="emernemly" />
+                  <input
+                    type="password"
+                    disabled
+                    value={`${OwnheadTeacher.UserName}`}
+                  />
                 </div>
               </Col>
             </Row>

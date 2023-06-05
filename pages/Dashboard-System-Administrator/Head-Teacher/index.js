@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -8,76 +8,16 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteHeadTeacher,
+  getHeadteacher,
+} from '../../../Redux/Action/HeadTeacherAction';
 
 const HeadTeacher = () => {
-  const headTeacher = [
-    {
-      Id: '1',
-      FirstName: 'Noster',
-      MiddelName: 'Noster',
-      LastName: '',
-      Gender: '',
-      DateOfBirth: '',
-      EducationalInstitution: '',
-      City: '',
-      Zip: '',
-      UserName: '',
-      Password: '',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '2',
-      FirstName: 'rafa',
-      MiddelName: 'Noster',
-      LastName: '',
-      Gender: '',
-      DateOfBirth: '',
-      EducationalInstitution: '',
-      City: '',
-      Zip: '',
-      UserName: '',
-      Password: '',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '3',
-      FirstName: 'ali',
-      MiddelName: 'Noster',
-      LastName: '',
-      Gender: '',
-      DateOfBirth: '',
-      EducationalInstitution: '',
-      City: '',
-      Zip: '',
-      UserName: '',
-      Password: '',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '4',
-      FirstName: 'ibrahim',
-      MiddelName: 'Noster',
-      LastName: '',
-      Gender: '',
-      DateOfBirth: '',
-      EducationalInstitution: '',
-      City: '',
-      Zip: '',
-      UserName: '',
-      Password: '',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-  ];
   const [search, setsearch] = useState('');
   const componentRef = useRef();
+  const dispatch = useDispatch();
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -93,6 +33,19 @@ const HeadTeacher = () => {
       );
       pdf.save('HeadTeacher.pdf');
     });
+  };
+
+  useEffect(() => {
+    dispatch(getHeadteacher());
+  }, []);
+  const headTeacher = useSelector(
+    (state) => state.HeadTeacherReducer.HeadTeacher
+  );
+  const deleteHead = (id) => {
+    var result = confirm('Want to delete?');
+    if (result) {
+      dispatch(deleteHeadTeacher(id));
+    }
   };
   return (
     <Hoc inRole={['admin']}>
@@ -145,23 +98,29 @@ const HeadTeacher = () => {
                   .filter((el) =>
                     el.FirstName.toLowerCase().includes(search.toLowerCase())
                   )
+                  .slice(0, 7)
                   .map((ownheadTeacher, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                        <td>{ownheadTeacher.Id}</td>
+                        <td>{ownheadTeacher.id}</td>
 
                         <td>{ownheadTeacher.FirstName}</td>
                         <td>{ownheadTeacher.Subject}</td>
-                        <td>{ownheadTeacher.ClassName}</td>
-                        <td>{ownheadTeacher.class}</td>
+                        <td>{ownheadTeacher.className}</td>
+                        <td>{ownheadTeacher.Class}</td>
                         <td>
-                          <Link href="/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher">
+                          <Link
+                            href={`/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher/${ownheadTeacher.id}`}
+                          >
                             <button className="bg-primary btn-Setting">
                               See
                             </button>
                           </Link>
-                          <HeadTeacherModul />
-                          <button className="bg-danger btn-Setting">
+                          <HeadTeacherModul ownheadTeacher={ownheadTeacher} />
+                          <button
+                            className="bg-danger btn-Setting"
+                            onClick={() => deleteHead(ownheadTeacher.id)}
+                          >
                             Delete
                           </button>{' '}
                         </td>

@@ -121,7 +121,7 @@ const Teacher = () => {
                             See
                           </button>
                         </Link>
-                        <HeadTeacherModul />
+                        {/* <HeadTeacherModul /> */}
                         <button className="bg-danger btn-Setting">
                           Delete
                         </button>{' '}

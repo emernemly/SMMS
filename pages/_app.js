@@ -12,13 +12,16 @@ import '../styles/NavDashboard.scss';
 import '../styles/StudentParent.scss';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Provider } from 'react-redux';
+import store from '../Redux/store';
 function MyApp({ Component, pageProps }) {
   return (
     <div className="bg_total">
-      <Component {...pageProps} />
+      {' '}
+      <Provider store={store}>
+        <Component {...pageProps} />{' '}
+      </Provider>
     </div>
   );
 }
-
 export default MyApp;
