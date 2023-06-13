@@ -5,7 +5,14 @@ import SideBarSA from '../../../../Components/SideBarSA';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { getOwnClass } from '../../../../Redux/Action/ClassAction';
+import { useDispatch, useSelector } from 'react-redux';
 const ClassProfile = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const id = router.query.ClassId;
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -23,6 +30,11 @@ const ClassProfile = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    id && dispatch(getOwnClass(id));
+  }, [id]);
+  const Ownclass = useSelector((state) => state.ClassesReducer.OwnClass);
+  console.log(id);
   return (
     <Row>
       {' '}
@@ -39,52 +51,52 @@ const ClassProfile = () => {
             <Col md={4}>
               <div className="profilContent ">
                 <b>Level:</b>
-                <p>8eme annee</p>
+                <p>{Ownclass.Level}</p>
               </div>
             </Col>
 
             <Col md={4}>
               <div className="profilContent">
                 <b>Class:</b>
-                <p>8eme annee A</p>
+                <p>{Ownclass.Class}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b>the time of the event:</b>
-                <p>2020-09-08 17:42:17</p>
+                <p>{Ownclass.timeEvent}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b>deserved:</b>
-                <p>1ere place</p>
+                <p>{Ownclass.deserved}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b>Details:</b>
-                <p>Activity sport</p>
+                <p>{Ownclass.Details}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b>Noticed:</b>
-                <p></p>
+                <p>{Ownclass.Noticed}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b>recorder:</b>
-                <p>Ali diop</p>
+                <p>{Ownclass.recorder}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> time to record:</b>
-                <p>2020-09-08 17:42:17</p>
+                <p>{Ownclass.timeRecord}</p>
               </div>
             </Col>
             <hr></hr>

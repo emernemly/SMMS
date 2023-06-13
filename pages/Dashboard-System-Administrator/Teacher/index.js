@@ -1,44 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
-import HeadTeacherModul from '../../../Components/ModelBox/HeadTeacherModul';
 import Link from 'next/link';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTeacher, getTeacher } from '../../../Redux/Action/TeacherAction';
 
 const Teacher = () => {
-  const headTeacher = [
-    {
-      Id: '1',
-      Name: 'Noster',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '2',
-      Name: 'rafa',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '3',
-      Name: 'ali',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-    {
-      Id: '4',
-      Name: 'ibrahim',
-      Subject: 'English',
-      ClassName: '7eme annee',
-      class: '7eme annee B',
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTeacher());
+  }, []);
+
+  const Teachers = useSelector((state) => state.TeacherReducer.Teacher);
+  console.log(Teachers);
   const [search, setsearch] = useState('');
   const componentRef = useRef();
   const downloadPDF = () => {
@@ -56,6 +34,12 @@ const Teacher = () => {
       );
       pdf.save('Teacher.pdf');
     });
+  };
+  const deleteTeachers = (id) => {
+    var result = confirm('Want to delete Teacher?');
+    if (result) {
+      dispatch(deleteTeacher(id));
+    }
   };
   return (
     <Row>
@@ -102,33 +86,34 @@ const Teacher = () => {
               </tr>{' '}
             </thead>
             <tbody>
-              {headTeacher
-                .filter((el) =>
-                  el.Name.toUpperCase().includes(search.toUpperCase())
-                )
-                .map((ownheadTeacher, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{ownheadTeacher.Id}</td>
+              {Teachers.filter((el) =>
+                el.FirstName.toUpperCase().includes(search.toUpperCase())
+              ).map((ownTeacher, i) => {
+                return (
+                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                    <td>{ownTeacher.id}</td>
 
-                      <td>{ownheadTeacher.Name}</td>
-                      <td>{ownheadTeacher.Subject}</td>
-                      <td>{ownheadTeacher.ClassName}</td>
-                      <td>{ownheadTeacher.class}</td>
-                      <td>
-                        <Link href="/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher">
-                          <button className="bg-primary btn-Setting">
-                            See
-                          </button>
-                        </Link>
-                        {/* <HeadTeacherModul /> */}
-                        <button className="bg-danger btn-Setting">
-                          Delete
-                        </button>{' '}
-                      </td>
-                    </tr>
-                  );
-                })}
+                    <td>{ownTeacher.FirstName}</td>
+                    <td>{ownTeacher.Subject}</td>
+                    <td>{ownTeacher.className}</td>
+                    <td>{ownTeacher.Class}</td>
+                    <td>
+                      <Link
+                        href={`/Dashboard-System-Administrator/Teacher/ProfileTeacher/${ownTeacher.id}`}
+                      >
+                        <button className="bg-primary btn-Setting">See</button>
+                      </Link>
+                      {/* <HeadTeacherModul /> */}
+                      <button
+                        className="bg-danger btn-Setting"
+                        onClick={() => deleteTeachers(ownTeacher.id)}
+                      >
+                        Delete
+                      </button>{' '}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </section>

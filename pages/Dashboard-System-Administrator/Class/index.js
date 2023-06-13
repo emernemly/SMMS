@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import ClassAddModel from '../../../Components/ModelBox/ClassAddModel';
 import ClassesModel from '../../../Components/ModelBox/ClassesModel';
@@ -8,54 +8,13 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Link from 'next/link';
 import ReactToPrint from 'react-to-print';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteClass, getClasses } from '../../../Redux/Action/ClassAction';
+
 const Class = () => {
   const componentRef = useRef();
-  const classes = [
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '8eme annee A',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '7eme annee B',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '7eme annee A',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-  ];
+  const dispatch = useDispatch();
+
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -72,6 +31,17 @@ const Class = () => {
       );
       pdf.save('Class.pdf');
     });
+  };
+
+  useEffect(() => {
+    dispatch(getClasses());
+  }, []);
+  const classes = useSelector((state) => state.ClassesReducer.Classes);
+  const DeleteClasses = (id) => {
+    const result = confirm('Want to delete?');
+    if (result) {
+      dispatch(DeleteClass(id));
+    }
   };
   return (
     <Row>
@@ -130,20 +100,25 @@ const Class = () => {
 
                       <td>{classes.Level}</td>
                       <td>{classes.Class}</td>
-                      <td>{classes.time}</td>
+                      <td>{classes.timeEvent}</td>
                       <td>{classes.deserved}</td>
                       <td>{classes.Details}</td>
                       <td>{classes.Noticed}</td>
                       <td>{classes.recorder}</td>
-                      <td>{classes.record}</td>
+                      <td>{classes.timeRecord}</td>
                       <td>
-                        <Link href="/Dashboard-System-Administrator/Class/ClassProfile">
+                        <Link
+                          href={`/Dashboard-System-Administrator/Class/ClassProfile/${classes.id}`}
+                        >
                           <button className="bg-primary btn-Setting">
                             See
                           </button>
                         </Link>
-                        <ClassesModel />
-                        <button className="bg-danger btn-Setting">
+                        <ClassesModel classes={classes} />
+                        <button
+                          className="bg-danger btn-Setting"
+                          onClick={() => DeleteClasses(classes.id)}
+                        >
                           Delete
                         </button>{' '}
                       </td>

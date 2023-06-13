@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addClasses, updateClass } from '../../Redux/Action/ClassAction';
 
-const ClassesModel = () => {
+const ClassesModel = ({ classes }) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -16,8 +19,10 @@ const ClassesModel = () => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(updateClass(classes.id, data));
+    handleClose();
   };
+
   return (
     <>
       <Button
@@ -45,14 +50,24 @@ const ClassesModel = () => {
                     {' '}
                     <div className="inputType">
                       <b>Level</b>
-                      <input type="text" name="Level" />
+                      <input
+                        type="text"
+                        name="Level"
+                        {...register('Level')}
+                        defaultValue={classes.Level}
+                      />
                     </div>
                   </Col>
                   <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>Class</b>
-                      <input type="text" name="Class" />
+                      <input
+                        type="text"
+                        name="Class"
+                        {...register('Class')}
+                        defaultValue={classes.Class}
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -62,14 +77,24 @@ const ClassesModel = () => {
                     <div className="inputType">
                       <b>the time of the event </b>
 
-                      <input type="text" name="time" />
+                      <input
+                        type="date"
+                        name="timeEvent"
+                        defaultValue={classes.timeEvent}
+                        {...register('timeEvent')}
+                      />
                     </div>
                   </Col>
                   <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>deserved</b>
-                      <input type="text" name="deserved" />
+                      <input
+                        type="text"
+                        name="deserved"
+                        defaultValue={classes.deserved}
+                        {...register('deserved')}
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -79,14 +104,24 @@ const ClassesModel = () => {
                     <div className="inputType">
                       <b>Details</b>
 
-                      <input type="number" name="Details" />
+                      <input
+                        type="test"
+                        name="Details"
+                        defaultValue={classes.Details}
+                        {...register('Details')}
+                      />
                     </div>
                   </Col>
                   <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>Noticed</b>
-                      <input type="text" name="Noticed" />
+                      <input
+                        type="text"
+                        name="Noticed"
+                        defaultValue={classes.Noticed}
+                        {...register('Noticed')}
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -96,14 +131,24 @@ const ClassesModel = () => {
                     <div className="inputType">
                       <b>Recorder</b>
 
-                      <input type="text" name="recorder" />
+                      <input
+                        type="text"
+                        name="recorder"
+                        defaultValue={classes.recorder}
+                        {...register('recorder')}
+                      />
                     </div>
                   </Col>
                   <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>time to record</b>
-                      <input type="number" name="record" />
+                      <input
+                        type="date"
+                        name="timeRecord"
+                        defaultValue={classes.timeRecord}
+                        {...register('timeRecord')}
+                      />
                     </div>
                   </Col>
                 </Row>{' '}

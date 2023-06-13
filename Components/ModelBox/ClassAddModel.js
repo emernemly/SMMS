@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
+import { addClasses } from '../../Redux/Action/ClassAction';
+import { useDispatch } from 'react-redux';
 
 const ClassAddModel = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -17,7 +20,10 @@ const ClassAddModel = () => {
   } = useForm();
   const onSubmits = (data) => {
     console.log(data);
+    dispatch(addClasses(data));
+    handleClose();
   };
+
   return (
     <>
       <Button onClick={() => setLgShow(true)} className="dashboard-btn">
@@ -81,8 +87,8 @@ const ClassAddModel = () => {
 
                       <input
                         type="date"
-                        name="time"
-                        {...register('time', { required: true })}
+                        name="timeEvent"
+                        {...register('timeEvent', { required: true })}
                       />
                       <p className="err">
                         {errors.time && '! this field is required'}
@@ -166,9 +172,9 @@ const ClassAddModel = () => {
                         time to record<sup>*</sup>
                       </b>
                       <input
-                        type="number"
-                        name="record"
-                        {...register('record', { required: true })}
+                        type="date"
+                        name="timeRecord"
+                        {...register('timeRecord', { required: true })}
                       />
                       <p className="err">
                         {errors.record && '! this field is required'}

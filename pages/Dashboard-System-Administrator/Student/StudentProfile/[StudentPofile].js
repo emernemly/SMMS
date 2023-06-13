@@ -1,11 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../../Components/SideBarSA';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { OwnStudents } from '../../../../Redux/Action/StudentAction';
 const StudentProfile = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -23,6 +28,11 @@ const StudentProfile = () => {
     });
   };
   const componentRef = useRef();
+  const id = router.query.StudentPofile;
+  useEffect(() => {
+    dispatch(OwnStudents(id));
+  }, [id]);
+  const student = useSelector((state) => state.StudentReducer.OwnStudent);
   return (
     <Row id="pdf-element">
       {' '}
@@ -39,85 +49,115 @@ const StudentProfile = () => {
             <Col md={4}>
               <div className="profilContent ">
                 <b>First Name:</b>
-                <p>emer</p>
+                <p>{student.FirstName}</p>
               </div>
             </Col>
 
             <Col md={4}>
               <div className="profilContent">
                 <b>Middel Name:</b>
-                <p>emer</p>
+                <p>{student.middelName}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b>Last Name:</b>
-                <p>emer</p>
+                <p>{student.lastName}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b>Gender:</b>
-                <p>Male</p>
+                <p>{student.Gender}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Date of Birth:</b>
-                <p>09/02/2023</p>
+                <p>{student.Birth}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Graduation School:</b>
-                <p>school</p>
+                <p>{student.GraduationSchool}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b>Graduation total score:</b>
-                <p>English</p>
+                <p>{student.GraduationScore}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
-                <b> level of study:</b>
-                <p>7eme annee</p>
+                <b> Student Number:</b>
+                <p>{student.StudentNumber}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
-                <b> Class:</b>
-                <p>7eme annee B</p>
+                <b> Street:</b>
+                <p>{student.Street}</p>
               </div>
             </Col>
             <hr></hr>
 
             <Col md={4}>
               <div className="profilContent">
-                <b> Student Number:</b>
-                <p>2009</p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="profilContent">
-                <b> Street:</b>
-                <p>2009</p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="profilContent">
                 <b> City:</b>
-                <p>tunis</p>
+                <p>{student.City}</p>
               </div>
             </Col>
+
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Zip/Postal Code:</b>
+                <p>{student.Zip}</p>
+              </div>
+            </Col>
+            <h2>Personal Information</h2>
+
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
-                <b> Zip:</b>
-                <p>2009</p>
+                <b> Father Name:</b>
+                <p>{student.FatherName}</p>
+              </div>
+            </Col>
+
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Father Phone:</b>
+                <p>{student.FatherPhone}</p>
+              </div>
+            </Col>
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Mother Name:</b>
+                <p>{student.MotherName}</p>
+              </div>
+            </Col>
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Mother Phone:</b>
+                <p>{student.MotherPhone}</p>
+              </div>
+            </Col>
+            <hr></hr>
+            <h2>Class Information</h2>
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Class:</b>
+                <p>{student.class}</p>
+              </div>
+            </Col>
+            <Col md={4}>
+              <div className="profilContent">
+                <b> Class Name:</b>
+                <p>{student.className}</p>
               </div>
             </Col>
             <hr></hr>
@@ -126,13 +166,13 @@ const StudentProfile = () => {
             <Col md={4}>
               <div className="profilContent">
                 <b> User Name:</b>
-                <p>Emer Nemly</p>
+                <p>{student.userName}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Password:</b>
-                <input type="password" disabled value="emernemly" />
+                <input type="password" disabled value={student.password} />
               </div>
             </Col>
           </Row>

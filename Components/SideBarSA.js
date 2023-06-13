@@ -147,7 +147,7 @@ const SideBarSA = () => {
               <SiGoogleclassroom /> classes
             </li>{' '}
           </Link>
-          <Link href="/Dashboard-System-Administrator/Class/ClassesTimeTable">
+          {/*  <Link href="/Dashboard-System-Administrator/Class/ClassesTimeTable">
             <li
               className={
                 path
@@ -159,7 +159,7 @@ const SideBarSA = () => {
             >
               <GrTableAdd /> Classes Time Table
             </li>{' '}
-          </Link>
+          </Link> */}
           <div className="dropdown">
             <a>
               {' '}

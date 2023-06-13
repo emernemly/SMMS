@@ -71,7 +71,7 @@
   ],
   "HeadTeacher": [
     {
-      "FirstName": "emer",
+      "FirstName": "emerr",
       "MiddelName": "nemly",
       "LastName": "new",
       "Gender": null,
@@ -90,7 +90,7 @@
       "FirstName": "emer",
       "MiddelName": "nemly",
       "LastName": "new2",
-      "Gender": "on",
+      "Gender": "Male",
       "Birth": "2023-05-13",
       "Educational": "math",
       "Subject": "phisque",
@@ -98,7 +98,7 @@
       "Class": "8 eme b",
       "City": "bardo",
       "Zip": "2009",
-      "userName": "headteacher",
+      "UserName": "",
       "password": "teacher",
       "id": 5
     },
@@ -154,81 +154,32 @@
       "id": 5
     },
     {
-      "FirstName": "emer",
+      "FirstName": "test",
       "middelName": "nemly",
-      "lastName": "teacher",
+      "lastName": "test",
       "Gender": "on",
-      "Birth": "2023-05-30",
+      "Birth": "2023-06-08",
       "Educational": "math",
       "Subject": "math",
       "City": "bardo",
       "Zip": "2009",
-      "userName": "Teacher",
-      "password": "Teasher",
-      "Role": {
-        "value": "admin",
-        "label": "admin"
-      },
-      "class": {
-        "value": "set permissions",
-        "label": "set permissions"
-      },
-      "className": {
-        "value": "import users",
-        "label": "import users"
-      },
-      "id": 6
-    },
-    {
-      "FirstName": "emer",
-      "middelName": "nemly",
-      "lastName": "teacher",
-      "Gender": "on",
-      "Birth": "2023-05-30",
-      "Educational": "math",
-      "Subject": "math",
-      "City": "bardo",
-      "Zip": "2009",
-      "userName": "Teacher",
-      "password": "Teasher",
+      "userName": "test",
+      "password": "test",
       "Role": "admin",
-      "class": "set permissions",
-      "className": "import users",
-      "id": 7
+      "class": "import basic student data",
+      "className": "import basic student data",
+      "id": 8
     }
   ],
   "Students": [
     {
       "FirstName": "emer",
       "middelName": "nemly",
-      "lastName": "teacher",
-      "Gender": "on",
-      "Birth": "2023-05-30",
-      "GraduationSchool": "math",
-      "GraduationScore": "math",
-      "StudentNumber": "",
-      "Street": "59 rue 409 ksar said 2",
-      "City": "bardo",
-      "Zip": "2009",
-      "FatherName": "",
-      "FatherPhone": "",
-      "MotherName": "",
-      "MotherPhone": "",
-      "userName": "Teacher",
-      "password": "Teasher",
-      "Role": "admin",
-      "class": "set permissions",
-      "className": "import users",
-      "id": 7
-    },
-    {
-      "FirstName": "emer",
-      "middelName": "nemly",
       "lastName": "Students",
       "Gender": "Male",
       "Birth": "2023-05-10",
       "GraduationSchool": "school",
-      "GraduationScore": "12",
+      "GraduationScore": "120",
       "StudentNumber": "2",
       "Street": "59 rue 409 ksar said 2",
       "City": "bardo",
@@ -236,21 +187,20 @@
       "FatherName": "emer",
       "FatherPhone": "52183728",
       "MotherName": "emer",
-      " MotherPhone": "52183728",
+      " MotherPhone": "",
       "userName": "Students",
       "password": "Students",
       "class": "set permissions",
-      "className": "set permissions",
       "id": 8
     },
     {
       "FirstName": "emer",
       "middelName": "nemly",
       "lastName": "Students",
-      "Gender": "Male",
+      "Gender": "female",
       "Birth": "2023-05-10",
       "GraduationSchool": "school",
-      "GraduationScore": "12",
+      "GraduationScore": "3200",
       "StudentNumber": "2",
       "Street": "59 rue 409 ksar said 2",
       "City": "bardo",
@@ -258,11 +208,10 @@
       "FatherName": "emer",
       "FatherPhone": "52183728",
       "MotherName": "emer",
-      " MotherPhone": "52183728",
+      " MotherPhone": "",
       "userName": "Students",
       "password": "Students",
       "class": "set permissions",
-      "className": "set permissions",
       "id": 9
     }
   ],
@@ -336,6 +285,52 @@
       "userName": "Parent",
       "password": "p",
       "id": 12
+    }
+  ],
+  "classes": [
+    {
+      "Level": "8eme annee",
+      "Class": "A",
+      "timeEvent": "2020-09-08 17:42:17",
+      "deserved": "2ere place",
+      "Details": "Activity sport 2",
+      "Noticed": "test",
+      "recorder": "Ali diop",
+      "timeRecord": "2020-09-08 17:42:17",
+      "id": 12
+    },
+    {
+      "Level": "test",
+      "Class": "test",
+      "timeEvent": "2023-06-03",
+      "deserved": "test",
+      "Details": "1",
+      "Noticed": "test1",
+      "recorder": "test",
+      "timeRecord": "2023-06-23",
+      "id": 13
+    },
+    {
+      "Level": "test2",
+      "Class": "test2",
+      "timeEvent": "2023-06-04",
+      "deserved": "test2",
+      "Details": "1",
+      "Noticed": "test2",
+      "recorder": "test2",
+      "timeRecord": "2023-06-03",
+      "id": 14
+    },
+    {
+      "Level": "test3",
+      "Class": "test3",
+      "timeEvent": "2023-06-22",
+      "deserved": "test3",
+      "Details": "33",
+      "Noticed": "test3",
+      "recorder": "test3",
+      "timeRecord": "2023-06-29",
+      "id": 15
     }
   ]
 }

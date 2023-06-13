@@ -98,7 +98,7 @@ const HeadTeacher = () => {
                   .filter((el) =>
                     el.FirstName.toLowerCase().includes(search.toLowerCase())
                   )
-                  .slice(0, 7)
+
                   .map((ownheadTeacher, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -7,73 +7,13 @@ import Link from 'next/link';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteStudent,
+  getStudents,
+} from '../../../Redux/Action/StudentAction';
 const Student = () => {
-  const student = [
-    {
-      StudentNumber: '1',
-      FirstName: 'Aro',
-      MiddelName: 'Aro',
-      LastName: 'Aro',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-    },
-    {
-      StudentNumber: '2',
-      FirstName: 'ali',
-      MiddelName: 'ali',
-      LastName: 'ali',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-    },
-    {
-      StudentNumber: '3',
-      FirstName: 'ibrahim',
-      MiddelName: 'ibrahim',
-      LastName: 'ibrahim',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-    },
-    {
-      StudentNumber: '4',
-      FirstName: 'emer',
-      MiddelName: 'emer',
-      LastName: 'emer',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-    },
-  ];
+  const dispatch = useDispatch();
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -92,6 +32,16 @@ const Student = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getStudents());
+  }, []);
+  const student = useSelector((state) => state.StudentReducer.Students);
+  const deleteStudents = (id) => {
+    var result = confirm('Want to delete Teacher?');
+    if (result) {
+      dispatch(deleteStudent(id));
+    }
+  };
   return (
     <Row>
       {' '}
@@ -150,13 +100,18 @@ const Student = () => {
                       <td>{student.GraduationSchool}</td>
                       <td>{student.GraduationScore}</td>
                       <td>
-                        <Link href="/Dashboard-System-Administrator/Student/StudentProfile">
+                        <Link
+                          href={`/Dashboard-System-Administrator/Student/StudentProfile/${student.id}`}
+                        >
                           <button className="bg-primary btn-Setting">
                             See
                           </button>
                         </Link>
-                        <StudentModul />
-                        <button className="bg-danger btn-Setting">
+                        <StudentModul student={student} />
+                        <button
+                          className="bg-danger btn-Setting"
+                          onClick={() => deleteStudents(student.id)}
+                        >
                           Delete
                         </button>{' '}
                       </td>

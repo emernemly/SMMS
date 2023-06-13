@@ -90,6 +90,10 @@ const HeadTeacherModul = ({ ownheadTeacher }) => {
                             name="Gender"
                             {...register('Gender')}
                             value="Male"
+                            defaultValue={ownheadTeacher.Gender}
+                            checked={
+                              ownheadTeacher.Gender === 'Male' ? true : false
+                            }
                           />
                           <b>Male</b>
                         </div>
@@ -99,6 +103,10 @@ const HeadTeacherModul = ({ ownheadTeacher }) => {
                             name="Gender"
                             {...register('Gender')}
                             value="female"
+                            defaultValue={ownheadTeacher.Gender}
+                            checked={
+                              ownheadTeacher.Gender === 'Male' ? true : false
+                            }
                           />
                           <b>female</b>
                         </div>
