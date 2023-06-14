@@ -26,3 +26,12 @@ export const ownTeacher = (_id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const changeTeacher = (datas, _id) => async (dispatch) => {
+  try {
+    const data = await axios.put(`http://localhost:3000/Teacher/${_id}`, datas);
+    dispatch(getTeacher());
+  } catch (error) {
+    console.log(error);
+  }
+};

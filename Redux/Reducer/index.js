@@ -3,11 +3,13 @@ import HeadTeacherReducer from './HeadTeacherReducer';
 import TeacherReducer from './TeacherReducer';
 import StudentReducer from './StudentsReducer';
 import ClassesReducer from './ClassesReducer';
+import ScoreReducer from './ScoreReducer';
 const RootReducer = combineReducers({
   HeadTeacherReducer,
   TeacherReducer,
   StudentReducer,
   ClassesReducer,
+  ScoreReducer,
 });
 
 export default RootReducer;

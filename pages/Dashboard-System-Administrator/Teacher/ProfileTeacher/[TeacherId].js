@@ -96,19 +96,7 @@ const TeacherId = () => {
                   <p>{OwnTeacher.Subject}</p>
                 </div>
               </Col>
-              <Col md={4}>
-                <div className="profilContent">
-                  <b> Class Name:</b>
-                  <p>{OwnTeacher.className}</p>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="profilContent">
-                  <b> Class:</b>
-                  <p>{OwnTeacher.Class}</p>
-                </div>
-              </Col>
-              <hr></hr>
+
               <Col md={4}>
                 <div className="profilContent">
                   <b> City:</b>
@@ -121,6 +109,21 @@ const TeacherId = () => {
                   <p>{OwnTeacher.Zip}</p>
                 </div>
               </Col>
+              <h2>Class Information</h2>
+              <hr></hr>
+              <Col md={4}>
+                <div className="profilContent">
+                  <b> Class Name:</b>
+                  <p>{OwnTeacher.className}</p>
+                </div>
+              </Col>
+              <Col md={4}>
+                <div className="profilContent">
+                  <b> Class:</b>
+                  <p>{OwnTeacher.Class}</p>
+                </div>
+              </Col>
+
               <hr></hr>
               <h2>Information Account </h2>
               <hr></hr>

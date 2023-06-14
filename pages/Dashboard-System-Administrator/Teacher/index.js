@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTeacher, getTeacher } from '../../../Redux/Action/TeacherAction';
+import TeacherModul from '../../../Components/ModelBox/TeacherModul';
 
 const Teacher = () => {
   const dispatch = useDispatch();
@@ -103,7 +104,7 @@ const Teacher = () => {
                       >
                         <button className="bg-primary btn-Setting">See</button>
                       </Link>
-                      {/* <HeadTeacherModul /> */}
+                      <TeacherModul ownTeacher={ownTeacher} />
                       <button
                         className="bg-danger btn-Setting"
                         onClick={() => deleteTeachers(ownTeacher.id)}

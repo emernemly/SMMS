@@ -288,9 +288,9 @@ const Teacher = () => {
                         value={className}
                         onChange={changeHandlerClassName}
                       />
-                      <p className="err">
+                      {/* <p className="err">
                         {errors.Zip && '! this field is required'}
-                      </p>
+                      </p> */}
                     </div>
                   </Col>
                 </Row>

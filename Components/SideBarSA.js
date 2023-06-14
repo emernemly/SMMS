@@ -236,9 +236,9 @@ const SideBarSA = () => {
               <AiOutlineLogout /> Students Leaves
             </li>{' '}
           </Link>
-          <Link href="/StudentAttendanceReport">
+          {/*           <Link href="/StudentAttendanceReport">
             <li
-              className={
+              clkassName={
                 path
                   ? path === '/StudentAttendanceReport' && `activeSideBare`
                   : ''
@@ -246,7 +246,7 @@ const SideBarSA = () => {
             >
               <MdOutlinePeopleAlt /> Attendance Report
             </li>{' '}
-          </Link>
+          </Link> */}
           <Link href="/StudentActivities">
             <li
               className={

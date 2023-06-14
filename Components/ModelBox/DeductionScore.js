@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deductionScores } from '../../Redux/Action/DeductionScores';
 
-const DeductionScore = () => {
+const DeductionScore = ({ student }) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -16,7 +19,8 @@ const DeductionScore = () => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(deductionScores(student.id, { ...data, status: 'deduction' }));
+    handleClose();
   };
   return (
     <>
@@ -45,7 +49,14 @@ const DeductionScore = () => {
                     <b>
                       semester<sup>*</sup>
                     </b>
-                    <input type="text" name="name" />
+                    <input
+                      type="text"
+                      name="semester"
+                      {...register('semester', { required: true })}
+                    />
+                    <p className="err">
+                      {errors.semester && '! this field is required'}
+                    </p>
                   </div>
                 </Col>
                 <Col md={4}>
@@ -53,7 +64,14 @@ const DeductionScore = () => {
                     <b>
                       Class Level<sup>*</sup>
                     </b>
-                    <input type="text" name="middelName" />
+                    <input
+                      type="text"
+                      name="ClassLevel"
+                      {...register('ClassLevel', { required: true })}
+                    />
+                    <p className="err">
+                      {errors.ClassLevel && '! this field is required'}
+                    </p>
                   </div>
                 </Col>
                 <Col md={4}>
@@ -61,7 +79,14 @@ const DeductionScore = () => {
                     <b>
                       Class<sup>*</sup>
                     </b>
-                    <input type="text" name="lastName" />
+                    <input
+                      type="text"
+                      name="Class"
+                      {...register('Class', { required: true })}
+                    />
+                    <p className="err">
+                      {errors.Class && '! this field is required'}
+                    </p>
                   </div>
                 </Col>
                 <Row>
@@ -71,7 +96,14 @@ const DeductionScore = () => {
                       <b>
                         Student<sup>*</sup>
                       </b>
-                      <input type="text" name="Student" />
+                      <input
+                        type="text"
+                        name="Student"
+                        {...register('Student', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.Student && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
@@ -80,7 +112,14 @@ const DeductionScore = () => {
                       <b>
                         Event Time<sup>*</sup>
                       </b>
-                      <input type="date" name="date" />
+                      <input
+                        type="date"
+                        name="EventTime"
+                        {...register('EventTime', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.EventTime && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -89,7 +128,14 @@ const DeductionScore = () => {
                     {' '}
                     <div className="inputType">
                       <b>Point Elements</b>
-                      <textarea type="text" name="Educational" />
+                      <textarea
+                        type="text"
+                        name="PointElements"
+                        {...register('PointElements', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.PointElements && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
 
@@ -98,7 +144,14 @@ const DeductionScore = () => {
                     <div className="inputType">
                       <b>Details on the situation of the notes</b>
 
-                      <input type="email" name="Subject" />
+                      <input
+                        type="text"
+                        name="Details"
+                        {...register('Details', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.Details && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -107,7 +160,14 @@ const DeductionScore = () => {
                     {' '}
                     <div className="inputType">
                       <b>points</b>
-                      <input type="number" name="className" />
+                      <input
+                        type="number"
+                        name="points"
+                        {...register('points', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.points && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
 
@@ -116,7 +176,14 @@ const DeductionScore = () => {
                     <div className="inputType">
                       <b>Note</b>
 
-                      <textarea type="email" name="Class" />
+                      <textarea
+                        type="email"
+                        name="Note"
+                        {...register('Note', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.Note && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -128,7 +195,14 @@ const DeductionScore = () => {
                       <b>
                         register<sup>*</sup>
                       </b>
-                      <input type="text" name="City" />
+                      <input
+                        type="text"
+                        name="register"
+                        {...register('register', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.register && '! this field is required'}
+                      </p>
                     </div>
                   </Col>
                 </Row>{' '}
