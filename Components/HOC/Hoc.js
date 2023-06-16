@@ -12,15 +12,20 @@ const Hoc = ({ children, inRole }) => {
   // Check if the user is authenticated, e.g., by accessing your authentication state or using a custom hook.
   // Replace this with your authentication check logic.
   const user = useSelector((state) => state.UserRedcuer.user);
-  if (!user) {
-    // Redirect the user to the login page if not authenticated.
-    router.push('/Login-System-Adminstrator');
+
+  if (typeof window === 'undefined' || !user) {
+    // Redirect the user to the login page if not authenticated or if running on server-side.
+    if (typeof window !== 'undefined') {
+      window.location.href = '/Login-System-Adminstrator';
+    }
     return null; // Render nothing until the redirect happens.
   } else if (
     !inRole ||
     (inRole && !inRole.some((role) => role === user.Role))
   ) {
-    router.push('/Login-System-Adminstrator');
+    if (typeof window !== 'undefined') {
+      window.location.href = '/Login-System-Adminstrator';
+    }
     return null;
   }
   // Render the child components if authenticated.
