@@ -13,6 +13,7 @@ import {
   deleteHeadTeacher,
   getHeadteacher,
 } from '../../../Redux/Action/HeadTeacherAction';
+import { getUser } from '../../../Redux/Action/UserActions';
 
 const HeadTeacher = () => {
   const [search, setsearch] = useState('');
@@ -37,10 +38,13 @@ const HeadTeacher = () => {
 
   useEffect(() => {
     dispatch(getHeadteacher());
+    dispatch(getUser());
   }, []);
   const headTeacher = useSelector(
     (state) => state.HeadTeacherReducer.HeadTeacher
   );
+  const user = useSelector((state) => state.UserRedcuer.user);
+
   const deleteHead = (id) => {
     var result = confirm('Want to delete?');
     if (result) {
@@ -48,7 +52,7 @@ const HeadTeacher = () => {
     }
   };
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['admin', 'headTeacher']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -90,7 +94,9 @@ const HeadTeacher = () => {
                   <th>Subject Teacher</th>
                   <th>Class Name</th>
                   <th>Class</th>
-                  <th>Setting</th>
+                  {['admin'].some((role) => role === user.Role) && (
+                    <th>Setting</th>
+                  )}
                 </tr>{' '}
               </thead>
               <tbody>
@@ -108,22 +114,24 @@ const HeadTeacher = () => {
                         <td>{ownheadTeacher.Subject}</td>
                         <td>{ownheadTeacher.className}</td>
                         <td>{ownheadTeacher.Class}</td>
-                        <td>
-                          <Link
-                            href={`/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher/${ownheadTeacher.id}`}
-                          >
-                            <button className="bg-primary btn-Setting">
-                              See
-                            </button>
-                          </Link>
-                          <HeadTeacherModul ownheadTeacher={ownheadTeacher} />
-                          <button
-                            className="bg-danger btn-Setting"
-                            onClick={() => deleteHead(ownheadTeacher.id)}
-                          >
-                            Delete
-                          </button>{' '}
-                        </td>
+                        {['admin'].some((role) => role === user.Role) && (
+                          <td>
+                            <Link
+                              href={`/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher/${ownheadTeacher.id}`}
+                            >
+                              <button className="bg-primary btn-Setting">
+                                See
+                              </button>
+                            </Link>
+                            <HeadTeacherModul ownheadTeacher={ownheadTeacher} />
+                            <button
+                              className="bg-danger btn-Setting"
+                              onClick={() => deleteHead(ownheadTeacher.id)}
+                            >
+                              Delete
+                            </button>{' '}
+                          </td>
+                        )}
                       </tr>
                     );
                   })}

@@ -16,9 +16,12 @@ import { TbDatabaseExport } from 'react-icons/tb';
 import { AiOutlineDashboard, AiOutlineLogout } from 'react-icons/ai';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../Redux/Action/UserActions';
 
 const SideBarSA = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [open, setopen] = useState(false);
   const [path, setpath] = useState(null);
   const [MoralDrop, setMoralDrop] = useState(false);
@@ -27,6 +30,11 @@ const SideBarSA = () => {
     setpath(router.pathname);
     console.log(router.pathname);
   }, [router.pathname]);
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  const user = useSelector((state) => state.UserRedcuer.user);
+
   return (
     <div className="sidebarAll">
       {' '}
@@ -50,103 +58,119 @@ const SideBarSA = () => {
               Dashboard
             </li>{' '}
           </Link>
-          <Link href="/Dashboard-System-Administrator/Registration">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Registration' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <MdOutlineAppRegistration />
-              Registration
-            </li>
-          </Link>
-          <div className="dropdown">
-            <a>
-              {' '}
-              <li onClick={() => setopen(!open)}>
-                <HiOutlineUserGroup /> User Management <MdKeyboardArrowDown />{' '}
-              </li>{' '}
-            </a>
+          {['admin'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/Registration">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Registration' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <MdOutlineAppRegistration />
+                Registration
+              </li>
+            </Link>
+          )}
+          {['admin'].some((role) => role === user.Role) && (
+            <div className="dropdown">
+              <a>
+                {' '}
+                <li onClick={() => setopen(!open)}>
+                  <HiOutlineUserGroup /> User Management <MdKeyboardArrowDown />{' '}
+                </li>{' '}
+              </a>
 
-            <ul className={`drop ${open && 'dropOpne'}`}>
-              {' '}
-              <Link href="/Dashboard-System-Administrator/User-Management/Permissions">
-                <li
-                  className={
-                    path ===
-                    '/Dashboard-System-Administrator/User-Management/Permissions'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Permissions
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/Dashboard-System-Administrator/User-Management/Role">
-                <li
-                  className={
-                    path ===
-                    '/Dashboard-System-Administrator/User-Management/Role'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Role
-                </li>{' '}
-              </Link>{' '}
-            </ul>
-          </div>
-          <Link href="/Dashboard-System-Administrator/Head-Teacher">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Head-Teacher' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <RiShieldUserLine /> Head Teacher
-            </li>
-          </Link>
-          <Link href="/Dashboard-System-Administrator/Teacher">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Teacher' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <GiTeacher /> Teacher
-            </li>
-          </Link>
-          <Link href="/Dashboard-System-Administrator/Student">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Student' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <FiUsers /> <p>Students</p>
-            </li>
-          </Link>
-          <Link href="/Dashboard-System-Administrator/Class">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Class' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <SiGoogleclassroom /> classes
-            </li>{' '}
-          </Link>
+              <ul className={`drop ${open && 'dropOpne'}`}>
+                {' '}
+                <Link href="/Dashboard-System-Administrator/User-Management/Permissions">
+                  <li
+                    className={
+                      path ===
+                      '/Dashboard-System-Administrator/User-Management/Permissions'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Permissions
+                  </li>{' '}
+                </Link>{' '}
+                <Link href="/Dashboard-System-Administrator/User-Management/Role">
+                  <li
+                    className={
+                      path ===
+                      '/Dashboard-System-Administrator/User-Management/Role'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Role
+                  </li>{' '}
+                </Link>{' '}
+              </ul>
+            </div>
+          )}
+          {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/Head-Teacher">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Head-Teacher' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <RiShieldUserLine /> Head Teacher
+              </li>
+            </Link>
+          )}
+          {['admin', 'headTeacher', 'teacher'].some(
+            (role) => role === user.Role
+          ) && (
+            <Link href="/Dashboard-System-Administrator/Teacher">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Teacher' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <GiTeacher /> Teacher
+              </li>
+            </Link>
+          )}
+          {['admin', 'headTeacher', 'teacher'].some(
+            (role) => role === user.Role
+          ) && (
+            <Link href="/Dashboard-System-Administrator/Student">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Student' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <FiUsers /> <p>Students</p>
+              </li>
+            </Link>
+          )}
+          {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/Class">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Class' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <SiGoogleclassroom /> classes
+              </li>{' '}
+            </Link>
+          )}
           {/*  <Link href="/Dashboard-System-Administrator/Class/ClassesTimeTable">
             <li
               className={
@@ -170,72 +194,88 @@ const SideBarSA = () => {
 
             <ul className={`drop ${MoralDrop && 'dropOpne'}`}>
               {' '}
-              <Link href="/Moral-Education-Management-Office">
-                <li
-                  className={
-                    path === '/Moral-Education-Management-Office'
-                      ? `mr activeSideBare`
-                      : 'mr'
-                  }
-                >
-                  Students Moral Education
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/Head-Teacher">
-                <li
-                  className={
-                    path === '/Head-Teacher' ? `activeSideBare mr` : 'mr'
-                  }
-                >
-                  Class Moral Education
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/Head-Teacher/Reviews">
-                <li
-                  className={
-                    path === '/Head-Teacher/Reviews'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Reviews
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/Dashboard-System-Administrator/Moral-Education-Scores">
-                <li
-                  className={
-                    path ===
-                    '/Dashboard-System-Administrator/Moral-Education-Scores'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Moral Score History
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/Dashboard-System-Administrator/Score-Recorded-Data-Statistics">
-                <li
-                  className={
-                    path ===
-                    '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Score Recorded Data Statistics
-                </li>{' '}
-              </Link>{' '}
+              {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+                <Link href="/Moral-Education-Management-Office">
+                  <li
+                    className={
+                      path === '/Moral-Education-Management-Office'
+                        ? `mr activeSideBare`
+                        : 'mr'
+                    }
+                  >
+                    Students Moral Education
+                  </li>{' '}
+                </Link>
+              )}
+              {['admin', 'headTeacher', 'teacher'].some(
+                (role) => role === user.Role
+              ) && (
+                <Link href="/Head-Teacher">
+                  <li
+                    className={
+                      path === '/Head-Teacher' ? `activeSideBare mr` : 'mr'
+                    }
+                  >
+                    Class Moral Education
+                  </li>{' '}
+                </Link>
+              )}
+              {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+                <Link href="/Head-Teacher/Reviews">
+                  <li
+                    className={
+                      path === '/Head-Teacher/Reviews'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Reviews
+                  </li>{' '}
+                </Link>
+              )}
+              {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+                <Link href="/Dashboard-System-Administrator/Moral-Education-Scores">
+                  <li
+                    className={
+                      path ===
+                      '/Dashboard-System-Administrator/Moral-Education-Scores'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Moral Score History
+                  </li>{' '}
+                </Link>
+              )}
+              {['admin', 'headTeacher', 'teacher'].some(
+                (role) => role === user.Role
+              ) && (
+                <Link href="/Dashboard-System-Administrator/Score-Recorded-Data-Statistics">
+                  <li
+                    className={
+                      path ===
+                      '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Score Recorded Data Statistics
+                  </li>{' '}
+                </Link>
+              )}
             </ul>
           </div>
-          <Link href="/StudentLeaves">
-            <li
-              className={
-                path ? path === '/StudentLeaves' && `activeSideBare` : ''
-              }
-            >
-              <AiOutlineLogout /> Students Leaves
-            </li>{' '}
-          </Link>
+          {['admin', 'headTeacher'].some((role) => role === user.Role) && (
+            <Link href="/StudentLeaves">
+              <li
+                className={
+                  path ? path === '/StudentLeaves' && `activeSideBare` : ''
+                }
+              >
+                <AiOutlineLogout /> Students Leaves
+              </li>{' '}
+            </Link>
+          )}
           {/*           <Link href="/StudentAttendanceReport">
             <li
               clkassName={
@@ -247,15 +287,19 @@ const SideBarSA = () => {
               <MdOutlinePeopleAlt /> Attendance Report
             </li>{' '}
           </Link> */}
-          <Link href="/StudentActivities">
-            <li
-              className={
-                path ? path === '/StudentActivities' && `activeSideBare` : ''
-              }
-            >
-              <RxActivityLog /> Students Activities
-            </li>{' '}
-          </Link>
+          {['admin', 'headTeacher', 'teacher'].some(
+            (role) => role === user.Role
+          ) && (
+            <Link href="/StudentActivities">
+              <li
+                className={
+                  path ? path === '/StudentActivities' && `activeSideBare` : ''
+                }
+              >
+                <RxActivityLog /> Students Activities
+              </li>{' '}
+            </Link>
+          )}
           <div className="dropdown">
             <a>
               {' '}
@@ -266,72 +310,90 @@ const SideBarSA = () => {
 
             <ul className={`drop ${healthDrop && 'dropOpne'}`}>
               {' '}
-              <Link href="/StudentHealth/StudentHeterogeneity">
-                <li
-                  className={
-                    path === '/StudentHealth/StudentHeterogeneity'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Students Heterogeneity
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/StudentHealth/ClassMorningCheck">
-                <li
-                  className={
-                    path === '/StudentHealth/ClassMorningCheck'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Class morning check details
-                </li>{' '}
-              </Link>{' '}
-              <Link href="/StudentHealth/ClassMorningCheck/ClassMoringHistory">
-                <li
-                  className={
-                    path ===
-                    '/StudentHealth/ClassMorningCheck/ClassMoringHistory'
-                      ? `activeSideBare mr`
-                      : 'mr'
-                  }
-                >
-                  Class morning check details history
-                </li>{' '}
-              </Link>{' '}
+              {['admin', 'headTeacher', 'teacher'].some(
+                (role) => role === user.Role
+              ) && (
+                <Link href="/StudentHealth/StudentHeterogeneity">
+                  <li
+                    className={
+                      path === '/StudentHealth/StudentHeterogeneity'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Students Heterogeneity
+                  </li>{' '}
+                </Link>
+              )}
+              {['admin', 'headTeacher', 'teacher'].some(
+                (role) => role === user.Role
+              ) && (
+                <Link href="/StudentHealth/ClassMorningCheck">
+                  <li
+                    className={
+                      path === '/StudentHealth/ClassMorningCheck'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Class morning check details
+                  </li>{' '}
+                </Link>
+              )}{' '}
+              {['admin', 'headTeacher', 'teacher'].some(
+                (role) => role === user.Role
+              ) && (
+                <Link href="/StudentHealth/ClassMorningCheck/ClassMoringHistory">
+                  <li
+                    className={
+                      path ===
+                      '/StudentHealth/ClassMorningCheck/ClassMoringHistory'
+                        ? `activeSideBare mr`
+                        : 'mr'
+                    }
+                  >
+                    Class morning check details history
+                  </li>{' '}
+                </Link>
+              )}
             </ul>
           </div>
-          <Link href="/Dashboard-System-Administrator/BackUp">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/BackUp' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <TbDatabaseExport /> Backup and Manage
-            </li>{' '}
-          </Link>{' '}
-          <Link href="/Dashboard-System-Administrator/Logs">
-            <li
-              className={
-                path
-                  ? path === '/Dashboard-System-Administrator/Logs' &&
-                    `activeSideBare`
-                  : ''
-              }
-            >
-              <MdOutlineSystemUpdateAlt />
-              System Logs and User Activity
-            </li>{' '}
-          </Link>
-          <Link href="/Dashboard-System-Administrator/Traffic-website">
-            <li>
-              <SiGoogleanalytics /> Trafic Website
-            </li>{' '}
-          </Link>
+          {['admin'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/BackUp">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/BackUp' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <TbDatabaseExport /> Backup and Manage
+              </li>{' '}
+            </Link>
+          )}
+          {['admin'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/Logs">
+              <li
+                className={
+                  path
+                    ? path === '/Dashboard-System-Administrator/Logs' &&
+                      `activeSideBare`
+                    : ''
+                }
+              >
+                <MdOutlineSystemUpdateAlt />
+                System Logs and User Activity
+              </li>{' '}
+            </Link>
+          )}
+          {['admin'].some((role) => role === user.Role) && (
+            <Link href="/Dashboard-System-Administrator/Traffic-website">
+              <li>
+                <SiGoogleanalytics /> Trafic Website
+              </li>{' '}
+            </Link>
+          )}
         </ul>
       </aside>
     </div>

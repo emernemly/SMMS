@@ -18,7 +18,9 @@ const HeadTeacherModul = ({ ownheadTeacher }) => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    dispatch(changeHeadTeacher(data, ownheadTeacher.id));
+    dispatch(
+      changeHeadTeacher({ ...data, Role: 'headTeacher' }, ownheadTeacher.id)
+    );
     handleClose();
   };
   return (
@@ -105,7 +107,7 @@ const HeadTeacherModul = ({ ownheadTeacher }) => {
                             value="female"
                             defaultValue={ownheadTeacher.Gender}
                             checked={
-                              ownheadTeacher.Gender === 'Male' ? true : false
+                              ownheadTeacher.Gender === 'female' ? true : false
                             }
                           />
                           <b>female</b>
@@ -221,8 +223,8 @@ const HeadTeacherModul = ({ ownheadTeacher }) => {
                     <input
                       type="text"
                       name="UserName"
-                      defaultValue={ownheadTeacher.UserName}
-                      {...register('UserName')}
+                      defaultValue={ownheadTeacher.userName}
+                      {...register('userName')}
                     />
                   </div>
                 </Col>

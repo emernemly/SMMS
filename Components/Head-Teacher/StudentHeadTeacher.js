@@ -8,6 +8,7 @@ import DeductionScore from '../ModelBox/DeductionScore';
 import Cancelling from '../ModelBox/Cancelling';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
+import Hoc from '../HOC/Hoc';
 const StudentHeadTeacher = () => {
   const student = [
     {
@@ -98,72 +99,74 @@ const StudentHeadTeacher = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard">
-          <div className="titleDashboard">
-            <h3>Student</h3>
-            <input
-              type="search"
-              placeholder="search Student"
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard">
+            <div className="titleDashboard">
+              <h3>Student</h3>
+              <input
+                type="search"
+                placeholder="search Student"
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table">
-            <thead>
-              {' '}
-              <tr>
-                <th>Student number</th>
+            <table className="Table">
+              <thead>
+                {' '}
+                <tr>
+                  <th>Student number</th>
 
-                <th>Name</th>
+                  <th>Name</th>
 
-                <th>Gender</th>
-                <th>Graduation school</th>
-                <th>Moral Education Score</th>
-                <th>Setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {student
-                .filter((el) =>
-                  el.FirstName.toUpperCase().includes(search.toUpperCase())
-                )
-                .map((student, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{student.StudentNumber}</td>
+                  <th>Gender</th>
+                  <th>Graduation school</th>
+                  <th>Moral Education Score</th>
+                  <th>Setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {student
+                  .filter((el) =>
+                    el.FirstName.toUpperCase().includes(search.toUpperCase())
+                  )
+                  .map((student, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{student.StudentNumber}</td>
 
-                      <td>{student.FirstName}</td>
-                      <td>{student.Gender}</td>
-                      <td>{student.GraduationSchool}</td>
-                      <td>{student.score}</td>
-                      <td>
-                        <DeductionScore />
+                        <td>{student.FirstName}</td>
+                        <td>{student.Gender}</td>
+                        <td>{student.GraduationSchool}</td>
+                        <td>{student.score}</td>
+                        <td>
+                          <DeductionScore />
 
-                        <Cancelling />
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                          <Cancelling />
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

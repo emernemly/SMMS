@@ -5,6 +5,7 @@ import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import Hoc from '../../../Components/HOC/Hoc';
 const BackUp = () => {
   const backup = [
     {
@@ -59,66 +60,68 @@ const BackUp = () => {
     });
   };
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Backup</h3>
-            <input
-              type="search"
-              placeholder="search Backup"
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <a className="dashboard-btn" onClick={downloadPDF}>
-                Download PDF
-              </a>
-              <a className="dashboard-btn">Create Backup </a>
-              <a className="dashboard-btn">Restore Backup </a>
-              <ReactToPrint
-                trigger={() => <a className="dashboard-btn">Print </a>}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Backup</h3>
+              <input
+                type="search"
+                placeholder="search Backup"
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <a className="dashboard-btn" onClick={downloadPDF}>
+                  Download PDF
+                </a>
+                <a className="dashboard-btn">Create Backup </a>
+                <a className="dashboard-btn">Restore Backup </a>
+                <ReactToPrint
+                  trigger={() => <a className="dashboard-btn">Print </a>}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>Backup List</th>
-                <th>Status</th>
-                <th>database</th>
-                <th>location</th>
-                <th>Size</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {backup
-                .filter((el) =>
-                  el.List.toUpperCase().includes(search.toUpperCase())
-                )
-                .map((backup, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{backup.List}</td>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>Backup List</th>
+                  <th>Status</th>
+                  <th>database</th>
+                  <th>location</th>
+                  <th>Size</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {backup
+                  .filter((el) =>
+                    el.List.toUpperCase().includes(search.toUpperCase())
+                  )
+                  .map((backup, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{backup.List}</td>
 
-                      <td>{backup.Status}</td>
-                      <td>{backup.database}</td>
-                      <td>{backup.location}</td>
-                      <td>{backup.Size}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                        <td>{backup.Status}</td>
+                        <td>{backup.database}</td>
+                        <td>{backup.location}</td>
+                        <td>{backup.Size}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

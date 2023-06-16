@@ -7,6 +7,7 @@ import Link from 'next/link';
 import ReactToPrint from 'react-to-print';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
+import Hoc from '../HOC/Hoc';
 
 const ClassMoralScore = () => {
   const componentRef = useRef();
@@ -81,81 +82,83 @@ const ClassMoralScore = () => {
     });
   };
   return (
-    <Row>
-      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Class</h3>
-            <input
-              type="search"
-              placeholder="search Class"
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+      <Row>
+        <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Class</h3>
+              <input
+                type="search"
+                placeholder="search Class"
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>Id</th>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>Id</th>
 
-                <th>Level</th>
+                  <th>Level</th>
 
-                <th>Class</th>
-                <th>the time of the event</th>
-                <th>deserved</th>
-                <th>Details</th>
-                <th>Noticed</th>
-                <th>recorder</th>
-                <th>time to record</th>
-                <th>Setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {classes
-                .filter((el) =>
-                  el.Class.toUpperCase().includes(search.toUpperCase())
-                )
-                .map((classes, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{classes.Id}</td>
+                  <th>Class</th>
+                  <th>the time of the event</th>
+                  <th>deserved</th>
+                  <th>Details</th>
+                  <th>Noticed</th>
+                  <th>recorder</th>
+                  <th>time to record</th>
+                  <th>Setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {classes
+                  .filter((el) =>
+                    el.Class.toUpperCase().includes(search.toUpperCase())
+                  )
+                  .map((classes, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{classes.Id}</td>
 
-                      <td>{classes.Level}</td>
-                      <td>{classes.Class}</td>
-                      <td>{classes.time}</td>
-                      <td>{classes.deserved}</td>
-                      <td>{classes.Details}</td>
-                      <td>{classes.Noticed}</td>
-                      <td>{classes.recorder}</td>
-                      <td>{classes.record}</td>
-                      <td>
-                        <Link href="/Head-Teacher/StudentClass">
-                          <button className="bg-primary btn-Setting">
-                            See
-                          </button>
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                        <td>{classes.Level}</td>
+                        <td>{classes.Class}</td>
+                        <td>{classes.time}</td>
+                        <td>{classes.deserved}</td>
+                        <td>{classes.Details}</td>
+                        <td>{classes.Noticed}</td>
+                        <td>{classes.recorder}</td>
+                        <td>{classes.record}</td>
+                        <td>
+                          <Link href="/Head-Teacher/StudentClass">
+                            <button className="bg-primary btn-Setting">
+                              See
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

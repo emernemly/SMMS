@@ -7,6 +7,7 @@ import ReactToPrint from 'react-to-print';
 import Link from 'next/link';
 import SideBarSA from './SideBarSA';
 import NavbarR from './RegistrationComponente/NavbarR';
+import Hoc from './HOC/Hoc';
 
 const StudentLeaves = () => {
   const StudentLeaves = [
@@ -66,76 +67,78 @@ const StudentLeaves = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Leave Request</h3>
-            <input
-              type="search"
-              placeholder="Search Student "
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin', 'headTeacher']}>
+      <Row>
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Leave Request</h3>
+              <input
+                type="search"
+                placeholder="Search Student "
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>student number</th>
-                <th>student</th>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>student number</th>
+                  <th>student</th>
 
-                <th>class</th>
+                  <th>class</th>
 
-                <th>class name</th>
-                <th>reason</th>
-                <th>Leave date</th>
-                <th>status</th>
-                <th>setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {StudentLeaves.filter((el) =>
-                el.StudentName.toUpperCase().includes(search.toUpperCase())
-              ).map((Leaverapport, i) => {
-                return (
-                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{Leaverapport.Id}</td>
-                    <td>{Leaverapport.StudentName}</td>
-                    <td>{Leaverapport.class}</td>
-                    <td>{Leaverapport.className}</td>
-                    <td>{Leaverapport.reason}</td>
-                    <td>{Leaverapport.leaveDate}</td>
-                    <td>{Leaverapport.statue}</td>
-                    <td>
-                      <button className="bg-success btn-Setting">
-                        approved
-                      </button>
+                  <th>class name</th>
+                  <th>reason</th>
+                  <th>Leave date</th>
+                  <th>status</th>
+                  <th>setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {StudentLeaves.filter((el) =>
+                  el.StudentName.toUpperCase().includes(search.toUpperCase())
+                ).map((Leaverapport, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{Leaverapport.Id}</td>
+                      <td>{Leaverapport.StudentName}</td>
+                      <td>{Leaverapport.class}</td>
+                      <td>{Leaverapport.className}</td>
+                      <td>{Leaverapport.reason}</td>
+                      <td>{Leaverapport.leaveDate}</td>
+                      <td>{Leaverapport.statue}</td>
+                      <td>
+                        <button className="bg-success btn-Setting">
+                          approved
+                        </button>
 
-                      <button className="bg-danger btn-Setting">
-                        unapproved
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                        <button className="bg-danger btn-Setting">
+                          unapproved
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

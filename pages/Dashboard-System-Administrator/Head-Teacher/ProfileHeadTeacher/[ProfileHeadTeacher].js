@@ -128,7 +128,7 @@ const ProfileHeadTeacher = () => {
               <Col md={4}>
                 <div className="profilContent">
                   <b> User Name:</b>
-                  <p>{OwnheadTeacher.UserName}</p>
+                  <p>{OwnheadTeacher.userName}</p>
                 </div>
               </Col>
               <Col md={4}>
@@ -137,7 +137,7 @@ const ProfileHeadTeacher = () => {
                   <input
                     type="password"
                     disabled
-                    value={`${OwnheadTeacher.UserName}`}
+                    value={`${OwnheadTeacher.password}`}
                   />
                 </div>
               </Col>

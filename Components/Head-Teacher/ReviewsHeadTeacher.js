@@ -8,6 +8,7 @@ import Approve from './Approve';
 import Refused from './Refused';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
+import Hoc from '../HOC/Hoc';
 const ReviewsHeadTeacher = () => {
   const EducationScores = [
     {
@@ -91,75 +92,77 @@ const ReviewsHeadTeacher = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Moral Education Scores</h3>
-            <input
-              type="search"
-              placeholder="Search Student "
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin', 'headTeacher']}>
+      <Row>
+        <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Moral Education Scores</h3>
+              <input
+                type="search"
+                placeholder="Search Student "
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>student number</th>
-                <th>student</th>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>student number</th>
+                  <th>student</th>
 
-                <th>semester</th>
+                  <th>semester</th>
 
-                <th>Level</th>
-                <th>Class</th>
-                <th>eventTime</th>
-                <th>status</th>
-                <th>points</th>
+                  <th>Level</th>
+                  <th>Class</th>
+                  <th>eventTime</th>
+                  <th>status</th>
+                  <th>points</th>
 
-                <th>Reviews</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {EducationScores.filter((el) =>
-                el.student.toUpperCase().includes(search.toUpperCase())
-              ).map((Scores, i) => {
-                return (
-                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{Scores.studentNumber}</td>
-                    <td>{Scores.student}</td>
-                    <td>{Scores.semester}</td>
-                    <td>{Scores.Level}</td>
-                    <td>{Scores.Class}</td>
-                    <td>{Scores.eventTime}</td>
+                  <th>Reviews</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {EducationScores.filter((el) =>
+                  el.student.toUpperCase().includes(search.toUpperCase())
+                ).map((Scores, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{Scores.studentNumber}</td>
+                      <td>{Scores.student}</td>
+                      <td>{Scores.semester}</td>
+                      <td>{Scores.Level}</td>
+                      <td>{Scores.Class}</td>
+                      <td>{Scores.eventTime}</td>
 
-                    <td>{Scores.statusRev}</td>
-                    <td>{Scores.points}</td>
-                    <td>
-                      <Approve />
-                      <Refused />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                      <td>{Scores.statusRev}</td>
+                      <td>{Scores.points}</td>
+                      <td>
+                        <Approve />
+                        <Refused />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

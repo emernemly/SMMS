@@ -3,14 +3,19 @@ import React from 'react';
 import Navbarcomponent from '../../Components/Navbarcomponent';
 import { useForm } from 'react-hook-form';
 import { Hoc } from '../../Components/HOC/Hoc';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../Redux/Action/UserActions';
 const LoginAd = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(signIn(data, router));
   };
   return (
     <>
@@ -22,19 +27,18 @@ const LoginAd = () => {
             type="text"
             placeholder="User Name"
             name="userName"
-            {...register('userName')}
+            {...register('userName', { required: true })}
           />
           <p className="err">{errors.userName && '! this field is required'}</p>
           <input
             type="password"
             placeholder="Password"
-            name="Password"
-            {...register('Password')}
+            name="password"
+            {...register('password', { required: true })}
           />
-          <p className="err">{errors.Password && '! this field is required'}</p>
-          <Link href="/Dashboard-System-Administrator">
-            <button>Login</button>
-          </Link>
+          <p className="err">{errors.password && '! this field is required'}</p>
+
+          <button type="sumbit">Login</button>
         </form>
       </section>
     </>

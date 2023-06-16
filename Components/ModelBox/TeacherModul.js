@@ -13,7 +13,7 @@ const TeacherModul = ({ ownTeacher }) => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const [className, setclassName] = useState({ value: ownTeacher.className });
-  const [classValue, setclassValue] = useState({ value: ownTeacher.Class });
+  const [classValue, setclassValue] = useState({ value: ownTeacher.class });
   const dispatch = useDispatch();
   const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
@@ -26,7 +26,12 @@ const TeacherModul = ({ ownTeacher }) => {
   const onSubmits = (data) => {
     dispatch(
       changeTeacher(
-        { ...data, Class: classValue.value, className: className.value },
+        {
+          ...data,
+          class: classValue.value,
+          className: className.value,
+          Role: 'teacher',
+        },
         ownTeacher.id
       )
     );
@@ -108,9 +113,9 @@ const TeacherModul = ({ ownTeacher }) => {
                     <b>Middel Name</b>
                     <input
                       type="text"
-                      name="MiddelName"
-                      defaultValue={ownTeacher.MiddelName}
-                      {...register('MiddelName')}
+                      name="middelName"
+                      defaultValue={ownTeacher.middelName}
+                      {...register('middelName')}
                     />
                   </div>
                 </Col>
@@ -119,9 +124,9 @@ const TeacherModul = ({ ownTeacher }) => {
                     <b>Last Name</b>
                     <input
                       type="text"
-                      name="LastName"
-                      defaultValue={ownTeacher.LastName}
-                      {...register('LastName')}
+                      name="lastName"
+                      defaultValue={ownTeacher.lastName}
+                      {...register('lastName')}
                     />
                   </div>
                 </Col>
@@ -151,10 +156,10 @@ const TeacherModul = ({ ownTeacher }) => {
                             type="radio"
                             name="Gender"
                             {...register('Gender')}
-                            value="female"
+                            value="Female"
                             defaultValue={ownTeacher.Gender}
                             checked={
-                              ownTeacher.Gender === 'Male' ? true : false
+                              ownTeacher.Gender === 'Female' ? true : false
                             }
                           />
                           <b>female</b>
@@ -277,9 +282,9 @@ const TeacherModul = ({ ownTeacher }) => {
 
                     <input
                       type="text"
-                      name="UserName"
-                      defaultValue={ownTeacher.UserName}
-                      {...register('UserName')}
+                      name="userName"
+                      defaultValue={ownTeacher.userName}
+                      {...register('userName')}
                     />
                   </div>
                 </Col>

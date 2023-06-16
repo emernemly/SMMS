@@ -61,13 +61,13 @@ const TeacherId = () => {
               <Col md={4}>
                 <div className="profilContent">
                   <b>Middel Name:</b>
-                  <p>{OwnTeacher.MiddelName}</p>
+                  <p>{OwnTeacher.middelName}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b>Last Name:</b>
-                  <p>{OwnTeacher.LastName}</p>
+                  <p>{OwnTeacher.lastName}</p>
                 </div>
               </Col>
               <hr></hr>
@@ -120,7 +120,7 @@ const TeacherId = () => {
               <Col md={4}>
                 <div className="profilContent">
                   <b> Class:</b>
-                  <p>{OwnTeacher.Class}</p>
+                  <p>{OwnTeacher.class}</p>
                 </div>
               </Col>
 
@@ -130,7 +130,7 @@ const TeacherId = () => {
               <Col md={4}>
                 <div className="profilContent">
                   <b> User Name:</b>
-                  <p>{OwnTeacher.UserName}</p>
+                  <p>{OwnTeacher.userName}</p>
                 </div>
               </Col>
               <Col md={4}>
@@ -139,7 +139,7 @@ const TeacherId = () => {
                   <input
                     type="password"
                     disabled
-                    value={`${OwnTeacher.UserName}`}
+                    value={`${OwnTeacher.password}`}
                   />
                 </div>
               </Col>

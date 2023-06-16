@@ -11,35 +11,12 @@ const HeadTeacher = () => {
   const animatedComponents = makeAnimated();
   const Permissions = [
     { title: 'import users', role: 'admin' },
-    { title: 'set permissions', role: 'admin' },
-    { title: 'import basic student data', role: 'admin' },
-    { title: 'import teacher', role: 'admin' },
-    { title: 'class schedules', role: 'admin' },
-    { title: 'manage the overall moral education system', role: 'admin' },
-    { title: 'defining roles ', role: 'admin' },
-    { title: 'managing the system information', role: 'admin' },
-    { title: 'database management', role: 'admin' },
-    { title: 'log management', role: 'admin' },
-    { title: 'maintaining the security', role: 'admin' },
 
-    { title: 'import users', role: 'HeadTeacher' },
-    { title: 'set permissions', role: 'HeadTeacher' },
-    { title: 'import basic student data', role: 'HeadTeacher' },
-    { title: 'import teacher', role: 'HeadTeacher' },
-    { title: 'class schedules', role: 'HeadTeacher' },
-    {
-      title: 'manage the overall moral education system',
-      role: 'HeadTeacher',
-    },
+    { title: 'import users', role: 'headTeacher' },
 
-    { title: 'import users', role: 'Teacher' },
-    { title: 'set permissions', role: 'Teacher' },
-    { title: 'import basic student data', role: 'Teacher' },
-    { title: 'import teacher', role: 'Teacher' },
+    { title: 'import users', role: 'teacher' },
 
-    { title: 'import users', role: 'Student' },
-    { title: 'set permissions', role: 'Student' },
-    { title: 'import basic student data', role: 'Student' },
+    { title: 'import users', role: 'student' },
   ];
   const [Rolevalue, setRolevalue] = useState('');
 
@@ -54,11 +31,18 @@ const HeadTeacher = () => {
   } = useForm();
   const onSubmits = async (data) => {
     try {
-      await axios.post('http://localhost:3000/HeadTeacher', {
-        ...data,
-        Role: Rolevalue.value,
-      });
-      alert('add HeadTeacher');
+      const found = await axios.get(
+        `http://localhost:3000/User?userName=${data.userName}`
+      );
+      if (!found.data.length) {
+        await axios.post('http://localhost:3000/User', {
+          ...data,
+          Role: Rolevalue.value,
+        });
+        alert('add HeadTeacher');
+      } else {
+        alert('user name already exist');
+      }
     } catch (error) {
       console.log(error);
     }

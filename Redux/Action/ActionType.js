@@ -9,3 +9,5 @@ export const GETCLASS = 'GETCLASS';
 export const OWNCLASS = 'OWNCLASS';
 export const FINDOWNCLASS = 'FINDOWNCLASS';
 export const GETDEDUCTIONSCORES = 'GETDEDUCTIONSCORES';
+export const SIGNIN = 'SIGNIN';
+export const GETUSER = 'GETUSER';

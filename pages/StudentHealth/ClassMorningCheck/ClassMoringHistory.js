@@ -4,20 +4,23 @@ import ClassSelect from '../../../Components/ClassMorningCheckCopmonent/ClassSel
 import DetailsRegistration from '../../../Components/ClassMorningCheckCopmonent/DetailsRegistration';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
+import Hoc from '../../../Components/HOC/Hoc';
 
 const ClassMoringHistory = () => {
   return (
-    <Row>
-      {' '}
-      <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <ClassSelect />
-        <DetailsRegistration />
-      </Col>
-    </Row>
+    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+      <Row>
+        {' '}
+        <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <ClassSelect />
+          <DetailsRegistration />
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

@@ -10,6 +10,7 @@ import AddActivities from './ModelBox/AddActivities';
 import EditActivities from './ModelBox/EditActivities';
 import SideBarSA from './SideBarSA';
 import NavbarR from './RegistrationComponente/NavbarR';
+import Hoc from './HOC/Hoc';
 const StudentActivities = () => {
   const Activities = [
     {
@@ -64,75 +65,79 @@ const StudentActivities = () => {
   };
   const componentRef = useRef();
   return (
-    <Row>
-      <Col lg={2} md={2} className="pd-l parentcontainer">
-        <SideBarSA />
-      </Col>
-      <Col lg={10} className="dashboardContent">
-        <NavbarR />
-        <section className="tableDashboard" ref={componentRef}>
-          <div className="titleDashboard">
-            <h3>Student Activities</h3>
-            <input
-              type="search"
-              placeholder="Search Student "
-              onChange={(e) => setsearch(e.target.value)}
-            />
-            <div className="All-btn">
-              <button onClick={downloadPDF}>Download PDF</button>
-              <AddActivities />
-              <ReactToPrint
-                trigger={() => (
-                  <button className="dashboard-btn">Print </button>
-                )}
-                content={() => componentRef.current}
-              />{' '}
+    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+      <Row>
+        <Col lg={2} md={2} className="pd-l parentcontainer">
+          <SideBarSA />
+        </Col>
+        <Col lg={10} className="dashboardContent">
+          <NavbarR />
+          <section className="tableDashboard" ref={componentRef}>
+            <div className="titleDashboard">
+              <h3>Student Activities</h3>
+              <input
+                type="search"
+                placeholder="Search Student "
+                onChange={(e) => setsearch(e.target.value)}
+              />
+              <div className="All-btn">
+                <button onClick={downloadPDF}>Download PDF</button>
+                <AddActivities />
+                <ReactToPrint
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
+                  content={() => componentRef.current}
+                />{' '}
+              </div>
             </div>
-          </div>
-          <table className="Table" id="pdf-element">
-            <thead>
-              {' '}
-              <tr>
-                <th>student number</th>
-                <th>student</th>
+            <table className="Table" id="pdf-element">
+              <thead>
+                {' '}
+                <tr>
+                  <th>student number</th>
+                  <th>student</th>
 
-                <th>class</th>
+                  <th>class</th>
 
-                <th>class name</th>
-                <th>activitie</th>
-                <th> date</th>
-                <th>setting</th>
-              </tr>{' '}
-            </thead>
-            <tbody>
-              {Activities.filter((el) =>
-                el.studnetName.toUpperCase().includes(search.toUpperCase())
-              ).map((Leaverapport, i) => {
-                return (
-                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{Leaverapport.id}</td>
-                    <td>{Leaverapport.studnetName}</td>
-                    <td>{Leaverapport.class}</td>
-                    <td>{Leaverapport.className}</td>
-                    <td>{Leaverapport.activitie}</td>
-                    <td>{Leaverapport.date}</td>
-                    <td>
-                      <Link href="/StudentActivities/ActivitiesProfile">
-                        <button className="bg-primary btn-Setting">See</button>
-                      </Link>
-                      <EditActivities />
-                      <button className="bg-danger btn-Setting">
-                        Delete
-                      </button>{' '}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </Col>
-    </Row>
+                  <th>class name</th>
+                  <th>activitie</th>
+                  <th> date</th>
+                  <th>setting</th>
+                </tr>{' '}
+              </thead>
+              <tbody>
+                {Activities.filter((el) =>
+                  el.studnetName.toUpperCase().includes(search.toUpperCase())
+                ).map((Leaverapport, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{Leaverapport.id}</td>
+                      <td>{Leaverapport.studnetName}</td>
+                      <td>{Leaverapport.class}</td>
+                      <td>{Leaverapport.className}</td>
+                      <td>{Leaverapport.activitie}</td>
+                      <td>{Leaverapport.date}</td>
+                      <td>
+                        <Link href="/StudentActivities/ActivitiesProfile">
+                          <button className="bg-primary btn-Setting">
+                            See
+                          </button>
+                        </Link>
+                        <EditActivities />
+                        <button className="bg-danger btn-Setting">
+                          Delete
+                        </button>{' '}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </section>
+        </Col>
+      </Row>
+    </Hoc>
   );
 };
 

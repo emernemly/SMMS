@@ -7,9 +7,10 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import StudentMoralEducation from '../../../Components/MoralEducationManagementOffice/StudentMoralEducation';
+import Hoc from '../../../Components/HOC/Hoc';
 const MoralEducationScores = () => {
   return (
-    <>
+    <Hoc inRole={['admin', 'headTeacher']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -20,7 +21,7 @@ const MoralEducationScores = () => {
           <StudentMoralEducation />
         </Col>
       </Row>
-    </>
+    </Hoc>
   );
 };
 

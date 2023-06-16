@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import DetailsRegistration from '../../../Components/ClassMorningCheckCopmonent/DetailsRegistration';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
+import Hoc from '../../../Components/HOC/Hoc';
 
 const index = () => {
   return (

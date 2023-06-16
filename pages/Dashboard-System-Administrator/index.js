@@ -21,7 +21,7 @@ const DashboardSA = () => {
     { user: 'emer', time: '2020-09-08 17:42:17	', operation: 'modifications' },
   ];
   const [search, setsearch] = useState('');
-  const [inRole, setinRole] = useState(['admin']);
+  const [inRole, setinRole] = useState(['admin', 'headTeacher', 'teacher']);
   return (
     <Hoc inRole={inRole}>
       <Row>
