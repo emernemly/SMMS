@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import jsPDF from 'jspdf';
@@ -9,70 +9,10 @@ import Refused from './Refused';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
 import Hoc from '../HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDeductionScores } from '../../Redux/Action/DeductionScores';
 const ReviewsHeadTeacher = () => {
-  const EducationScores = [
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      studentNumber: 2,
-
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'waiting',
-      statusRev: 'deduction',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      studentNumber: 15,
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'approves',
-      statusRev: 'Cancelling',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      studentNumber: 20,
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'approves',
-      statusRev: 'deduction',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      studentNumber: 7,
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      statusRev: 'Cancelling',
-      status: 'rejects',
-    },
-  ];
+  const dispatch = useDispatch();
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -91,6 +31,10 @@ const ReviewsHeadTeacher = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getDeductionScores());
+  }, []);
+  const EducationScores = useSelector((state) => state.ScoreReducer.score);
   return (
     <Hoc inRole={['admin', 'headTeacher']}>
       <Row>
@@ -123,32 +67,34 @@ const ReviewsHeadTeacher = () => {
                 <tr>
                   <th>student number</th>
                   <th>student</th>
-
                   <th>semester</th>
-
                   <th>Level</th>
                   <th>Class</th>
                   <th>eventTime</th>
+                  <th>Details</th>
+                  <th>Note</th>
                   <th>status</th>
-                  <th>points</th>
 
+                  <th>points</th>
                   <th>Reviews</th>
                 </tr>{' '}
               </thead>
               <tbody>
                 {EducationScores.filter((el) =>
-                  el.student.toUpperCase().includes(search.toUpperCase())
+                  el.Student.toUpperCase().includes(search.toUpperCase())
                 ).map((Scores, i) => {
                   return (
                     <tr className={i % 2 === 0 && `bg-ver`} key={i}>
                       <td>{Scores.studentNumber}</td>
-                      <td>{Scores.student}</td>
+                      <td>{Scores.Student}</td>
                       <td>{Scores.semester}</td>
-                      <td>{Scores.Level}</td>
+                      <td>{Scores.ClassLevel}</td>
                       <td>{Scores.Class}</td>
-                      <td>{Scores.eventTime}</td>
+                      <td>{Scores.EventTime}</td>
+                      <td>{Scores.Details}</td>
+                      <td>{Scores.Note}</td>
+                      <td>{Scores.status}</td>
 
-                      <td>{Scores.statusRev}</td>
                       <td>{Scores.points}</td>
                       <td>
                         <Approve />

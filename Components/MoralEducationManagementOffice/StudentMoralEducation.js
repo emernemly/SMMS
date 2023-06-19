@@ -1,10 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDeductionScores } from '../../Redux/Action/DeductionScores';
 const StudentMoralEducation = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
@@ -24,60 +27,11 @@ const StudentMoralEducation = () => {
     });
   };
   const componentRef = useRef();
-  const EducationScores = [
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'waiting',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'approves',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'approves',
-    },
-    {
-      semester: 'semester1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      student: 'ali',
-      eventTime: '2020-09-08 17:42:17',
-      PointElements: 'hygene refus de netoyer',
-      Details: 'refuse',
-      points: 3,
-      Note: 'avertir',
-      register: '',
-      status: 'rejects',
-    },
-  ];
+
+  useEffect(() => {
+    dispatch(getDeductionScores());
+  }, []);
+  const EducationScores = useSelector((state) => state.ScoreReducer.score);
   return (
     <Col lg={12} className="dashboardContent">
       <section className="tableDashboard" ref={componentRef}>
@@ -117,20 +71,20 @@ const StudentMoralEducation = () => {
           </thead>
           <tbody>
             {EducationScores.filter((el) =>
-              el.student.toUpperCase().includes(search.toUpperCase())
+              el.Student.toUpperCase().includes(search.toUpperCase())
             ).map((Scores, i) => {
               return (
                 <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                  <td>{Scores.student}</td>
+                  <td>{Scores.Student}</td>
                   <td>{Scores.semester}</td>
-                  <td>{Scores.Level}</td>
+                  <td>{Scores.ClassLevel}</td>
                   <td>{Scores.Class}</td>
-                  <td>{Scores.eventTime}</td>
+                  <td>{Scores.EventTime}</td>
                   <td>{Scores.Details}</td>
                   <td>{Scores.points}</td>
                   {router.pathname !==
                     '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics' && (
-                    <td>{Scores.status}</td>
+                    <td>{Scores.reviews}</td>
                   )}
                 </tr>
               );
