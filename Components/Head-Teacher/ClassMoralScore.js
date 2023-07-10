@@ -8,55 +8,13 @@ import ReactToPrint from 'react-to-print';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
 import Hoc from '../HOC/Hoc';
+import { useEffect } from 'react';
+import { getClasses } from '../../Redux/Action/ClassAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ClassMoralScore = () => {
   const componentRef = useRef();
-  const classes = [
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '8eme annee B',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '8eme annee A',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '7eme annee B',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-    {
-      Id: '1',
-      Level: '8eme annee',
-      Class: '7eme annee A',
-      time: '2020-09-08 17:42:17',
-      deserved: '1ere place',
-      Details: 'Activity sport',
-      Noticed: '',
-      recorder: 'Ali diop',
-      record: '2020-09-08 17:42:17',
-    },
-  ];
+  const dispatch = useDispatch();
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -81,6 +39,11 @@ const ClassMoralScore = () => {
       pdf.save('Class.pdf');
     });
   };
+  useEffect(() => {
+    dispatch(getClasses());
+  }, []);
+  const classes = useSelector((state) => state.ClassesReducer.Classes);
+
   return (
     <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
       <Row>
@@ -133,18 +96,18 @@ const ClassMoralScore = () => {
                   .map((classes, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                        <td>{classes.Id}</td>
+                        <td>{classes.id}</td>
 
                         <td>{classes.Level}</td>
                         <td>{classes.Class}</td>
-                        <td>{classes.time}</td>
+                        <td>{classes.timeEvent}</td>
                         <td>{classes.deserved}</td>
                         <td>{classes.Details}</td>
                         <td>{classes.Noticed}</td>
                         <td>{classes.recorder}</td>
-                        <td>{classes.record}</td>
+                        <td>{classes.timeRecord}</td>
                         <td>
-                          <Link href="/Head-Teacher/StudentClass">
+                          <Link href={`/Head-Teacher/${classes.Class}`}>
                             <button className="bg-primary btn-Setting">
                               See
                             </button>

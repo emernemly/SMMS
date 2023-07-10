@@ -26,8 +26,9 @@ export const signIn = (datas, naviget) => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
   try {
     const id = localStorage.getItem('token');
-    console.log(id);
+
     const data = await axios.get(`http://localhost:3000/User/${id}`);
+    console.log(data.data);
     dispatch({ type: 'GETUSER', payload: data.data });
   } catch (error) {
     console.log(error);

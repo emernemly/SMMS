@@ -36,3 +36,14 @@ export const deleteStudent = (_id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getstudentByClass = (className) => async (dispatch) => {
+  try {
+    const data = await axios.get(
+      `http://localhost:3000/Students?className=${className}`
+    );
+    dispatch({ type: 'GETSTUDENTBYCLASS', payload: data.data });
+  } catch (error) {
+    console.log(error);
+  }
+};

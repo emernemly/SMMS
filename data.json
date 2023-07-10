@@ -34,9 +34,8 @@
       "className": "import users",
       "id": 4
     },
-
     {
-      "FirstName": "testupdate",
+      "FirstName": "test2",
       "MiddelName": "nemly",
       "LastName": "test2",
       "Gender": "female",
@@ -68,33 +67,50 @@
       "Zip": "2009",
       "FatherName": "emer",
       "FatherPhone": "52183728",
-      "MotherName": "emer",
-      " MotherPhone": "",
       "userName": "Students",
       "password": "Students",
       "class": "set permissions",
       "id": 8
     },
     {
-      "FirstName": "emer",
-      "middelName": "nemly",
-      "lastName": "Students",
-      "Gender": "female",
-      "Birth": "2023-05-10",
-      "GraduationSchool": "school",
-      "GraduationScore": "3200",
+      "FirstName": "testClass",
+      "middelName": "testClass",
+      "lastName": "testClass",
+      "Gender": "Male",
+      "Birth": "2023-06-24",
+      "GraduationSchool": "testClass",
+      "GraduationScore": "12",
       "StudentNumber": "2",
       "Street": "59 rue 409 ksar said 2",
       "City": "bardo",
       "Zip": "2009",
       "FatherName": "emer",
       "FatherPhone": "52183728",
-      "MotherName": "emer",
-      " MotherPhone": "",
-      "userName": "Students",
-      "password": "Students",
-      "class": "set permissions",
+      "userName": "testClass",
+      "password": "testClass",
+      "class": "import users",
+      "className": "import users",
       "id": 9
+    },
+    {
+      "FirstName": "check",
+      "middelName": "check",
+      "lastName": "check",
+      "Gender": "Male",
+      "Birth": "2023-06-13",
+      "GraduationSchool": "check",
+      "GraduationScore": "check",
+      "StudentNumber": "2",
+      "Street": "check",
+      "City": "bardo",
+      "Zip": "2009",
+      "FatherName": "check",
+      "FatherPhone": "52183728",
+      "userName": "check",
+      "password": "check",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "id": 10
     }
   ],
   "Parent": [
@@ -171,48 +187,15 @@
   ],
   "classes": [
     {
-      "Level": "8eme annee",
-      "Class": "A",
-      "timeEvent": "2020-09-08 17:42:17",
-      "deserved": "2ere place",
-      "Details": "Activity sport 2",
-      "Noticed": "test",
-      "recorder": "Ali diop",
-      "timeRecord": "2020-09-08 17:42:17",
-      "id": 12
-    },
-    {
-      "Level": "test",
-      "Class": "test",
-      "timeEvent": "2023-06-03",
+      "Level": "8 eme",
+      "Class": "8 eme A",
+      "timeEvent": "2023-06-09",
       "deserved": "test",
-      "Details": "1",
-      "Noticed": "test1",
+      "Details": "23",
+      "Noticed": "test",
       "recorder": "test",
-      "timeRecord": "2023-06-23",
-      "id": 13
-    },
-    {
-      "Level": "test2",
-      "Class": "test2",
-      "timeEvent": "2023-06-04",
-      "deserved": "test2",
-      "Details": "1",
-      "Noticed": "test2",
-      "recorder": "test2",
-      "timeRecord": "2023-06-03",
-      "id": 14
-    },
-    {
-      "Level": "test3",
-      "Class": "test3",
-      "timeEvent": "2023-06-22",
-      "deserved": "test3",
-      "Details": "33",
-      "Noticed": "test3",
-      "recorder": "test3",
-      "timeRecord": "2023-06-29",
-      "id": 15
+      "timeRecord": "2023-06-16",
+      "id": 1
     }
   ],
   "deductionScores": [
@@ -278,6 +261,22 @@
       "reviews": "waiting",
       "studentId": 8,
       "id": 13
+    },
+    {
+      "semester": " testvd",
+      "ClassLevel": "testvd",
+      "Class": "testvd",
+      "Student": "testvd",
+      "EventTime": "2023-06-02",
+      "PointElements": "testvd",
+      "Details": "testvd",
+      "points": "300",
+      "Note": "testvd",
+      "register": "testvd",
+      "status": "deduction",
+      "reviews": "waiting",
+      "studentId": 8,
+      "id": 14
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { GETUSER, SIGNIN } from '../Action/ActionType';
 
 const init = {
-  user: {},
+  user: null,
 };
 const UserRedcuer = (state = init, { type, payload }) => {
   switch (type) {

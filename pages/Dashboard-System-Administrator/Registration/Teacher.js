@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
@@ -7,17 +7,11 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Hoc from '../../../Components/HOC/Hoc';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClasses } from '../../../Redux/Action/ClassAction';
 const Teacher = () => {
   const animatedComponents = makeAnimated();
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
 
-    { title: 'import users', role: 'headTeacher' },
-
-    { title: 'import users', role: 'teacher' },
-
-    { title: 'import users', role: 'student' },
-  ];
   const [Rolevalue, setRolevalue] = useState('');
   const [className, setclassName] = useState('');
   const [classValue, setclassValue] = useState('');
@@ -35,6 +29,12 @@ const Teacher = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClasses());
+  }, []);
+  const classes = useSelector((state) => state.ClassesReducer.Classes);
+
   const onSubmits = async (data) => {
     try {
       const found = await axios.get(
@@ -251,8 +251,8 @@ const Teacher = () => {
                       <Select
                         closeMenuOnSelect={true}
                         components={animatedComponents}
-                        options={Permissions.map((el) => {
-                          return { value: el.title, label: el.title };
+                        options={classes.map((el) => {
+                          return { value: el.Level, label: el.Level };
                         })}
                         value={classValue}
                         onChange={changeHandlerClassValue}
@@ -268,8 +268,8 @@ const Teacher = () => {
                       <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
-                        options={Permissions.map((el) => {
-                          return { value: el.title, label: el.title };
+                        options={classes.map((el) => {
+                          return { value: el.Class, label: el.Class };
                         })}
                         value={className}
                         onChange={changeHandlerClassName}
@@ -324,8 +324,8 @@ const Teacher = () => {
                     <Select
                       closeMenuOnSelect={false}
                       components={animatedComponents}
-                      options={Permissions.map((el) => {
-                        return { value: el.role, label: el.role };
+                      options={classes.map((el) => {
+                        return { value: el.Class, label: el.Class };
                       })}
                       value={Rolevalue}
                       onChange={changeHandler}

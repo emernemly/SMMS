@@ -92,7 +92,7 @@ const ReviewsHeadTeacher = () => {
                       <td>{Scores.Class}</td>
                       <td>{Scores.EventTime}</td>
                       <td>{Scores.Details}</td>
-                      <td>{Scores.Note}</td>
+                      <td>{Scores.Notetn}</td>
                       <td>{Scores.status}</td>
 
                       <td>{Scores.points}</td>

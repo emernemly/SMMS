@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Link from 'next/link';
 import jsPDF from 'jspdf';
@@ -9,77 +9,10 @@ import Cancelling from '../ModelBox/Cancelling';
 import SideBarSA from '../SideBarSA';
 import NavbarR from '../RegistrationComponente/NavbarR';
 import Hoc from '../HOC/Hoc';
+import { getstudentByClass } from '../../Redux/Action/StudentAction';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 const StudentHeadTeacher = () => {
-  const student = [
-    {
-      StudentNumber: '1',
-      FirstName: 'Aro',
-      MiddelName: 'Aro',
-      LastName: 'Aro',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-      score: 300,
-    },
-    {
-      StudentNumber: '2',
-      FirstName: 'ali',
-      MiddelName: 'ali',
-      LastName: 'ali',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-      score: 100,
-    },
-    {
-      StudentNumber: '3',
-      FirstName: 'ibrahim',
-      MiddelName: 'ibrahim',
-      LastName: 'ibrahim',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-      score: 50,
-    },
-    {
-      StudentNumber: '4',
-      FirstName: 'emer',
-      MiddelName: 'emer',
-      LastName: 'emer',
-      DateOfBirth: '01/07/2000',
-      levelOfStudy: '8eme',
-      class: '8eme',
-      Street: '95 rue 409',
-      City: 'tunis',
-      Zip: '2009',
-      UserName: 'emernemly',
-      Gender: 'Male',
-      GraduationSchool: 'Preparatory School',
-      GraduationScore: '500',
-      score: 150,
-    },
-  ];
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -98,6 +31,15 @@ const StudentHeadTeacher = () => {
     });
   };
   const componentRef = useRef();
+  const router = useRouter();
+  const path = router.query.StudentClass;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getstudentByClass(path));
+  }, [path]);
+
+  const student = useSelector((state) => state.StudentReducer.Students);
+
   return (
     <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
       <Row>

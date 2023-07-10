@@ -1,4 +1,4 @@
-import { OWNSTUDENTS, STUDENTS } from '../Action/ActionType';
+import { GETSTUDENTBYCLASS, OWNSTUDENTS, STUDENTS } from '../Action/ActionType';
 
 const init = {
   Students: [],
@@ -11,6 +11,8 @@ const StudentReducer = (state = init, { type, payload }) => {
       return { ...state, Students: payload };
     case OWNSTUDENTS:
       return { ...state, OwnStudent: payload };
+    case GETSTUDENTBYCLASS:
+      return { ...state, Students: payload };
     default:
       return state;
   }

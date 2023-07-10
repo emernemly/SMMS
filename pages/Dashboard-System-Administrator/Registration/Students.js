@@ -7,40 +7,16 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Hoc from '../../../Components/HOC/Hoc';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getClasses } from '../../../Redux/Action/ClassAction';
 const Students = () => {
   const animatedComponents = makeAnimated();
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
-    { title: 'set permissions', role: 'admin' },
-    { title: 'import basic student data', role: 'admin' },
-    { title: 'import teacher', role: 'admin' },
-    { title: 'class schedules', role: 'admin' },
-    { title: 'manage the overall moral education system', role: 'admin' },
-    { title: 'defining roles ', role: 'admin' },
-    { title: 'managing the system information', role: 'admin' },
-    { title: 'database management', role: 'admin' },
-    { title: 'log management', role: 'admin' },
-    { title: 'maintaining the security', role: 'admin' },
-
-    { title: 'import users', role: 'HeadTeacher' },
-    { title: 'set permissions', role: 'HeadTeacher' },
-    { title: 'import basic student data', role: 'HeadTeacher' },
-    { title: 'import teacher', role: 'HeadTeacher' },
-    { title: 'class schedules', role: 'HeadTeacher' },
-    {
-      title: 'manage the overall moral education system',
-      role: 'HeadTeacher',
-    },
-
-    { title: 'import users', role: 'Teacher' },
-    { title: 'set permissions', role: 'Teacher' },
-    { title: 'import basic student data', role: 'Teacher' },
-    { title: 'import teacher', role: 'Teacher' },
-
-    { title: 'import users', role: 'Student' },
-    { title: 'set permissions', role: 'Student' },
-    { title: 'import basic student data', role: 'Student' },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClasses());
+  }, []);
+  const classes = useSelector((state) => state.ClassesReducer.Classes);
 
   const [className, setclassName] = useState('');
   const [classValue, setclassValue] = useState('');
@@ -319,40 +295,6 @@ const Students = () => {
                     </div>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={6}>
-                    <div className="inputType">
-                      <b>
-                        Mother Name<sup>*</sup>
-                      </b>
-                      <input
-                        type="text"
-                        name="MotherName"
-                        {...register('MotherName', { required: true })}
-                      />{' '}
-                      <p className="err">
-                        {errors.MotherName && '! this field is required'}
-                      </p>
-                    </div>
-                  </Col>
-
-                  <Col md={6}>
-                    {' '}
-                    <div className="inputType">
-                      <b>
-                        Mother Phone<sup>*</sup>
-                      </b>
-                      <input
-                        type="number"
-                        name=" MotherPhone"
-                        {...register(' MotherPhone', { required: true })}
-                      />
-                      <p className="err">
-                        {errors.MotherPhone && '! this field is required'}
-                      </p>
-                    </div>
-                  </Col>
-                </Row>
                 <hr></hr>
                 <h2>Class Information </h2>
                 <Row>
@@ -366,8 +308,8 @@ const Students = () => {
                       <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
-                        options={Permissions.map((el) => {
-                          return { value: el.title, label: el.title };
+                        options={classes.map((el) => {
+                          return { value: el.Level, label: el.Level };
                         })}
                         value={classValue}
                         onChange={changeHandlerClassValue}
@@ -383,8 +325,8 @@ const Students = () => {
                       <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
-                        options={Permissions.map((el) => {
-                          return { value: el.title, label: el.title };
+                        options={classes.map((el) => {
+                          return { value: el.Class, label: el.Class };
                         })}
                         value={className}
                         onChange={changeHandlerClassName}
