@@ -277,6 +277,22 @@
       "reviews": "waiting",
       "studentId": 8,
       "id": 14
+    },
+    {
+      "semester": "test4",
+      "ClassLevel": "test4",
+      "Class": "test4",
+      "Student": "test4",
+      "EventTime": "2023-07-07",
+      "PointElements": "test4",
+      "Details": "test4",
+      "points": "300",
+      "Note": "test4",
+      "register": "test4",
+      "status": "deduction",
+      "reviews": "waiting",
+      "studentId": 8,
+      "id": 15
     }
   ]
 }

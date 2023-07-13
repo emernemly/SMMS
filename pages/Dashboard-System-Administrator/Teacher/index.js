@@ -88,7 +88,7 @@ const Teacher = () => {
                   <th>Subject Teacher</th>
                   <th>Class Name</th>
                   <th>Class</th>
-                  {['admin'].some((role) => role === user.Role) && (
+                  {user && ['admin'].some((role) => role === user.Role) && (
                     <th>Setting</th>
                   )}
                 </tr>{' '}
@@ -96,36 +96,38 @@ const Teacher = () => {
               <tbody>
                 {Teachers.filter((el) =>
                   el.FirstName.toUpperCase().includes(search.toUpperCase())
-                ).map((ownTeacher, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{ownTeacher.id}</td>
+                )
+                  .reverse()
+                  .map((ownTeacher, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{ownTeacher.id}</td>
 
-                      <td>{ownTeacher.FirstName}</td>
-                      <td>{ownTeacher.Subject}</td>
-                      <td>{ownTeacher.className}</td>
-                      <td>{ownTeacher.Class}</td>
-                      {['admin'].some((role) => role === user.Role) && (
-                        <td>
-                          <Link
-                            href={`/Dashboard-System-Administrator/Teacher/ProfileTeacher/${ownTeacher.id}`}
-                          >
-                            <button className="bg-primary btn-Setting">
-                              See
-                            </button>
-                          </Link>
-                          <TeacherModul ownTeacher={ownTeacher} />
-                          <button
-                            className="bg-danger btn-Setting"
-                            onClick={() => deleteTeachers(ownTeacher.id)}
-                          >
-                            Delete
-                          </button>{' '}
-                        </td>
-                      )}
-                    </tr>
-                  );
-                })}
+                        <td>{ownTeacher.FirstName}</td>
+                        <td>{ownTeacher.Subject}</td>
+                        <td>{ownTeacher.className}</td>
+                        <td>{ownTeacher.Class}</td>
+                        {['admin'].some((role) => role === user.Role) && (
+                          <td>
+                            <Link
+                              href={`/Dashboard-System-Administrator/Teacher/ProfileTeacher/${ownTeacher.id}`}
+                            >
+                              <button className="bg-primary btn-Setting">
+                                See
+                              </button>
+                            </Link>
+                            <TeacherModul ownTeacher={ownTeacher} />
+                            <button
+                              className="bg-danger btn-Setting"
+                              onClick={() => deleteTeachers(ownTeacher.id)}
+                            >
+                              Delete
+                            </button>{' '}
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </section>

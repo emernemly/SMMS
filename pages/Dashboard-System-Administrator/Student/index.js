@@ -98,6 +98,7 @@ const Student = () => {
                   .filter((el) =>
                     el.FirstName.toUpperCase().includes(search.toUpperCase())
                   )
+                  .reverse()
                   .map((student, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>

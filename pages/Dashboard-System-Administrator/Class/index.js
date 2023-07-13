@@ -95,6 +95,7 @@ const Class = () => {
                   .filter((el) =>
                     el.Class.toUpperCase().includes(search.toUpperCase())
                   )
+                  .reverse()
                   .map((classes, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>

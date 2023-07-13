@@ -94,7 +94,7 @@ const HeadTeacher = () => {
                   <th>Subject Teacher</th>
                   <th>Class Name</th>
                   <th>Class</th>
-                  {['admin'].some((role) => role === user.Role) && (
+                  {user && ['admin'].some((role) => role === user.Role) && (
                     <th>Setting</th>
                   )}
                 </tr>{' '}
@@ -104,6 +104,7 @@ const HeadTeacher = () => {
                   .filter((el) =>
                     el.FirstName.toLowerCase().includes(search.toLowerCase())
                   )
+                  .reverse()
 
                   .map((ownheadTeacher, i) => {
                     return (
@@ -114,24 +115,27 @@ const HeadTeacher = () => {
                         <td>{ownheadTeacher.Subject}</td>
                         <td>{ownheadTeacher.className}</td>
                         <td>{ownheadTeacher.Class}</td>
-                        {['admin'].some((role) => role === user.Role) && (
-                          <td>
-                            <Link
-                              href={`/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher/${ownheadTeacher.id}`}
-                            >
-                              <button className="bg-primary btn-Setting">
-                                See
-                              </button>
-                            </Link>
-                            <HeadTeacherModul ownheadTeacher={ownheadTeacher} />
-                            <button
-                              className="bg-danger btn-Setting"
-                              onClick={() => deleteHead(ownheadTeacher.id)}
-                            >
-                              Delete
-                            </button>{' '}
-                          </td>
-                        )}
+                        {user &&
+                          ['admin'].some((role) => role === user.Role) && (
+                            <td>
+                              <Link
+                                href={`/Dashboard-System-Administrator/Head-Teacher/ProfileHeadTeacher/${ownheadTeacher.id}`}
+                              >
+                                <button className="bg-primary btn-Setting">
+                                  See
+                                </button>
+                              </Link>
+                              <HeadTeacherModul
+                                ownheadTeacher={ownheadTeacher}
+                              />
+                              <button
+                                className="bg-danger btn-Setting"
+                                onClick={() => deleteHead(ownheadTeacher.id)}
+                              >
+                                Delete
+                              </button>{' '}
+                            </td>
+                          )}
                       </tr>
                     );
                   })}

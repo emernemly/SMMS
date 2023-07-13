@@ -82,27 +82,29 @@ const ReviewsHeadTeacher = () => {
               <tbody>
                 {EducationScores.filter((el) =>
                   el.Student.toUpperCase().includes(search.toUpperCase())
-                ).map((Scores, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{Scores.studentNumber}</td>
-                      <td>{Scores.Student}</td>
-                      <td>{Scores.semester}</td>
-                      <td>{Scores.ClassLevel}</td>
-                      <td>{Scores.Class}</td>
-                      <td>{Scores.EventTime}</td>
-                      <td>{Scores.Details}</td>
-                      <td>{Scores.Notetn}</td>
-                      <td>{Scores.status}</td>
+                )
+                  .reverse()
+                  .map((Scores, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{Scores.studentNumber}</td>
+                        <td>{Scores.Student}</td>
+                        <td>{Scores.semester}</td>
+                        <td>{Scores.ClassLevel}</td>
+                        <td>{Scores.Class}</td>
+                        <td>{Scores.EventTime}</td>
+                        <td>{Scores.Details}</td>
+                        <td>{Scores.Notetn}</td>
+                        <td>{Scores.status}</td>
 
-                      <td>{Scores.points}</td>
-                      <td>
-                        <Approve />
-                        <Refused />
-                      </td>
-                    </tr>
-                  );
-                })}
+                        <td>{Scores.points}</td>
+                        <td>
+                          <Approve />
+                          <Refused />
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </section>
