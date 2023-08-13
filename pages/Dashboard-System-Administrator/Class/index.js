@@ -45,7 +45,7 @@ const Class = () => {
     }
   };
   return (
-    <Hoc inRole={['admin', 'headTeacher']}>
+    <Hoc inRole={['class schedules']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">

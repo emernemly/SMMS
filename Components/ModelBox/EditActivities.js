@@ -3,19 +3,23 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
-const EditActivities = () => {
+import { useDispatch } from 'react-redux';
+import { updateActivities } from '../../Redux/Action/ActivitiesAction';
+const EditActivities = ({ Activitie }) => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(updateActivities(data, Activitie.id));
+    handleClose();
   };
   return (
     <>
@@ -50,11 +54,9 @@ const EditActivities = () => {
                       <input
                         type="text"
                         name="studentNumber"
-                        {...register('studentNumber', { required: true })}
+                        defaultValue={Activitie.studentNumber}
+                        {...register('studentNumber')}
                       />
-                      <p className="err">
-                        {errors.studentNumber && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
@@ -64,11 +66,9 @@ const EditActivities = () => {
                       <input
                         type="text"
                         name="student"
-                        {...register('student', { required: true })}
+                        defaultValue={Activitie.student}
+                        {...register('student')}
                       />
-                      <p className="err">
-                        {errors.Class && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -81,11 +81,9 @@ const EditActivities = () => {
                       <input
                         type="text"
                         name="class"
-                        {...register('class', { required: true })}
+                        defaultValue={Activitie.class}
+                        {...register('class')}
                       />
-                      <p className="err">
-                        {errors.class && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
@@ -95,11 +93,9 @@ const EditActivities = () => {
                       <input
                         type="text"
                         name=" className "
-                        {...register('className', { required: true })}
+                        defaultValue={Activitie.className}
+                        {...register('className')}
                       />
-                      <p className="err">
-                        {errors.className && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -110,27 +106,35 @@ const EditActivities = () => {
                       <b>activitie</b>
 
                       <input
-                        type="number"
+                        type="text"
                         name="activitie"
-                        {...register('activitie', { required: true })}
+                        defaultValue={Activitie.activitie}
+                        {...register('activitie')}
                       />
-                      <p className="err">
-                        {errors.activitie && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
                     {' '}
                     <div className="inputType">
-                      <b>date</b>
+                      <b>start date</b>
                       <input
-                        type="text"
-                        name="date"
-                        {...register('date', { required: true })}
+                        type="date"
+                        name="startDate"
+                        defaultValue={Activitie.startDate}
+                        {...register('startDate')}
                       />
-                      <p className="err">
-                        {errors.date && '! this field is required'}
-                      </p>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    {' '}
+                    <div className="inputType">
+                      <b>end date</b>
+                      <input
+                        type="date"
+                        name="endDate"
+                        defaultValue={Activitie.endDate}
+                        {...register('endDate')}
+                      />
                     </div>
                   </Col>
                 </Row>

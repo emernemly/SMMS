@@ -3,12 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { addClassMorningCheck } from '../../Redux/Action/ClassMorningCheckAction';
+import { getUser } from '../../Redux/Action/UserActions';
 
 const AddDetailsRegistration = () => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const dispatch = useDispatch();
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -16,8 +19,11 @@ const AddDetailsRegistration = () => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(getUser());
+    dispatch(addClassMorningCheck({ ...data, recorder: user.FirstName }));
+    handleClose();
   };
+  const user = useSelector((state) => state.UserRedcuer.user);
   return (
     <>
       <Button onClick={() => setLgShow(true)} className="dashboard-btn">
@@ -50,7 +56,7 @@ const AddDetailsRegistration = () => {
                         {...register('semester', { required: true })}
                       />
                       <p className="err">
-                        {errors.Level && '! this field is required'}
+                        {errors.semester && '! this field is required'}
                       </p>
                     </div>
                   </Col>
@@ -81,11 +87,11 @@ const AddDetailsRegistration = () => {
 
                       <input
                         type="text"
-                        name="ClassName"
-                        {...register('ClassName', { required: true })}
+                        name="className"
+                        {...register('className', { required: true })}
                       />
                       <p className="err">
-                        {errors.ClassName && '! this field is required'}
+                        {errors.className && '! this field is required'}
                       </p>
                     </div>
                   </Col>
@@ -93,15 +99,15 @@ const AddDetailsRegistration = () => {
                     {' '}
                     <div className="inputType">
                       <b>
-                        Student<sup>*</sup>
+                        student<sup>*</sup>
                       </b>
                       <input
                         type="text"
-                        name="Student"
-                        {...register('Student', { required: true })}
+                        name="student"
+                        {...register('student', { required: true })}
                       />
                       <p className="err">
-                        {errors.Student && '! this field is required'}
+                        {errors.student && '! this field is required'}
                       </p>
                     </div>
                   </Col>
@@ -117,7 +123,7 @@ const AddDetailsRegistration = () => {
                       <input
                         type="number"
                         name="age"
-                        {...register('Details', { required: true })}
+                        {...register('age', { required: true })}
                       />
                       <p className="err">
                         {errors.age && '! this field is required'}
@@ -131,7 +137,7 @@ const AddDetailsRegistration = () => {
                         Temperature<sup>*</sup>
                       </b>
                       <input
-                        type="text"
+                        type="number"
                         name="Temperature"
                         {...register('Temperature', { required: true })}
                       />
@@ -166,7 +172,7 @@ const AddDetailsRegistration = () => {
                         consultation<sup>*</sup>
                       </b>
                       <input
-                        type="number"
+                        type="text"
                         name="consultation"
                         {...register('consultation', { required: true })}
                       />
@@ -185,7 +191,7 @@ const AddDetailsRegistration = () => {
                         Adresse<sup>*</sup>
                       </b>
                       <input
-                        type="number"
+                        type="test"
                         name="Adresse"
                         {...register('Adresse', { required: true })}
                       />
@@ -207,22 +213,6 @@ const AddDetailsRegistration = () => {
                       />
                       <p className="err">
                         {errors.telephone && '! this field is required'}
-                      </p>
-                    </div>
-                  </Col>
-                  <Col md={6}>
-                    {' '}
-                    <div className="inputType">
-                      <b>
-                        recorder<sup>*</sup>
-                      </b>
-                      <input
-                        type="number"
-                        name="consultation"
-                        {...register('consultation', { required: true })}
-                      />
-                      <p className="err">
-                        {errors.consultation && '! this field is required'}
                       </p>
                     </div>
                   </Col>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import jsPDF from 'jspdf';
@@ -11,41 +11,23 @@ import EditActivities from './ModelBox/EditActivities';
 import SideBarSA from './SideBarSA';
 import NavbarR from './RegistrationComponente/NavbarR';
 import Hoc from './HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteActivities,
+  getActivities,
+} from '../Redux/Action/ActivitiesAction';
 const StudentActivities = () => {
-  const Activities = [
-    {
-      id: 1,
-      studnetName: 'student1',
-      class: '8eme annee',
-      className: '8eme annee b',
-      activitie: 'sport',
-      date: '23/12/2023 to 30/12/2023',
-    },
-    {
-      id: 1,
-      studnetName: 'student1',
-      class: '8eme annee',
-      className: '8eme annee b',
-      activitie: 'sport',
-      date: '23/12/2023 to 30/12/2023',
-    },
-    {
-      id: 1,
-      studnetName: 'student1',
-      class: '8eme annee',
-      className: '8eme annee b',
-      activitie: 'sport',
-      date: '23/12/2023 to 30/12/2023',
-    },
-    {
-      id: 1,
-      studnetName: 'student1',
-      class: '8eme annee',
-      className: '8eme annee b',
-      activitie: 'sport',
-      date: '23/12/2023 to 30/12/2023',
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getActivities());
+  }, []);
+  const deleteActivitie = (id) => {
+    var result = confirm('Want to delete activities');
+    if (result) {
+      dispatch(deleteActivities(id));
+    }
+  };
+  const Activities = useSelector((state) => state.ActivitiesReducer.Activities);
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -65,7 +47,7 @@ const StudentActivities = () => {
   };
   const componentRef = useRef();
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Student Activities']}>
       <Row>
         <Col lg={2} md={2} className="pd-l parentcontainer">
           <SideBarSA />
@@ -102,36 +84,45 @@ const StudentActivities = () => {
 
                   <th>class name</th>
                   <th>activitie</th>
-                  <th> date</th>
+                  <th> Start Date</th>
+                  <th>end Date</th>
                   <th>setting</th>
                 </tr>{' '}
               </thead>
               <tbody>
                 {Activities.filter((el) =>
-                  el.studnetName.toUpperCase().includes(search.toUpperCase())
-                ).map((Leaverapport, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{Leaverapport.id}</td>
-                      <td>{Leaverapport.studnetName}</td>
-                      <td>{Leaverapport.class}</td>
-                      <td>{Leaverapport.className}</td>
-                      <td>{Leaverapport.activitie}</td>
-                      <td>{Leaverapport.date}</td>
-                      <td>
-                        <Link href="/StudentActivities/ActivitiesProfile">
-                          <button className="bg-primary btn-Setting">
-                            See
-                          </button>
-                        </Link>
-                        <EditActivities />
-                        <button className="bg-danger btn-Setting">
-                          Delete
-                        </button>{' '}
-                      </td>
-                    </tr>
-                  );
-                })}
+                  el.student.toUpperCase().includes(search.toUpperCase())
+                )
+                  .reverse()
+                  .map((Activitie, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{Activitie.studentNumber}</td>
+                        <td>{Activitie.student}</td>
+                        <td>{Activitie.class}</td>
+                        <td>{Activitie.className}</td>
+                        <td>{Activitie.activitie}</td>
+                        <td>{Activitie.startDate}</td>
+                        <td>{Activitie.endDate}</td>
+                        <td>
+                          <Link
+                            href={`/StudentActivities/ActivitiesProfile/${Activitie.id}`}
+                          >
+                            <button className="bg-primary btn-Setting">
+                              See
+                            </button>
+                          </Link>
+                          <EditActivities Activitie={Activitie} />
+                          <button
+                            className="bg-danger btn-Setting"
+                            onClick={() => deleteActivitie(Activitie.id)}
+                          >
+                            Delete
+                          </button>{' '}
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </section>

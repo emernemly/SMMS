@@ -121,7 +121,7 @@ const ClassAddModel = () => {
                       </b>
 
                       <input
-                        type="number"
+                        type="text"
                         name="Details"
                         {...register('Details', { required: true })}
                       />

@@ -1,48 +1,21 @@
-import React from 'react';
-import SideBarSA from '../../../../../Components/SideBarSA';
+import React, { useEffect } from 'react';
+import SideBarSA from '../../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
-import NavbarR from '../../../../../Components/RegistrationComponente/NavbarR';
+import NavbarR from '../../../../Components/RegistrationComponente/NavbarR';
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import Hoc from '../../../../../Components/HOC/Hoc';
-const EditRole = () => {
+import Hoc from '../../../../Components/HOC/Hoc';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOwnRole } from '../../../../Redux/Action/RolesAction';
+const RolesProfile = () => {
+  const router = useRouter();
+  const { RolesProfile } = router.query;
+  const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
-
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
-    { title: 'set permissions', role: 'admin' },
-    { title: 'import basic student data', role: 'admin' },
-    { title: 'import teacher', role: 'admin' },
-    { title: 'class schedules', role: 'admin' },
-    { title: 'manage the overall moral education system', role: 'admin' },
-    { title: 'defining roles ', role: 'admin' },
-    { title: 'managing the system information', role: 'admin' },
-    { title: 'database management', role: 'admin' },
-    { title: 'log management', role: 'admin' },
-    { title: 'maintaining the security', role: 'admin' },
-
-    { title: 'import users', role: 'HeadTeacher' },
-    { title: 'set permissions', role: 'HeadTeacher' },
-    { title: 'import basic student data', role: 'HeadTeacher' },
-    { title: 'import teacher', role: 'HeadTeacher' },
-    { title: 'class schedules', role: 'HeadTeacher' },
-    {
-      title: 'manage the overall moral education system',
-      role: 'HeadTeacher',
-    },
-
-    { title: 'import users', role: 'Teacher' },
-    { title: 'set permissions', role: 'Teacher' },
-    { title: 'import basic student data', role: 'Teacher' },
-    { title: 'import teacher', role: 'Teacher' },
-
-    { title: 'import users', role: 'Student' },
-    { title: 'set permissions', role: 'Student' },
-    { title: 'import basic student data', role: 'Student' },
-  ];
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -59,8 +32,19 @@ const EditRole = () => {
       pdf.save('Profile.pdf');
     });
   };
+  console.log(router);
+
+  useEffect(() => {
+    // Access the RolesProfile query parameter correctly from router.query
+    RolesProfile && dispatch(getOwnRole(RolesProfile)); // Assuming RolesProfile is the correct query parameter name
+  }, [RolesProfile]); // Add the correct dependency here
+
+  // ... the rest of your code ...
+
+  const OwnRole = useSelector((state) => state.RolesReducer.OwnRole);
+  console.log(OwnRole);
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Management']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -81,7 +65,11 @@ const EditRole = () => {
                     Title<sup>*</sup>
                   </b>
                 </label>
-                <input type="text" name="Title" value="admin" />
+                <input
+                  type="text"
+                  name="Title"
+                  value={OwnRole && OwnRole.Role}
+                />
               </div>
               <div className="role-input">
                 <label>
@@ -112,23 +100,20 @@ const EditRole = () => {
                 </span>
               </span> */}{' '}
               </div>
-              <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                defaultValue={Permissions.filter(
-                  (el) => el.role === 'admin'
-                ).map((OwnPermissions) => {
-                  return {
-                    value: OwnPermissions.title,
-                    label: OwnPermissions.title,
-                  };
-                })}
-                isMulti
-                options={Permissions.map((el) => {
-                  return { value: el.title, label: el.title };
-                })}
-                isDisabled
-              />
+              {OwnRole && (
+                <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  defaultValue={OwnRole.Permissions.map((OwnPermissions) => {
+                    return {
+                      value: OwnPermissions.value,
+                      label: OwnPermissions.value,
+                    };
+                  })}
+                  isMulti
+                  isDisabled
+                />
+              )}
               <button onClick={downloadPDF}>Download PDF</button>
             </div>
           </section>
@@ -138,4 +123,4 @@ const EditRole = () => {
   );
 };
 
-export default EditRole;
+export default RolesProfile;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Navbarcomponent from '../../Components/Navbarcomponent';
 import { useForm } from 'react-hook-form';
-import { Hoc } from '../../Components/HOC/Hoc';
+
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../Redux/Action/UserActions';

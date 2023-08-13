@@ -3,10 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
-const Approve = () => {
+import { StatusAdding } from '../../Redux/Action/ScoreAdding';
+import { useDispatch } from 'react-redux';
+import { StatusDeductionScores } from '../../Redux/Action/DeductionScores';
+const Approve = ({ Scores }) => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
+  const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const {
@@ -14,8 +17,13 @@ const Approve = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmits = (data) => {
-    console.log(data);
+  const onSubmits = () => {
+    console.log(Scores);
+    if (Scores.status === 'add') {
+      dispatch(StatusAdding(Scores, 'approved'));
+    } else {
+      dispatch(StatusDeductionScores(Scores, 'approved'));
+    }
   };
   return (
     <>

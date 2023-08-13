@@ -11,19 +11,24 @@ import { deleteTeacher, getTeacher } from '../../../Redux/Action/TeacherAction';
 import TeacherModul from '../../../Components/ModelBox/TeacherModul';
 import Hoc from '../../../Components/HOC/Hoc';
 import { getUser } from '../../../Redux/Action/UserActions';
+import { getRoleByName } from '../../../Redux/Action/RolesAction';
 
 const Teacher = () => {
+  const [id, setid] = useState(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTeacher());
-    dispatch(getUser());
-  }, []);
-
-  const Teachers = useSelector((state) => state.TeacherReducer.Teacher);
-  const user = useSelector((state) => state.UserRedcuer.user);
 
   const [search, setsearch] = useState('');
   const componentRef = useRef();
+  useEffect(() => {
+    setid(localStorage.getItem('Role'));
+    dispatch(getTeacher());
+  }, []);
+  useEffect(() => {
+    id && dispatch(getRoleByName(id));
+  }, [id]);
+  const Teachers = useSelector((state) => state.TeacherReducer.Teacher);
+  const Permissions = useSelector((state) => state.RolesReducer.checkRole);
+
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -47,7 +52,7 @@ const Teacher = () => {
     }
   };
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['see All teacher']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -88,9 +93,11 @@ const Teacher = () => {
                   <th>Subject Teacher</th>
                   <th>Class Name</th>
                   <th>Class</th>
-                  {user && ['admin'].some((role) => role === user.Role) && (
-                    <th>Setting</th>
-                  )}
+                  {Permissions &&
+                    Permissions[0].Permissions.map((el) => el.value).some(
+                      (role) =>
+                        role.toUpperCase() === 'setting teacher'.toUpperCase()
+                    ) && <th>Setting</th>}
                 </tr>{' '}
               </thead>
               <tbody>
@@ -107,24 +114,29 @@ const Teacher = () => {
                         <td>{ownTeacher.Subject}</td>
                         <td>{ownTeacher.className}</td>
                         <td>{ownTeacher.Class}</td>
-                        {['admin'].some((role) => role === user.Role) && (
-                          <td>
-                            <Link
-                              href={`/Dashboard-System-Administrator/Teacher/ProfileTeacher/${ownTeacher.id}`}
-                            >
-                              <button className="bg-primary btn-Setting">
-                                See
-                              </button>
-                            </Link>
-                            <TeacherModul ownTeacher={ownTeacher} />
-                            <button
-                              className="bg-danger btn-Setting"
-                              onClick={() => deleteTeachers(ownTeacher.id)}
-                            >
-                              Delete
-                            </button>{' '}
-                          </td>
-                        )}
+                        {Permissions &&
+                          Permissions[0].Permissions.map((el) => el.value).some(
+                            (role) =>
+                              role.toUpperCase() ===
+                              'setting teacher'.toUpperCase()
+                          ) && (
+                            <td>
+                              <Link
+                                href={`/Dashboard-System-Administrator/Teacher/ProfileTeacher/${ownTeacher.id}`}
+                              >
+                                <button className="bg-primary btn-Setting">
+                                  See
+                                </button>
+                              </Link>
+                              <TeacherModul ownTeacher={ownTeacher} />
+                              <button
+                                className="bg-danger btn-Setting"
+                                onClick={() => deleteTeachers(ownTeacher.id)}
+                              >
+                                Delete
+                              </button>{' '}
+                            </td>
+                          )}
                       </tr>
                     );
                   })}

@@ -45,7 +45,7 @@ const Students = () => {
     }
   };
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Registration']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">

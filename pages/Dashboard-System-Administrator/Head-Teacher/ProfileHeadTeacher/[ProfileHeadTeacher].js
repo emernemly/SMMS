@@ -39,7 +39,7 @@ const ProfileHeadTeacher = () => {
   };
   const componentRef = useRef();
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['setting student']}>
       <Row id="pdf-element">
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">

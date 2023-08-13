@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -6,17 +6,11 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLogs } from '../../../Redux/Action/LogsActions';
 const Logs = () => {
-  const log = [
-    { user: 'kilo', time: '2020-09-08 17:42:17	', operation: 'modifications' },
-    { user: 'ali', time: '2020-09-08 17:42:17	', operation: 'modifications' },
-    {
-      user: 'ibrahim',
-      time: '2020-09-08 17:42:17	',
-      operation: 'modifications',
-    },
-    { user: 'emer', time: '2020-09-08 17:42:17	', operation: 'modifications' },
-  ];
+  const dispatch = useDispatch();
+
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -35,8 +29,12 @@ const Logs = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getLogs());
+  }, []);
+  const Logs = useSelector((state) => state.LogsReducer.Logs);
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['systeme logs']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -72,15 +70,14 @@ const Logs = () => {
                 </tr>{' '}
               </thead>
               <tbody>
-                {log
-                  .filter((el) =>
+                {Logs &&
+                  Logs.filter((el) =>
                     el.user.toUpperCase().includes(search.toUpperCase())
-                  )
-                  .map((log, i) => {
+                  ).map((log, i) => {
                     return (
                       <tr className={i % 2 === 0 && `bg-ver`} key={i}>
                         <td>{log.user}</td>
-                        <td>{log.time}</td>
+                        <td>{log.accessTime}</td>
                         <td>{log.operation}</td>
                       </tr>
                     );

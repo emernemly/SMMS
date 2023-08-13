@@ -8,7 +8,7 @@ import Hoc from '../../../Components/HOC/Hoc';
 
 const ClassMoringHistory = () => {
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Class Morning check']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">

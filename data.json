@@ -18,7 +18,7 @@
       "Role": "admin"
     },
     {
-      "FirstName": "emer",
+      "FirstName": "emer2",
       "middelName": "nemly",
       "lastName": "test",
       "Gender": "on",
@@ -48,39 +48,88 @@
       "Zip": "2009",
       "userName": "emer",
       "password": "23023",
-      "Role": "headTeacher",
+      "Role": "Head teacher",
       "id": 6
+    },
+    {
+      "FirstName": "emer",
+      "MiddelName": "nemly",
+      "LastName": "news",
+      "Gender": "Male",
+      "Birth": "2023-08-12",
+      "Educational": "mathv",
+      "Subject": "phisque",
+      "className": "8 eme A",
+      "Class": "test3",
+      "City": "bardo",
+      "Zip": "2009",
+      "userName": "checkrole",
+      "password": "checkrole",
+      "Role": "Head teacher",
+      "id": 7
+    },
+    {
+      "FirstName": "admin",
+      "MiddelName": "admin",
+      "LastName": "admin",
+      "Gender": "Male",
+      "Birth": "2023-08-09",
+      "Email": "nemlyemer@gmail.com",
+      "PhoneNumber": "521833272332",
+      "Street": "admin",
+      "City": "bardoadmin",
+      "Zip": "2009",
+      "Country": "Tunisia",
+      "userName": "admin",
+      "password": "admin",
+      "Role": "admin",
+      "id": 8
+    },
+    {
+      "FirstName": "Headteacher ",
+      "MiddelName": "Headteacher",
+      "LastName": "Headteacher",
+      "Gender": "Male",
+      "Birth": "2023-08-15",
+      "Educational": "Headteacher",
+      "Subject": "Headteacher",
+      "className": "8 eme A",
+      "Class": "8 eme b",
+      "City": "Headteacher",
+      "Zip": "2009",
+      "userName": "Headteacher",
+      "password": "Headteacher",
+      "Role": "Head teacher",
+      "id": 9
+    },
+    {
+      "FirstName": "teacher",
+      "middelName": "teacher",
+      "lastName": "teacher",
+      "Gender": "Male",
+      "Birth": "2023-08-10",
+      "Educational": "teacher",
+      "Subject": "teacher",
+      "City": "teacher",
+      "Zip": "teacher",
+      "userName": "teacher",
+      "password": "teacher",
+      "Role": "teacher",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "id": 10
     }
   ],
   "Students": [
     {
-      "FirstName": "emer",
-      "middelName": "nemly",
-      "lastName": "Students",
-      "Gender": "Male",
-      "Birth": "2023-05-10",
-      "GraduationSchool": "school",
-      "GraduationScore": "120",
-      "StudentNumber": "2",
-      "Street": "59 rue 409 ksar said 2",
-      "City": "bardo",
-      "Zip": "2009",
-      "FatherName": "emer",
-      "FatherPhone": "52183728",
-      "userName": "Students",
-      "password": "Students",
-      "class": "set permissions",
-      "id": 8
-    },
-    {
-      "FirstName": "testClass",
+      "FirstName": "testClasses",
       "middelName": "testClass",
       "lastName": "testClass",
       "Gender": "Male",
       "Birth": "2023-06-24",
       "GraduationSchool": "testClass",
-      "GraduationScore": "12",
-      "StudentNumber": "2",
+      "GraduationScore": 12,
+      "StudentNumber": 2,
       "Street": "59 rue 409 ksar said 2",
       "City": "bardo",
       "Zip": "2009",
@@ -90,16 +139,17 @@
       "password": "testClass",
       "class": "import users",
       "className": "import users",
+      "Score": -300,
       "id": 9
     },
     {
       "FirstName": "check",
-      "middelName": "check",
+      "middelName": "checks",
       "lastName": "check",
       "Gender": "Male",
       "Birth": "2023-06-13",
       "GraduationSchool": "check",
-      "GraduationScore": "check",
+      "GraduationScore": 120,
       "StudentNumber": "2",
       "Street": "check",
       "City": "bardo",
@@ -110,6 +160,7 @@
       "password": "check",
       "class": "8 eme",
       "className": "8 eme A",
+      "Score": "120",
       "id": 10
     }
   ],
@@ -196,33 +247,28 @@
       "recorder": "test",
       "timeRecord": "2023-06-16",
       "id": 1
+    },
+    {
+      "Level": "class",
+      "Class": "class A",
+      "timeEvent": "2023-08-11",
+      "deserved": "class",
+      "Details": "class",
+      "Noticed": "class",
+      "recorder": "class",
+      "timeRecord": "2023-08-26",
+      "id": 2
     }
   ],
   "deductionScores": [
-    {
-      "semester": "semester 1",
-      "ClassLevel": "",
-      "Student": "",
-      "EventTime": "",
-      "PointElements": "",
-      "Details": "",
-      "points": 300,
-      "Note": "",
-      "register": "",
-      "reviews": "waiting",
-      "studentId": 2,
-      "status": "",
-      "id": 10
-    },
     {
       "semester": "test",
       "ClassLevel": "test",
       "Class": "test",
       "Student": "test",
-      "EventTime": "2023-06-09",
       "PointElements": "test",
       "Details": "test",
-      "points": "6878",
+      "points": 6878,
       "Note": "test",
       "register": "test",
       "status": "deduction",
@@ -238,11 +284,11 @@
       "EventTime": "2023-06-09",
       "PointElements": "test1",
       "Details": "test1",
-      "points": "400",
+      "points": 400,
       "Note": "test1",
       "register": "test1",
       "status": "deduction",
-      "reviews": "waiting",
+      "reviews": "approved",
       "studentId": 9,
       "id": 12
     },
@@ -254,7 +300,7 @@
       "EventTime": "2023-06-30",
       "PointElements": "test3",
       "Details": "test3",
-      "points": "2920",
+      "points": 2920,
       "Note": "test3",
       "register": "test3",
       "status": "Cancelling",
@@ -263,36 +309,1138 @@
       "id": 13
     },
     {
-      "semester": " testvd",
-      "ClassLevel": "testvd",
-      "Class": "testvd",
-      "Student": "testvd",
-      "EventTime": "2023-06-02",
-      "PointElements": "testvd",
-      "Details": "testvd",
-      "points": "300",
-      "Note": "testvd",
-      "register": "testvd",
-      "status": "deduction",
-      "reviews": "waiting",
+      "semester": "CancellingScores",
+      "ClassLevel": "CancellingScores",
+      "Class": "CancellingScores",
+      "Student": "CancellingScores",
+      "EventTime": "2023-07-13",
+      "PointElements": "CancellingScores",
+      "Details": "CancellingScores",
+      "points": 122,
+      "Note": "CancellingScores",
+      "register": "CancellingScores",
+      "status": "Cancelling",
+      "reviews": "approved",
       "studentId": 8,
       "id": 14
     },
     {
-      "semester": "test4",
-      "ClassLevel": "test4",
-      "Class": "test4",
-      "Student": "test4",
-      "EventTime": "2023-07-07",
-      "PointElements": "test4",
-      "Details": "test4",
-      "points": "300",
-      "Note": "test4",
-      "register": "test4",
-      "status": "deduction",
-      "reviews": "waiting",
-      "studentId": 8,
+      "semester": "data",
+      "ClassLevel": "data",
+      "Class": "data",
+      "Student": "data",
+      "EventTime": "2023-07-12",
+      "PointElements": "data",
+      "Details": "data",
+      "points": 3,
+      "Note": "data",
+      "register": "data",
+      "status": "Cancelling",
+      "reviews": "approved",
+      "studentId": 10,
       "id": 15
+    },
+    {
+      "semester": "datas",
+      "ClassLevel": "datas",
+      "Class": "datas",
+      "Student": "datas",
+      "EventTime": "2023-07-18",
+      "PointElements": "datas",
+      "Details": "datas",
+      "points": 3,
+      "Note": "datas",
+      "register": "datas",
+      "status": "Cancelling",
+      "reviews": "Refused",
+      "studentId": 10,
+      "id": 16
+    },
+    {
+      "semester": "fix",
+      "ClassLevel": "fix",
+      "Class": "fix",
+      "Student": "fix",
+      "EventTime": "2023-07-06",
+      "PointElements": "fix",
+      "Details": "fix",
+      "points": 23,
+      "Note": "fix",
+      "register": "fix",
+      "status": "Cancelling",
+      "reviews": "Refused",
+      "studentId": 10,
+      "id": 17
+    },
+    {
+      "semester": "testdeduction",
+      "ClassLevel": "testdeduction",
+      "Class": "testdeduction",
+      "Student": "testdeduction",
+      "EventTime": "2023-07-05",
+      "PointElements": "testdeduction",
+      "Details": "testdeduction",
+      "points": "200",
+      "Note": "testdeduction",
+      "register": "testdeduction",
+      "status": "deduction",
+      "reviews": "approved",
+      "studentId": 9,
+      "id": 18
+    },
+    {
+      "semester": "test",
+      "ClassLevel": "test",
+      "Class": "test",
+      "Student": "test",
+      "EventTime": "2023-07-06",
+      "PointElements": "tsesr",
+      "Details": "tsesr",
+      "points": "50",
+      "Note": "tsesr",
+      "register": "tsesr",
+      "status": "deduction",
+      "reviews": "approved",
+      "studentId": 10,
+      "id": 19
+    }
+  ],
+  "addScore": [
+    {
+      "score": 300,
+      "note": "emer",
+      "status": "add",
+      "reviews": "Cancelling",
+      "UserId": {
+        "FirstName": "emer",
+        "middelName": "nemly",
+        "lastName": "Students",
+        "Gender": "Male",
+        "Birth": "2023-05-10",
+        "GraduationSchool": "school",
+        "GraduationScore": "120",
+        "StudentNumber": "2",
+        "Street": "59 rue 409 ksar said 2",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "emer",
+        "FatherPhone": "52183728",
+        "userName": "Students",
+        "password": "Students",
+        "class": "set permissions",
+        "id": 8
+      },
+      "id": 8
+    },
+    {
+      "score": "1522",
+      "note": "good again",
+      "UserId": {
+        "FirstName": "emer",
+        "middelName": "nemly",
+        "lastName": "Students",
+        "Gender": "Male",
+        "Birth": "2023-05-10",
+        "GraduationSchool": "school",
+        "GraduationScore": "120",
+        "StudentNumber": "2",
+        "Street": "59 rue 409 ksar said 2",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "emer",
+        "FatherPhone": "52183728",
+        "userName": "Students",
+        "password": "Students",
+        "class": "set permissions",
+        "id": 8,
+        "Score": 0
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 9
+    },
+    {
+      "score": "122",
+      "note": "good",
+      "UserId": {
+        "FirstName": "testClass",
+        "middelName": "testClass",
+        "lastName": "testClass",
+        "Gender": "Male",
+        "Birth": "2023-06-24",
+        "GraduationSchool": "testClass",
+        "GraduationScore": 12,
+        "StudentNumber": 2,
+        "Street": "59 rue 409 ksar said 2",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "emer",
+        "FatherPhone": "52183728",
+        "userName": "testClass",
+        "password": "testClass",
+        "class": "import users",
+        "className": "import users",
+        "Score": 100,
+        "id": 9
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 10
+    },
+    {
+      "score": "200",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": 100,
+        "id": 10
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 11
+    },
+    {
+      "score": "100",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": "200",
+        "id": 10
+      },
+      "reviews": "Refused",
+      "status": "add",
+      "id": 12
+    },
+    {
+      "score": "300",
+      "note": "good",
+      "UserId": {
+        "FirstName": "testClass",
+        "middelName": "testClass",
+        "lastName": "testClass",
+        "Gender": "Male",
+        "Birth": "2023-06-24",
+        "GraduationSchool": "testClass",
+        "GraduationScore": 12,
+        "StudentNumber": 2,
+        "Street": "59 rue 409 ksar said 2",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "emer",
+        "FatherPhone": "52183728",
+        "userName": "testClass",
+        "password": "testClass",
+        "class": "import users",
+        "className": "import users",
+        "Score": "122",
+        "id": 9
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 13
+    },
+    {
+      "score": "3000",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": 0,
+        "id": 10
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 14
+    },
+    {
+      "score": "3000",
+      "note": "kl",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": 0,
+        "id": 10
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 15
+    },
+    {
+      "score": "100",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": "3000",
+        "id": 10
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 16
+    },
+    {
+      "score": "500",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": "100",
+        "id": 10
+      },
+      "reviews": "Refused",
+      "status": "add",
+      "id": 17
+    },
+    {
+      "score": "300",
+      "note": "good\n",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "check",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": "check",
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": 50,
+        "id": 10
+      },
+      "reviews": "waiting",
+      "status": "add",
+      "id": 18
+    },
+    {
+      "score": "120",
+      "note": "good",
+      "UserId": {
+        "FirstName": "check",
+        "middelName": "checks",
+        "lastName": "check",
+        "Gender": "Male",
+        "Birth": "2023-06-13",
+        "GraduationSchool": "check",
+        "GraduationScore": 120,
+        "StudentNumber": "2",
+        "Street": "check",
+        "City": "bardo",
+        "Zip": "2009",
+        "FatherName": "check",
+        "FatherPhone": "52183728",
+        "userName": "check",
+        "password": "check",
+        "class": "8 eme",
+        "className": "8 eme A",
+        "Score": 50,
+        "id": 10
+      },
+      "reviews": "approved",
+      "status": "add",
+      "id": 19
+    }
+  ],
+  "Activities": [
+    {
+      "studentNumber": "3",
+      "student": "nemly",
+      "class": "8 eme",
+      "className": "test2",
+      "activitie": "sport",
+      "startDate": "2023-07-13",
+      "endDate": "2023-07-28",
+      "id": 2
+    },
+    {
+      "studentNumber": "3",
+      "class": "8 eme",
+      "className": "8 eme",
+      "activitie": "sport",
+      "startDate": "2023-07-26",
+      "endDate": "2023-07-29",
+      "student": "testClass",
+      "id": 3
+    },
+    {
+      "studentNumber": "3",
+      "activitie": "sport",
+      "startDate": "2023-07-11",
+      "endDate": "2023-07-07",
+      "student": "check",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "id": 4
+    }
+  ],
+  "Leaves": [
+    {
+      "StartDay": "2023-08-10",
+      "reason": "sick",
+      "studentNumber": "2",
+      "student": "checks",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "unapproved",
+      "id": 3,
+      "user": "10"
+    },
+    {
+      "StartDay": "2023-08-10",
+      "reason": "sick",
+      "EndDay": "2023-08-12",
+      "studentNumber": "2",
+      "student": "checks",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "unapproved",
+      "id": 4,
+      "user": "10"
+    },
+    {
+      "StartDay": "2023-08-13",
+      "reason": "sick",
+      "EndDay": "2023-08-16",
+      "studentNumber": "2",
+      "student": "checks",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "approved",
+      "id": 5,
+      "user": "10"
+    },
+    {
+      "StartDay": "2023-08-02",
+      "reason": "very sick",
+      "studentNumber": "2",
+      "student": "checks",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "waiting",
+      "user": "10",
+      "id": 6
+    },
+    {
+      "StartDay": "2023-08-02",
+      "reason": "very sick",
+      "studentNumber": "2",
+      "student": "emer",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "waiting",
+      "user": "12",
+      "id": 6
+    },
+    {
+      "StartDay": "2023-08-12",
+      "reason": "very sick",
+      "EndDay": "2023-08-20",
+      "studentNumber": "2",
+      "student": "check",
+      "class": "8 eme",
+      "className": "8 eme A",
+      "status": "approved",
+      "user": "10",
+      "id": 7
+    }
+  ],
+  "Heterogeneity": [
+    {
+      "studentNumber": "4",
+      "student": "emrs",
+      "class": "8 eme",
+      "className": "8 eme b ",
+      "Heterogeneity": "test",
+      "SituationDetails": "good",
+      "TimeRegistration": "2023-07-26",
+      "Recorder": "emer",
+      "id": 4
+    },
+    {
+      "studentNumber": "5",
+      "student": "fixt",
+      "class": "8 eme",
+      "className": "test",
+      "Heterogeneity": "test",
+      "SituationDetails": "helthy",
+      "TimeRegistration": "2023-07-26",
+      "id": 5
+    }
+  ],
+  "ClassMorningCheck": [
+    {
+      "semester": "",
+      "Class": "8 eme q",
+      "className": "8 eme A",
+      "student": "check",
+      "age": "16",
+      "Temperature": "23",
+      "principal": "",
+      "consultation": "",
+      "Adresse": "",
+      "telephone": "",
+      "id": 1
+    },
+    {
+      "semester": "test",
+      "Class": "test5",
+      "className": "8 eme A",
+      "student": "emernemly",
+      "age": "12",
+      "Temperature": "34",
+      "principal": "test",
+      "consultation": "test",
+      "Adresse": "test",
+      "telephone": "231453616",
+      "id": 2
+    },
+    {
+      "semester": "test",
+      "Class": "test",
+      "className": "8 eme",
+      "student": "emr",
+      "age": "23",
+      "Temperature": "23",
+      "principal": "test",
+      "consultation": "test",
+      "Adresse": "tset",
+      "telephone": "233",
+      "recorder": "emer",
+      "id": 3
+    }
+  ],
+  "Roles": [
+    {
+      "Role": "admin",
+      "Permissions": [
+        {
+          "value": "import users",
+          "label": "import users"
+        },
+        {
+          "value": "User Registration",
+          "label": "User Registration"
+        },
+        {
+          "value": "User Management",
+          "label": "User Management"
+        },
+        {
+          "value": "import basic student data",
+          "label": "import basic student data"
+        },
+        {
+          "value": "setting Head-teacher",
+          "label": "setting Head-teacher"
+        },
+        {
+          "value": "see All Head-teacher",
+          "label": "see All Head-teacher"
+        },
+        {
+          "value": "setting teacher",
+          "label": "setting teacher"
+        },
+        {
+          "value": "see All teacher",
+          "label": "see All teacher"
+        },
+        {
+          "value": "setting student",
+          "label": "setting student"
+        },
+        {
+          "value": "see All student",
+          "label": "see All student"
+        },
+        {
+          "value": "class schedules",
+          "label": "class schedules"
+        },
+        {
+          "value": "Students Moral Education",
+          "label": "Students Moral Education"
+        },
+        {
+          "value": "Class Moral Education",
+          "label": "Class Moral Education"
+        },
+        {
+          "value": "Reviews Moral Education",
+          "label": "Reviews Moral Education"
+        },
+        {
+          "value": "see Molar Education history",
+          "label": "see Molar Education history"
+        },
+        {
+          "value": "see score recorded data statistics",
+          "label": "see score recorded data statistics"
+        },
+        {
+          "value": "Leave Request",
+          "label": "Leave Request"
+        },
+        {
+          "value": "Student Activities",
+          "label": "Student Activities"
+        },
+        {
+          "value": "Student Heterogeneity",
+          "label": "Student Heterogeneity"
+        },
+        {
+          "value": "Class Morning check",
+          "label": "Class Morning check"
+        },
+        {
+          "value": "Backup mangement",
+          "label": "Backup mangement"
+        },
+        {
+          "value": "systeme logs",
+          "label": "systeme logs"
+        },
+        {
+          "value": "admin",
+          "label": "admin"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "Role": "Head teacher",
+      "Permissions": [
+        {
+          "value": "import teacher",
+          "label": "import teacher"
+        },
+        {
+          "value": "class schedules",
+          "label": "class schedules"
+        },
+        {
+          "value": "Students Moral Education",
+          "label": "Students Moral Education"
+        },
+        {
+          "value": "Class Moral Education",
+          "label": "Class Moral Education"
+        },
+        {
+          "value": "Reviews Moral Education",
+          "label": "Reviews Moral Education"
+        },
+        {
+          "value": "see All student",
+          "label": "see All student"
+        },
+        {
+          "value": "see All teacher",
+          "label": "see All teacher"
+        },
+        {
+          "value": "see Molar Education history",
+          "label": "see Molar Education history"
+        },
+        {
+          "value": "see score recorded data statistics",
+          "label": "see score recorded data statistics"
+        },
+        {
+          "value": "Leave Request",
+          "label": "Leave Request"
+        },
+        {
+          "value": "Student Activities",
+          "label": "Student Activities"
+        },
+        {
+          "value": "Student Heterogeneity",
+          "label": "Student Heterogeneity"
+        },
+        {
+          "value": "Class Morning check",
+          "label": "Class Morning check"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "Role": "student",
+      "Permissions": [
+        {
+          "value": "Student Activities",
+          "label": "Student Activities"
+        },
+        {
+          "value": "Leave Request",
+          "label": "Leave Request"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "Role": "teacher",
+      "Permissions": [
+        {
+          "value": "see All student",
+          "label": "see All student"
+        },
+        {
+          "value": "Students Moral Education",
+          "label": "Students Moral Education"
+        },
+        {
+          "value": "Class Moral Education",
+          "label": "Class Moral Education"
+        },
+        {
+          "value": "see Molar Education history",
+          "label": "see Molar Education history"
+        },
+        {
+          "value": "see score recorded data statistics",
+          "label": "see score recorded data statistics"
+        },
+        {
+          "value": "Student Heterogeneity",
+          "label": "Student Heterogeneity"
+        },
+        {
+          "value": "Class Morning check",
+          "label": "Class Morning check"
+        },
+        {
+          "value": "Student Activities",
+          "label": "Student Activities"
+        },
+        {
+          "value": "class schedules",
+          "label": "class schedules"
+        }
+      ],
+      "id": 5
+    }
+  ],
+  "Permissions": [
+    {
+      "title": "User Registration"
+    },
+    {
+      "title": "User Management"
+    },
+    {
+      "title": "import basic student data"
+    },
+    {
+      "title": "setting Head-teacher"
+    },
+    {
+      "title": "see All Head-teacher"
+    },
+    {
+      "title": "setting teacher"
+    },
+    {
+      "title": "see All teacher"
+    },
+    {
+      "title": "setting student"
+    },
+    {
+      "title": "see All student"
+    },
+    {
+      "title": "class schedules"
+    },
+    {
+      "title": "Students Moral Education"
+    },
+    {
+      "title": "Class Moral Education"
+    },
+    {
+      "title": "Reviews Moral Education"
+    },
+    {
+      "title": "see Molar Education history"
+    },
+    {
+      "title": "see score recorded data statistics"
+    },
+    {
+      "title": "Leave Request"
+    },
+    {
+      "title": "Student Activities"
+    },
+    {
+      "title": "Student Heterogeneity"
+    },
+    {
+      "title": "Class Morning check"
+    },
+    {
+      "title": "Backup mangement"
+    },
+    {
+      "title": "systeme logs"
+    }
+  ],
+  "backUp": [
+    {
+      "id": 1,
+      "Status": "completed",
+      "database": "Users",
+      "location": "mongoDb"
+    },
+    {
+      "Status": "completed",
+      "database": "Students",
+      "location": "mongoDb",
+      "id": 2
+    },
+    {
+      "Status": "completed",
+      "database": "Classes",
+      "location": "mongoDb",
+      "id": 3
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "user": "emer",
+      "accessTime": "2020-09-08",
+      "operation": "modifications"
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T07:40:35.963Z",
+      "operation": "modifications",
+      "id": 2
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T08:02:17.013Z",
+      "operation": "modifications",
+      "id": 3
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T09:49:13.718Z",
+      "operation": "modifications",
+      "id": 4
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T15:33:32.335Z",
+      "operation": "modifications",
+      "id": 5
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T15:34:07.612Z",
+      "operation": "modifications",
+      "id": 6
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T16:07:00.185Z",
+      "operation": "modifications",
+      "id": 7
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T16:10:48.394Z",
+      "operation": "modifications",
+      "id": 8
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T16:14:05.912Z",
+      "operation": "modifications",
+      "id": 9
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T20:25:53.261Z",
+      "operation": "modifications",
+      "id": 10
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T20:25:54.182Z",
+      "operation": "modifications",
+      "id": 11
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T20:46:23.628Z",
+      "operation": "modifications",
+      "id": 12
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-10T20:46:24.421Z",
+      "operation": "modifications",
+      "id": 13
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-10T21:08:54.927Z",
+      "operation": "modifications",
+      "id": 14
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-11T07:05:41.716Z",
+      "operation": "modifications",
+      "id": 15
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-11T07:38:17.779Z",
+      "operation": "modifications",
+      "id": 16
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-11T12:16:16.070Z",
+      "operation": "modifications",
+      "id": 17
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-11T12:16:17.038Z",
+      "operation": "modifications",
+      "id": 18
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-11T15:19:56.471Z",
+      "operation": "modifications",
+      "id": 19
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-12T08:04:28.937Z",
+      "operation": "modifications",
+      "id": 20
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-12T08:04:32.613Z",
+      "operation": "modifications",
+      "id": 21
+    },
+    {
+      "user": "emerNemly",
+      "accessTime": "2023-08-13T12:19:59.023Z",
+      "operation": "modifications",
+      "id": 22
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:25:19.199Z",
+      "operation": "modifications",
+      "id": 23
+    },
+    {
+      "user": "Headteacher",
+      "accessTime": "2023-08-13T12:32:03.954Z",
+      "operation": "modifications",
+      "id": 24
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:32:45.417Z",
+      "operation": "modifications",
+      "id": 25
+    },
+    {
+      "user": "Headteacher",
+      "accessTime": "2023-08-13T12:35:08.057Z",
+      "operation": "modifications",
+      "id": 26
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:37:11.422Z",
+      "operation": "modifications",
+      "id": 27
+    },
+    {
+      "user": "Headteacher",
+      "accessTime": "2023-08-13T12:41:47.635Z",
+      "operation": "modifications",
+      "id": 28
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:42:03.202Z",
+      "operation": "modifications",
+      "id": 29
+    },
+    {
+      "user": "teacher",
+      "accessTime": "2023-08-13T12:48:08.975Z",
+      "operation": "modifications",
+      "id": 30
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:48:36.844Z",
+      "operation": "modifications",
+      "id": 31
+    },
+    {
+      "user": "teacher",
+      "accessTime": "2023-08-13T12:49:36.005Z",
+      "operation": "modifications",
+      "id": 32
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:49:56.167Z",
+      "operation": "modifications",
+      "id": 33
+    },
+    {
+      "user": "teacher",
+      "accessTime": "2023-08-13T12:51:04.477Z",
+      "operation": "modifications",
+      "id": 34
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T12:51:32.296Z",
+      "operation": "modifications",
+      "id": 35
+    },
+    {
+      "user": "check",
+      "accessTime": "2023-08-13T13:02:30.333Z",
+      "operation": "modifications",
+      "id": 36
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T13:03:42.293Z",
+      "operation": "modifications",
+      "id": 37
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T13:03:54.428Z",
+      "operation": "modifications",
+      "id": 38
+    },
+    {
+      "user": "admin",
+      "accessTime": "2023-08-13T13:04:22.623Z",
+      "operation": "modifications",
+      "id": 39
     }
   ]
 }

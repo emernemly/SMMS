@@ -3,11 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
-const AddHeterogeneity = () => {
+import { useDispatch } from 'react-redux';
+import { AddHeterogeneitys } from '../../Redux/Action/HeterogeneityAction';
+const AddHeterogeneity = ({ user }) => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const dispatch = useDispatch();
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -15,7 +17,8 @@ const AddHeterogeneity = () => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(AddHeterogeneitys({ ...data, Recorder: user.FirstName }));
+    handleClose();
   };
   return (
     <>
@@ -68,7 +71,7 @@ const AddHeterogeneity = () => {
                         {...register('student', { required: true })}
                       />
                       <p className="err">
-                        {errors.Class && '! this field is required'}
+                        {errors.student && '! this field is required'}
                       </p>
                     </div>
                   </Col>
@@ -144,22 +147,22 @@ const AddHeterogeneity = () => {
                     </div>
                   </Col>
 
-                  {/*                    <Col md={6}>
+                  <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>
                         Time Registration<sup>*</sup>
                       </b>
                       <input
-                        type="text"
-                        name="date"
-                        {...register('date', { required: true })}
+                        type="date"
+                        name="TimeRegistration"
+                        {...register('TimeRegistration', { required: true })}
                       />
                       <p className="err">
-                        {errors.date && '! this field is required'}
+                        {errors.TimeRegistration && '! this field is required'}
                       </p>
                     </div>
-                  </Col>  */}
+                  </Col>
                 </Row>
                 <button type="sumbit"> Save</button>{' '}
               </Row>

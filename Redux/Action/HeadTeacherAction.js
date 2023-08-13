@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getHeadteacher = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/User?Role=headTeacher');
+    const data = await axios.get(
+      'http://localhost:3000/User?Role=Head teacher'
+    );
     dispatch({ type: 'GETHEADTEACHER', payload: data.data });
   } catch (error) {
     console.log(error);

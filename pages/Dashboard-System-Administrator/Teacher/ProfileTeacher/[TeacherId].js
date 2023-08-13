@@ -38,7 +38,7 @@ const TeacherId = () => {
   };
   const componentRef = useRef();
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['setting teacher']}>
       <Row id="pdf-element">
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">

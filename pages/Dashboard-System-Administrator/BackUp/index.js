@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -6,7 +6,16 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addClassesBackup,
+  addStudentsBackup,
+  addUserBackup,
+  getBackUp,
+} from '../../../Redux/Action/BackUpAction';
+import BackUpModel from '../../../Components/ModelBox/BackUpModel';
 const BackUp = () => {
+  const dispatch = useDispatch();
   const backup = [
     {
       List: 'Backup Set:3120	',
@@ -59,8 +68,13 @@ const BackUp = () => {
       pdf.save('Backup.pdf');
     });
   };
+  useEffect(() => {
+    dispatch(getBackUp());
+  }, []);
+  const BackUp = useSelector((state) => state.BackUpReducer.BackUp);
+  console.log(BackUp);
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['Backup mangement']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -77,13 +91,14 @@ const BackUp = () => {
                 onChange={(e) => setsearch(e.target.value)}
               />
               <div className="All-btn">
-                <a className="dashboard-btn" onClick={downloadPDF}>
+                <button className="dashboard-btn" onClick={downloadPDF}>
                   Download PDF
-                </a>
-                <a className="dashboard-btn">Create Backup </a>
-                <a className="dashboard-btn">Restore Backup </a>
+                </button>
+                <BackUpModel />
                 <ReactToPrint
-                  trigger={() => <a className="dashboard-btn">Print </a>}
+                  trigger={() => (
+                    <button className="dashboard-btn">Print </button>
+                  )}
                   content={() => componentRef.current}
                 />{' '}
               </div>
@@ -96,26 +111,23 @@ const BackUp = () => {
                   <th>Status</th>
                   <th>database</th>
                   <th>location</th>
-                  <th>Size</th>
                 </tr>{' '}
               </thead>
               <tbody>
-                {backup
-                  .filter((el) =>
-                    el.List.toUpperCase().includes(search.toUpperCase())
-                  )
-                  .map((backup, i) => {
-                    return (
-                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                        <td>{backup.List}</td>
+                {BackUp &&
+                  BackUp.filter((el) => el.database.includes(search)).map(
+                    (backup, i) => {
+                      return (
+                        <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                          <td>BackUp set:{backup.id}</td>
 
-                        <td>{backup.Status}</td>
-                        <td>{backup.database}</td>
-                        <td>{backup.location}</td>
-                        <td>{backup.Size}</td>
-                      </tr>
-                    );
-                  })}
+                          <td>{backup.Status}</td>
+                          <td>{backup.database}</td>
+                          <td>{backup.location}</td>
+                        </tr>
+                      );
+                    }
+                  )}
               </tbody>
             </table>
           </section>

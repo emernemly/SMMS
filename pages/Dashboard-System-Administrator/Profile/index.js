@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarSA from '../../../Components/SideBarSA';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../../Redux/Action/UserActions';
 const Profile = () => {
+  const dispatch = useDispatch();
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -14,6 +17,10 @@ const Profile = () => {
       pdf.save('Profile.pdf');
     });
   };
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  const user = useSelector((state) => state.UserRedcuer.user);
   return (
     <Row id="pdf-element">
       {' '}
@@ -31,86 +38,86 @@ const Profile = () => {
               <div className="profilContent ">
                 <b>First Name:</b>
 
-                <p>emer</p>
+                <p>{user && user.FirstName}</p>
               </div>
             </Col>
 
             <Col md={4}>
               <div className="profilContent">
                 <b>Middel Name:</b>
-                <p>emer</p>
+                <p>{user && user.MiddelName}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b>Last Name:</b>
-                <p>emer</p>
+                <p>{user && user.LastName}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b>Gender:</b>
-                <p>Male</p>
+                <p>{user && user.Gender}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Date of Birth:</b>
-                <p>09/02/2023</p>
+                <p>{user && user.Birth}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Email:</b>
-                <p>nemlyemer@gmail.com</p>
+                <p>{user && user.Email}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b> Phone Number:</b>
-                <p>+21623974784</p>
+                <p>{user && user.PhoneNumber}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Street:</b>
-                <p>95 exemple rue exemple</p>
+                <p>{user && user.Street}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> City:</b>
-                <p>tunis</p>
+                <p>{user && user.City}</p>
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b> Zip/Postal Code:</b>
-                <p>2009</p>
+                <p>{user && user.Zip}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Country:</b>
-                <p>tunisia</p>
+                <p>{user && user.Country}</p>
               </div>
             </Col>
-            <hr></hr>
+
             <h2>Information Account </h2>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
                 <b> User Name:</b>
-                <p>Emer Nemly</p>
+                <p>{user && user.userName}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
                 <b> Password:</b>
-                <input type="password" disabled value="emernemly" />
+                <input type="password" disabled value={user && user.password} />
               </div>
             </Col>
           </Row>

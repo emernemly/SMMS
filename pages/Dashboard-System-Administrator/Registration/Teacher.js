@@ -9,6 +9,7 @@ import Hoc from '../../../Components/HOC/Hoc';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClasses } from '../../../Redux/Action/ClassAction';
+import { getRoles } from '../../../Redux/Action/RolesAction';
 const Teacher = () => {
   const animatedComponents = makeAnimated();
 
@@ -32,7 +33,10 @@ const Teacher = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClasses());
+    dispatch(getRoles());
   }, []);
+
+  const Role = useSelector((state) => state.RolesReducer.Role);
   const classes = useSelector((state) => state.ClassesReducer.Classes);
 
   const onSubmits = async (data) => {
@@ -56,7 +60,7 @@ const Teacher = () => {
     }
   };
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Registration']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
@@ -324,8 +328,8 @@ const Teacher = () => {
                     <Select
                       closeMenuOnSelect={false}
                       components={animatedComponents}
-                      options={classes.map((el) => {
-                        return { value: el.Class, label: el.Class };
+                      options={Role.map((el) => {
+                        return { value: el.Role, label: el.Role };
                       })}
                       value={Rolevalue}
                       onChange={changeHandler}

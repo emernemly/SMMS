@@ -6,6 +6,7 @@ import ReactToPrint from 'react-to-print';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDeductionScores } from '../../Redux/Action/DeductionScores';
+import { getStudents } from '../../Redux/Action/StudentAction';
 const StudentMoralEducation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -29,9 +30,10 @@ const StudentMoralEducation = () => {
   const componentRef = useRef();
 
   useEffect(() => {
-    dispatch(getDeductionScores());
+    dispatch(getStudents());
   }, []);
-  const EducationScores = useSelector((state) => state.ScoreReducer.score);
+  const Students = useSelector((state) => state.StudentReducer.Students);
+  console.log(Students);
   return (
     <Col lg={12} className="dashboardContent">
       <section className="tableDashboard" ref={componentRef}>
@@ -54,40 +56,34 @@ const StudentMoralEducation = () => {
           <thead>
             {' '}
             <tr>
-              <th>student</th>
+              <th>StudentNumber</th>
 
-              <th>semester</th>
+              <th>FirstName</th>
 
-              <th>Level</th>
-              <th>Class</th>
-              <th>eventTime</th>
-              <th>Details</th>
-              <th>points</th>
-              {router.pathname !==
-                '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics' && (
-                <th>status</th>
-              )}
+              <th>class</th>
+              <th>className</th>
+              <th>Birth</th>
+              <th>GraduationSchool</th>
+              <th>Score</th>
             </tr>{' '}
           </thead>
           <tbody>
-            {EducationScores.filter((el) =>
-              el.Student.toUpperCase().includes(search.toUpperCase())
+            {Students.filter((el) =>
+              el.FirstName.toUpperCase().includes(search.toUpperCase())
             )
               .reverse()
-              .map((Scores, i) => {
+              .sort((a, b) => b.Score - a.Score)
+              .slice(0, 9)
+              .map((Student, i) => {
                 return (
                   <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{Scores.Student}</td>
-                    <td>{Scores.semester}</td>
-                    <td>{Scores.ClassLevel}</td>
-                    <td>{Scores.Class}</td>
-                    <td>{Scores.EventTime}</td>
-                    <td>{Scores.Details}</td>
-                    <td>{Scores.points}</td>
-                    {router.pathname !==
-                      '/Dashboard-System-Administrator/Score-Recorded-Data-Statistics' && (
-                      <td>{Scores.reviews}</td>
-                    )}
+                    <td>{Student.StudentNumber}</td>
+                    <td>{Student.FirstName}</td>
+                    <td>{Student.class}</td>
+                    <td>{Student.className}</td>
+                    <td>{Student.Birth}</td>
+                    <td>{Student.GraduationSchool}</td>
+                    <td>{Student.Score}</td>
                   </tr>
                 );
               })}

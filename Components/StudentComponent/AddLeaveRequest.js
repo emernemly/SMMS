@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { AddLeaves } from '../../Redux/Action/LeavesAction';
 const AddLeaveRequest = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    dispatch(AddLeaves(data));
   };
   const [PickDate, setPickDate] = useState(false);
   return (
@@ -37,7 +41,6 @@ const AddLeaveRequest = () => {
                           value="Single"
                           defaultChecked
                           onClick={(e) => setPickDate(e.target.value)}
-                          {...register('Gender', { required: true })}
                         />
                         <b>Leave for Single Day</b>
                       </div>
@@ -45,16 +48,12 @@ const AddLeaveRequest = () => {
                         <input
                           type="radio"
                           name="Gender"
-                          {...register('Gender', { required: true })}
                           value="Multiple"
                           onClick={(e) => setPickDate(e.target.value)}
                         />
                         <b>Leave for Multiple Days</b>
                       </div>
                     </div>
-                    <p className="err">
-                      {errors.lastName && '! this field is required'}
-                    </p>
                   </div>
                 </Col>
                 {PickDate === 'Multiple' ? (
@@ -67,12 +66,9 @@ const AddLeaveRequest = () => {
                         </b>
                         <input
                           type="date"
-                          name="date"
-                          {...register('date', { required: true })}
+                          name="StartDay"
+                          {...register('StartDay')}
                         />
-                        <p className="err">
-                          {errors.date && '! this field is required'}
-                        </p>
                       </div>
                     </Col>
                     <Col md={12}>
@@ -83,12 +79,9 @@ const AddLeaveRequest = () => {
                         </b>
                         <input
                           type="date"
-                          name="date"
-                          {...register('date', { required: true })}
+                          name="EndDay"
+                          {...register('EndDay')}
                         />
-                        <p className="err">
-                          {errors.date && '! this field is required'}
-                        </p>
                       </div>
                     </Col>
                   </Row>
@@ -102,12 +95,9 @@ const AddLeaveRequest = () => {
 
                       <input
                         type="date"
-                        name="Email"
-                        {...register('Email', { required: true })}
+                        name="StartDay"
+                        {...register('StartDay')}
                       />
-                      <p className="err">
-                        {errors.Email && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                 )}
@@ -120,12 +110,12 @@ const AddLeaveRequest = () => {
                       Reason<sup>*</sup>
                     </b>
                     <textarea
-                      type="number"
-                      name="number"
-                      {...register('number', { required: true })}
+                      type="text"
+                      name="reason"
+                      {...register('reason', { required: true })}
                     />
                     <p className="err">
-                      {errors.number && '! this field is required'}
+                      {errors.reason && '! this field is required'}
                     </p>
                   </div>
                 </Col>

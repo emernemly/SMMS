@@ -1,49 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../../Components/RegistrationComponente/NavbarR';
 import SideBarStudent from '../../../../Components/SideBarStudent';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOwnLeavesByStudent } from '../../../../Redux/Action/LeavesAction';
+import NavBarStudent from '../../../../Components/NavBarStudent';
 const LeaveRequesthistory = () => {
-  const StudentLeaves = [
-    {
-      Id: 1,
-      StudentName: 'Student1',
-      class: '8eme annee',
-      className: '8eme annee b',
-      reason: 'sick',
-      leaveDate: '23/12/2023 to 30/12/2023',
-      statue: 'unapproved',
-    },
-    {
-      Id: 1,
-      StudentName: 'Student1',
-      class: '8eme annee',
-      className: '8eme annna b',
-      reason: 'sick',
-      leaveDate: '23/12/2023 to 30/12/2023',
-      statue: 'unapproved',
-    },
-    {
-      Id: 1,
-      StudentName: 'Student1',
-      class: '8eme annee',
-      className: '8eme annna b',
-      reason: 'sick',
-      leaveDate: '23/12/2023 to 30/12/2023',
-      statue: 'unapproved',
-    },
-    {
-      Id: 1,
-      StudentName: 'Student1',
-      class: '8eme annee',
-      className: '8eme annna b',
-      reason: 'sick',
-      leaveDate: '23/12/2023 to 30/12/2023',
-      statue: 'unapproved',
-    },
-  ];
+  const dispatch = useDispatch();
+
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -62,6 +29,11 @@ const LeaveRequesthistory = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getOwnLeavesByStudent());
+  }, []);
+
+  const StudentLeaves = useSelector((state) => state.LeavesReducer.Leaves);
   return (
     <Row>
       {' '}
@@ -69,7 +41,7 @@ const LeaveRequesthistory = () => {
         <SideBarStudent />
       </Col>
       <Col lg={10} className="dashboardContent">
-        <NavbarR />
+        <NavBarStudent />
         <section className="tableDashboard" ref={componentRef}>
           <div className="titleDashboard">
             <h3>Leave Request History</h3>
@@ -105,20 +77,22 @@ const LeaveRequesthistory = () => {
             </thead>
             <tbody>
               {StudentLeaves.filter((el) =>
-                el.StudentName.toUpperCase().includes(search.toUpperCase())
-              ).map((Leaverapport, i) => {
-                return (
-                  <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                    <td>{Leaverapport.Id}</td>
-                    <td>{Leaverapport.StudentName}</td>
-                    <td>{Leaverapport.class}</td>
-                    <td>{Leaverapport.className}</td>
-                    <td>{Leaverapport.reason}</td>
-                    <td>{Leaverapport.leaveDate}</td>
-                    <td>{Leaverapport.statue}</td>
-                  </tr>
-                );
-              })}
+                el.status.toUpperCase().includes(search.toUpperCase())
+              )
+                .reverse()
+                .map((Leaverapport, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{Leaverapport.studentNumber}</td>
+                      <td>{Leaverapport.student}</td>
+                      <td>{Leaverapport.class}</td>
+                      <td>{Leaverapport.className}</td>
+                      <td>{Leaverapport.reason}</td>
+                      <td>{Leaverapport.StartDay}</td>
+                      <td>{Leaverapport.status}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </section>

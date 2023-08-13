@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import SideBarSA from '../../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../../Components/RegistrationComponente/NavbarR';
@@ -7,36 +7,9 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteRole, getRoles } from '../../../../Redux/Action/RolesAction';
 const Role = () => {
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
-    { title: 'set permissions', role: 'admin' },
-    { title: 'import basic student data', role: 'admin' },
-    { title: 'import teacher', role: 'admin' },
-    { title: 'class schedules', role: 'admin' },
-    { title: 'manage the overall moral education system', role: 'admin' },
-    { title: 'defining roles ', role: 'admin' },
-    { title: 'managing the system information', role: 'admin' },
-    { title: 'database management', role: 'admin' },
-    { title: 'log management', role: 'admin' },
-    { title: 'maintaining the security', role: 'admin' },
-
-    { title: 'import users', role: 'HeadTeacher' },
-    { title: 'set permissions', role: 'HeadTeacher' },
-    { title: 'import basic student data', role: 'HeadTeacher' },
-    { title: 'import teacher', role: 'HeadTeacher' },
-    { title: 'class schedules', role: 'HeadTeacher' },
-    { title: 'manage the overall moral education system', role: 'HeadTeacher' },
-
-    { title: 'import users', role: 'Teacher' },
-    { title: 'set permissions', role: 'Teacher' },
-    { title: 'import basic student data', role: 'Teacher' },
-    { title: 'import teacher', role: 'Teacher' },
-
-    { title: 'import users', role: 'Student' },
-    { title: 'set permissions', role: 'Student' },
-    { title: 'import basic student data', role: 'Student' },
-  ];
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -54,8 +27,18 @@ const Role = () => {
     });
   };
   const componentRef = useRef();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRoles());
+  }, []);
+  const Permission = useSelector((state) => state.RolesReducer.Role);
+  const handelDelete = (id) => {
+    let result = confirm('sure you want to delete');
+    console.log(result);
+    result && dispatch(DeleteRole(id));
+  };
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Management']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -107,90 +90,39 @@ const Role = () => {
               
                 );
               })  */}{' '}
-                <tr className="bg-ver">
-                  <td>Admin</td>
+                {Permission.map((Roles) => (
+                  <tr className="bg-ver" key={Roles.id}>
+                    {console.log(Roles.Permissions)}
+                    <td>{Roles.Role}</td>
 
-                  <td className="Permissions">
-                    {Permissions.filter((el) => el.role === 'admin').map(
-                      (OwnPermissions, i) => (
-                        <span className="OwnPermissions" key={i}>
-                          {OwnPermissions.title}
-                        </span>
-                      )
-                    )}
-                  </td>
-                  <td>
-                    <Link href="/Dashboard-System-Administrator/User-Management/Role/RoleProfile">
-                      <button className="bg-primary btn-Setting">See</button>
-                    </Link>{' '}
-                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                      <button className="bg-success btn-Setting">Edit</button>
-                    </Link>
-                    <button className="bg-danger btn-Setting">Delete</button>{' '}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Head Teacher</td>
-
-                  <td className="Permissions">
-                    {Permissions.filter((el) => el.role === 'HeadTeacher').map(
-                      (OwnPermissions, i) => (
-                        <span className="OwnPermissions" key={i}>
-                          {OwnPermissions.title}
-                        </span>
-                      )
-                    )}
-                  </td>
-                  <td>
-                    <button className="bg-primary btn-Setting">See</button>{' '}
-                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                      <button className="bg-success btn-Setting">Edit</button>
-                    </Link>
-                    <button className="bg-danger btn-Setting">Delete</button>{' '}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Teacher</td>
-
-                  <td className="Permissions">
-                    {' '}
-                    {Permissions.filter((el) => el.role === 'Teacher').map(
-                      (OwnPermissions, i) => (
-                        <span className="OwnPermissions" key={i}>
-                          {OwnPermissions.title}
-                        </span>
-                      )
-                    )}
-                  </td>
-                  <td>
-                    <button className="bg-primary btn-Setting">See</button>{' '}
-                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                      <button className="bg-success btn-Setting">Edit</button>
-                    </Link>
-                    <button className="bg-danger btn-Setting">Delete</button>{' '}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Student/parent</td>
-
-                  <td className="Permissions">
-                    {' '}
-                    {Permissions.filter((el) => el.role === 'Student').map(
-                      (OwnPermissions, i) => (
-                        <span className="OwnPermissions" key={i}>
-                          {OwnPermissions.title}
-                        </span>
-                      )
-                    )}
-                  </td>
-                  <td>
-                    <button className="bg-primary btn-Setting">See</button>{' '}
-                    <Link href="/Dashboard-System-Administrator/User-Management/Role/Edit-Role">
-                      <button className="bg-success btn-Setting">Edit</button>
-                    </Link>
-                    <button className="bg-danger btn-Setting">Delete</button>{' '}
-                  </td>
-                </tr>
+                    <td className="Permissions">
+                      {Permission &&
+                        Roles.Permissions.map((OwnPermissions, i) => (
+                          <span className="OwnPermissions" key={i}>
+                            {OwnPermissions.value}
+                          </span>
+                        ))}
+                    </td>
+                    <td>
+                      <Link
+                        href={`/Dashboard-System-Administrator/User-Management/Role/${Roles.id}`}
+                      >
+                        <button className="bg-primary btn-Setting">See</button>
+                      </Link>{' '}
+                      <Link
+                        href={`/Dashboard-System-Administrator/User-Management/Role/RoleEdite/${Roles.id}`}
+                      >
+                        <button className="bg-success btn-Setting">Edit</button>
+                      </Link>
+                      <button
+                        className="bg-danger btn-Setting"
+                        onClick={() => handelDelete(Roles.id)}
+                      >
+                        Delete
+                      </button>{' '}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </section>

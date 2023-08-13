@@ -45,7 +45,7 @@ const ClassMoralScore = () => {
   const classes = useSelector((state) => state.ClassesReducer.Classes);
 
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Class Moral Education']}>
       <Row>
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
           <SideBarSA />

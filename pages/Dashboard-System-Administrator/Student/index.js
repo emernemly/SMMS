@@ -14,9 +14,11 @@ import {
 } from '../../../Redux/Action/StudentAction';
 import Hoc from '../../../Components/HOC/Hoc';
 import { getUser } from '../../../Redux/Action/UserActions';
+import { getRoleByName } from '../../../Redux/Action/RolesAction';
 const Student = () => {
   const dispatch = useDispatch();
   const [search, setsearch] = useState('');
+  const [id, setid] = useState(null);
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -36,10 +38,13 @@ const Student = () => {
   const componentRef = useRef();
   useEffect(() => {
     dispatch(getStudents());
-    dispatch(getUser());
+    setid(localStorage.getItem('Role'));
   }, []);
+  useEffect(() => {
+    id && dispatch(getRoleByName(id));
+  }, [id]);
   const student = useSelector((state) => state.StudentReducer.Students);
-  const user = useSelector((state) => state.UserRedcuer.user);
+  const Permissions = useSelector((state) => state.RolesReducer.checkRole);
 
   const deleteStudents = (id) => {
     var result = confirm('Want to delete Teacher?');
@@ -48,7 +53,7 @@ const Student = () => {
     }
   };
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['see All student']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -88,9 +93,11 @@ const Student = () => {
                   <th>Gender</th>
                   <th>Graduation school</th>
                   <th>Graduation total Score</th>
-                  {['admin'].some((role) => role === user.Role) && (
-                    <th>Setting</th>
-                  )}
+                  {Permissions &&
+                    Permissions[0].Permissions.map((el) => el.value).some(
+                      (role) =>
+                        role.toUpperCase() === 'setting student'.toUpperCase()
+                    ) && <th>Setting</th>}
                 </tr>{' '}
               </thead>
               <tbody>
@@ -108,24 +115,29 @@ const Student = () => {
                         <td>{student.Gender}</td>
                         <td>{student.GraduationSchool}</td>
                         <td>{student.GraduationScore}</td>
-                        {['admin'].some((role) => role === user.Role) && (
-                          <td>
-                            <Link
-                              href={`/Dashboard-System-Administrator/Student/StudentProfile/${student.id}`}
-                            >
-                              <button className="bg-primary btn-Setting">
-                                See
-                              </button>
-                            </Link>
-                            <StudentModul student={student} />
-                            <button
-                              className="bg-danger btn-Setting"
-                              onClick={() => deleteStudents(student.id)}
-                            >
-                              Delete
-                            </button>{' '}
-                          </td>
-                        )}
+                        {Permissions &&
+                          Permissions[0].Permissions.map((el) => el.value).some(
+                            (role) =>
+                              role.toUpperCase() ===
+                              'setting student'.toUpperCase()
+                          ) && (
+                            <td>
+                              <Link
+                                href={`/Dashboard-System-Administrator/Student/StudentProfile/${student.id}`}
+                              >
+                                <button className="bg-primary btn-Setting">
+                                  See
+                                </button>
+                              </Link>
+                              <StudentModul student={student} />
+                              <button
+                                className="bg-danger btn-Setting"
+                                onClick={() => deleteStudents(student.id)}
+                              >
+                                Delete
+                              </button>{' '}
+                            </td>
+                          )}
                       </tr>
                     );
                   })}

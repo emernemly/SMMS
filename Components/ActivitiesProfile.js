@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import jsPDF from 'jspdf';
@@ -7,7 +7,12 @@ import ReactToPrint from 'react-to-print';
 import SideBarSA from './SideBarSA';
 import NavbarR from './RegistrationComponente/NavbarR';
 import Hoc from './HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOwnActivities } from '../Redux/Action/ActivitiesAction';
+import { useRouter } from 'next/router';
 const ActivitiesProfile = () => {
+  const router = useRouter();
+  const id = router.query.ActivitiesProfile;
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -25,8 +30,16 @@ const ActivitiesProfile = () => {
     });
   };
   const componentRef = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    id && dispatch(getOwnActivities(id));
+  }, [id]);
+  const Activitie = useSelector(
+    (state) => state.ActivitiesReducer.OwnActivitien
+  );
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Student Activities']}>
       <Row id="pdf-element">
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
@@ -37,53 +50,51 @@ const ActivitiesProfile = () => {
           <section className="Profile formInput" ref={componentRef}>
             <Row>
               <h2>Activitie Information</h2>
-
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent ">
                   <b>student number :</b>
-                  <p>1</p>
+                  <p>{Activitie.studentNumber}</p>
                 </div>
               </Col>
-
               <Col md={4}>
                 <div className="profilContent">
                   <b>student:</b>
-                  <p>Student1</p>
+                  <p>{Activitie.student}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
-                  <b>Last Name:</b>
-                  <p>emer</p>
+                  <b>class:</b>
+                  <p>{Activitie.class}</p>
                 </div>
               </Col>
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent">
-                  <b>class:</b>
-                  <p>8eme annee </p>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="profilContent">
                   <b> class name :</b>
-                  <p>8eme annee b </p>
+                  <p>{Activitie.className}</p>
                 </div>
               </Col>
               <Col md={4}>
                 <div className="profilContent">
                   <b> activitie:</b>
-                  <p>sport</p>
+                  <p>{Activitie.activitie}</p>
                 </div>
               </Col>
+              <Col md={4}>
+                <div className="profilContent">
+                  <b> start date:</b>
+                  <p>{Activitie.startDate}</p>
+                </div>
+              </Col>{' '}
               <hr></hr>
               <Col md={4}>
                 <div className="profilContent">
-                  <b> date:</b>
-                  <p>23/12/2023 to 30/12/2023 </p>
+                  <b> end date:</b>
+                  <p>{Activitie.endDate}</p>
                 </div>
-              </Col>
+              </Col>{' '}
             </Row>
             <div className="All-btn btn-profil">
               <button className="" onClick={downloadPDF}>

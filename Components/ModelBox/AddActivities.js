@@ -1,22 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+import { addActivities } from '../../Redux/Action/ActivitiesAction';
+import { getStudents } from '../../Redux/Action/StudentAction';
+import { getClasses } from '../../Redux/Action/ClassAction';
 const AddActivities = () => {
+  const animatedComponents = makeAnimated();
+
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
+  const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [Rolevalue, setRolevalue] = useState('');
+  const [Classvalue, setClassvalue] = useState('');
+  const [ClassNamevalue, setClassNamevalue] = useState('');
+
+  useEffect(() => {
+    dispatch(getStudents());
+    dispatch(getClasses());
+  }, []);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmits = (data) => {
-    console.log(data);
+
+  const changeHandler = (Rolevalue) => {
+    setRolevalue(Rolevalue);
   };
+  const changeClassHandler = (Classvalue) => {
+    setClassvalue(Classvalue);
+  };
+  const changeClassNameHandler = (ClassNamevalue) => {
+    setClassNamevalue(ClassNamevalue);
+  };
+  const onSubmits = (data) => {
+    dispatch(
+      addActivities({
+        ...data,
+        student: Rolevalue.value,
+        class: Classvalue.value,
+        className: ClassNamevalue.value,
+      })
+    );
+  };
+  const students = useSelector((state) => state.StudentReducer.Students);
+  const Classes = useSelector((state) => state.ClassesReducer.Classes);
   return (
     <>
       <Button onClick={() => setLgShow(true)} className="dashboard-btn">
@@ -62,10 +98,13 @@ const AddActivities = () => {
                       <b>
                         student<sup>*</sup>
                       </b>
-                      <input
-                        type="text"
-                        name="student"
-                        {...register('student', { required: true })}
+                      <Select
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        options={students.map((el) => {
+                          return { value: el.FirstName, label: el.FirstName };
+                        })}
+                        onChange={changeHandler}
                       />
                       <p className="err">
                         {errors.Class && '! this field is required'}
@@ -81,10 +120,13 @@ const AddActivities = () => {
                         class<sup>*</sup>
                       </b>
 
-                      <input
-                        type="text"
-                        name="class"
-                        {...register('class', { required: true })}
+                      <Select
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        options={Classes.map((el) => {
+                          return { value: el.Level, label: el.Level };
+                        })}
+                        onChange={changeClassHandler}
                       />
                       <p className="err">
                         {errors.class && '! this field is required'}
@@ -97,10 +139,14 @@ const AddActivities = () => {
                       <b>
                         class name <sup>*</sup>
                       </b>
-                      <input
-                        type="text"
-                        name=" className "
-                        {...register('className', { required: true })}
+
+                      <Select
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        options={Classes.map((el) => {
+                          return { value: el.Class, label: el.Class };
+                        })}
+                        onChange={changeClassNameHandler}
                       />
                       <p className="err">
                         {errors.className && '! this field is required'}
@@ -117,7 +163,7 @@ const AddActivities = () => {
                       </b>
 
                       <input
-                        type="number"
+                        type="text"
                         name="activitie"
                         {...register('activitie', { required: true })}
                       />
@@ -130,15 +176,31 @@ const AddActivities = () => {
                     {' '}
                     <div className="inputType">
                       <b>
-                        date<sup>*</sup>
+                        start date<sup>*</sup>
                       </b>
                       <input
-                        type="text"
-                        name="date"
-                        {...register('date', { required: true })}
+                        type="date"
+                        name="startDate"
+                        {...register('startDate', { required: true })}
                       />
                       <p className="err">
-                        {errors.date && '! this field is required'}
+                        {errors.startDate && '! this field is required'}
+                      </p>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    {' '}
+                    <div className="inputType">
+                      <b>
+                        end date<sup>*</sup>
+                      </b>
+                      <input
+                        type="date"
+                        name="endDate"
+                        {...register('endDate', { required: true })}
+                      />
+                      <p className="err">
+                        {errors.endDate && '! this field is required'}
                       </p>
                     </div>
                   </Col>

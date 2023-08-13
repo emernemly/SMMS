@@ -41,7 +41,7 @@ const StudentHeadTeacher = () => {
   const student = useSelector((state) => state.StudentReducer.Students);
 
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Class Moral Education']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
@@ -96,9 +96,9 @@ const StudentHeadTeacher = () => {
                         <td>{student.GraduationSchool}</td>
                         <td>{student.score}</td>
                         <td>
-                          <DeductionScore />
+                          <DeductionScore student={student} />
 
-                          <Cancelling />
+                          <Cancelling student={student} />
                         </td>
                       </tr>
                     );

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import Link from 'next/link';
@@ -10,53 +10,14 @@ import NavbarR from '../../Components/RegistrationComponente/NavbarR';
 import AddHeterogeneity from '../../Components/ModelBox/AddHeterogeneity';
 import EditHeterogeneity from '../../Components/ModelBox/EditHeterogeneity';
 import Hoc from '../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteHeterogeneity,
+  getHeterogeneity,
+} from '../../Redux/Action/HeterogeneityAction';
+import { getUser } from '../../Redux/Action/UserActions';
 const StudentHeterogeneity = () => {
-  const student = [
-    {
-      StudentNumber: '1',
-      class: '8eme annee',
-      className: '8eme annee b',
-
-      studentName: 'student1',
-      Heterogeneity: 'Bonne sante',
-      SituationDetails: '',
-      Recorder: 'ali diop',
-      TimeRegistration: '23/12/2022 12:00',
-    },
-    {
-      StudentNumber: '1',
-      class: '8eme annee',
-      className: '8eme annee b',
-
-      studentName: 'student1',
-      Heterogeneity: 'Bonne sante',
-      SituationDetails: 'healthy and dynamic',
-      Recorder: 'ali diop',
-      TimeRegistration: '23/12/2022 12:00',
-    },
-    {
-      StudentNumber: '1',
-      class: '8eme annee',
-      className: '8eme annee b',
-
-      studentName: 'student1',
-      Heterogeneity: 'Bonne sante',
-      SituationDetails: '',
-      Recorder: 'ali diop',
-      TimeRegistration: '23/12/2022 12:00',
-    },
-    {
-      StudentNumber: '1',
-      class: '8eme annee',
-      className: '8eme annee b',
-
-      studentName: 'student1',
-      Heterogeneity: 'Bonne sante',
-      SituationDetails: '',
-      Recorder: 'ali diop',
-      TimeRegistration: '23/12/2022 12:00',
-    },
-  ];
+  const dispatch = useDispatch();
   const [search, setsearch] = useState('');
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
@@ -75,8 +36,22 @@ const StudentHeterogeneity = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getHeterogeneity());
+  }, []);
+  const user = useSelector((state) => state.UserRedcuer.user);
+  const Heterogeneity = useSelector(
+    (state) => state.HeterogeneityReducer.Heterogeneity
+  );
+  const handelDelete = (id) => {
+    const result = confirm('want to delete');
+    if (result) {
+      dispatch(deleteHeterogeneity(id));
+    }
+  };
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['Student Heterogeneity']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -94,7 +69,7 @@ const StudentHeterogeneity = () => {
               />
               <div className="All-btn">
                 <button onClick={downloadPDF}>Download PDF</button>
-                <AddHeterogeneity />
+                <AddHeterogeneity user={user} />
                 <ReactToPrint
                   trigger={() => (
                     <button className="dashboard-btn">Print </button>
@@ -121,36 +96,39 @@ const StudentHeterogeneity = () => {
                 </tr>{' '}
               </thead>
               <tbody>
-                {student
-                  .filter((el) =>
-                    el.studentName.toUpperCase().includes(search.toUpperCase())
-                  )
-                  .map((student, i) => {
-                    return (
-                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                        <td>{student.StudentNumber}</td>
+                {Heterogeneity.filter((el) =>
+                  el.student.toUpperCase().includes(search.toUpperCase())
+                ).map((Heterogeneity, i) => {
+                  return (
+                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                      <td>{Heterogeneity.studentNumber}</td>
 
-                        <td>{student.class}</td>
-                        <td>{student.className}</td>
-                        <td>{student.studentName}</td>
-                        <td>{student.Heterogeneity}</td>
-                        <td>{student.SituationDetails}</td>
-                        <td>{student.Recorder}</td>
-                        <td>{student.TimeRegistration}</td>
-                        <td>
-                          <Link href="//StudentHealth/StudentHeterogeneityProfile">
-                            <button className="bg-primary btn-Setting">
-                              See
-                            </button>
-                          </Link>
-                          <EditHeterogeneity />
-                          <button className="bg-danger btn-Setting">
-                            Delete
-                          </button>{' '}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                      <td>{Heterogeneity.class}</td>
+                      <td>{Heterogeneity.className}</td>
+                      <td>{Heterogeneity.student}</td>
+                      <td>{Heterogeneity.Heterogeneity}</td>
+                      <td>{Heterogeneity.SituationDetails}</td>
+                      <td>{Heterogeneity.Recorder}</td>
+                      <td>{Heterogeneity.TimeRegistration}</td>
+                      <td>
+                        <Link
+                          href={`/StudentHealth/StudentHeterogeneityProfile/${Heterogeneity.id}`}
+                        >
+                          <button className="bg-primary btn-Setting">
+                            See
+                          </button>
+                        </Link>
+                        <EditHeterogeneity Heterogeneity={Heterogeneity} />
+                        <button
+                          className="bg-danger btn-Setting"
+                          onClick={() => handelDelete(Heterogeneity.id)}
+                        >
+                          Delete
+                        </button>{' '}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </section>

@@ -1,10 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
+import { GetOwnScore } from '../../Redux/Action/ScoreAdding';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 const StudentMoralProfile = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const id = router.query.StudentMoralProfileId;
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -22,79 +28,57 @@ const StudentMoralProfile = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    id && dispatch(GetOwnScore(id));
+  }, [id]);
+  const Ownclass = useSelector((state) => state.ScoreAddingReducer.OwnScore);
+
   return (
     <Row id="pdf-element">
       {' '}
       <Col lg={12} className="dashboardContent">
         <section className="Profile formInput" ref={componentRef}>
-          <Row>
+          <Row id="pdf-element">
             <h2>Personal Information</h2>
 
             <hr></hr>
             <Col md={4}>
               <div className="profilContent ">
-                <b>Student Number:</b>
-                <p>2</p>
+                <b>student number:</b>
+                {Ownclass.UserId && <p>{Ownclass.UserId.studentNumber}</p>}
               </div>
             </Col>
 
             <Col md={4}>
               <div className="profilContent">
-                <b>Student:</b>
-                <p>emer</p>
+                <b>student:</b>
+                {Ownclass.UserId && <p>{Ownclass.UserId.FirstName}</p>}
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
-                <b>semester:</b>
-                <p>semester1</p>
-              </div>
-            </Col>
-            <hr></hr>
-            <Col md={4}>
-              <div className="profilContent">
-                <b>Level:</b>
-                <p>8eme annee </p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="profilContent">
-                <b> Class:</b>
-                <p>8eme annee B </p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="profilContent">
-                <b> EventTime:</b>
-                <p>2020-09-08 17:42:17 </p>
+                <b>Class:</b>
+                {Ownclass.UserId && <p>{Ownclass.UserId.class}</p>}
               </div>
             </Col>
             <hr></hr>
             <Col md={4}>
               <div className="profilContent">
-                <b> Status:</b>
-                <p>deduction</p>
+                <b>Note:</b>
+                <p>{Ownclass.note}</p>
               </div>
             </Col>
             <Col md={4}>
               <div className="profilContent">
-                <b> Points:</b>
-                <p>3</p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="profilContent">
-                <b> Class:</b>
-                <p>7eme annee B</p>
+                <b>points:</b>
+                <p>{Ownclass.score}</p>
               </div>
             </Col>
 
             <hr></hr>
           </Row>
           <div className="All-btn btn-profil">
-            <button className="" onClick={downloadPDF}>
-              Download PDF
-            </button>
+            <button onClick={downloadPDF}>Download PDF</button>
             <ReactToPrint
               trigger={() => <button className="dashboard-btn">Print </button>}
               content={() => componentRef.current}

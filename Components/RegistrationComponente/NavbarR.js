@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Badge, Offcanvas } from 'react-bootstrap';
+import { Offcanvas } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
-import { IoMdNotifications } from 'react-icons/io';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { RiContactsFill } from 'react-icons/ri';
 import { FiLogIn } from 'react-icons/fi';
-import { AiFillSetting } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { BsList } from 'react-icons/bs';
 import {
@@ -25,6 +23,8 @@ import { CgToolbox } from 'react-icons/cg';
 import { TbDatabaseExport } from 'react-icons/tb';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import Link from 'next/link';
+import { getUser, logout } from '../../Redux/Action/UserActions';
+import { useDispatch, useSelector } from 'react-redux';
 const NavbarR = () => {
   const [show, setShow] = useState(false);
   const [drop, setdrop] = useState(false);
@@ -33,7 +33,7 @@ const NavbarR = () => {
   const [open, setopen] = useState(false);
   const [path, setpath] = useState(null);
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const searchRef = useRef();
   useEffect(() => {
     const closeSearch = (e) => {
@@ -50,7 +50,12 @@ const NavbarR = () => {
     setpath(router.pathname);
     console.log(router.pathname);
   }, [router.pathname]);
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  const user = useSelector((state) => state.UserRedcuer.user);
 
+  const handelLogout = () => dispatch(logout(router));
   return (
     <div className="Navbarcomponent navbarDashboard">
       <div className="responsive">
@@ -73,7 +78,7 @@ const NavbarR = () => {
               setdrop(!drop);
             }}
           >
-            <FaUserCircle /> <p> User Name</p>
+            <FaUserCircle /> <p> {user && user.userName}</p>
             <MdKeyboardArrowDown />
           </div>
           <div
@@ -84,15 +89,15 @@ const NavbarR = () => {
               {' '}
               <RiContactsFill /> <p>Profile</p>
             </Link>
-            <Link href="/Dashboard-System-Administrator/Setting-Admin">
+            {/*      <Link href="/Dashboard-System-Administrator/Setting-Admin">
               {' '}
               <AiFillSetting /> <p>Setting</p>
-            </Link>
-            <Link href="/">
+            </Link> */}
+            <a onClick={handelLogout}>
               {' '}
               <FiLogIn />
-              <p>Log Out</p>
-            </Link>
+              Log Out
+            </a>
           </div>
         </div>
         <>

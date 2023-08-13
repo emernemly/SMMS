@@ -7,7 +7,7 @@ import SideBarSA from '../../../Components/SideBarSA';
 import Hoc from '../../../Components/HOC/Hoc';
 const Registration = () => {
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Registration']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">

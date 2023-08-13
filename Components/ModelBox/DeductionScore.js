@@ -19,6 +19,7 @@ const DeductionScore = ({ student }) => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
+    console.log(student);
     dispatch(deductionScores(student.id, { ...data, status: 'deduction' }));
     handleClose();
   };

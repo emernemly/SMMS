@@ -4,7 +4,6 @@ import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../Components/RegistrationComponente/NavbarR';
 import BarChart from '../../Components/BarChart';
 import LineChart from '../../Components/LineChart';
-import Donat from '../../Components/Donat';
 import Image from 'next/image';
 import Link from 'next/link';
 import Hoc from '../../Components/HOC/Hoc';
@@ -21,7 +20,49 @@ const DashboardSA = () => {
     { user: 'emer', time: '2020-09-08 17:42:17	', operation: 'modifications' },
   ];
   const [search, setsearch] = useState('');
-  const [inRole, setinRole] = useState(['admin', 'headTeacher', 'teacher']);
+  const [inRole, setinRole] = useState([
+    'User Registration',
+
+    'User Management',
+
+    'import basic student data',
+
+    'setting Head-teacher',
+
+    'see All Head-teacher',
+
+    'setting teacher',
+
+    'see All teacher',
+
+    'setting student',
+
+    'see All student',
+
+    'class schedules',
+
+    'Students Moral Education',
+
+    'Class Moral Education',
+
+    'Reviews Moral Education',
+
+    'see Molar Education history',
+
+    'see score recorded data statistics',
+
+    'Leave Request',
+
+    'Student Activities',
+
+    'Student Heterogeneity',
+
+    'Class Morning check',
+
+    'Backup mangement',
+
+    'systeme logs',
+  ]);
   return (
     <Hoc inRole={inRole}>
       <Row>
@@ -34,22 +75,7 @@ const DashboardSA = () => {
           <div className="Dashboard">
             <Row>
               {' '}
-              <Col md={3}>
-                {' '}
-                <Link href="/Dashboard-System-Administrator">
-                  <div className="cordonnee clrown">
-                    {' '}
-                    <Image
-                      src="/Role/admin.png"
-                      alt="admin"
-                      width={50}
-                      height={50}
-                    />{' '}
-                    <b>Administrator</b>
-                  </div>
-                </Link>
-              </Col>
-              <Col md={3}>
+              <Col md={4}>
                 {' '}
                 <Link href="/Dashboard-System-Administrator/Head-Teacher">
                   <div className="cordonnee clrtow">
@@ -64,7 +90,7 @@ const DashboardSA = () => {
                   </div>
                 </Link>
               </Col>
-              <Col md={3}>
+              <Col md={4}>
                 {' '}
                 <Link href="/Dashboard-System-Administrator/Teacher">
                   <div className="cordonnee clrthree">
@@ -78,7 +104,7 @@ const DashboardSA = () => {
                   </div>
                 </Link>
               </Col>
-              <Col md={3}>
+              <Col md={4}>
                 <Link href="/Dashboard-System-Administrator/Student">
                   <div className="cordonnee clrfour">
                     {' '}

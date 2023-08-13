@@ -35,7 +35,7 @@ const StudentProfile = () => {
   }, [id]);
   const student = useSelector((state) => state.StudentReducer.OwnStudent);
   return (
-    <Hoc inRole={['admin', 'headTeacher', 'teacher']}>
+    <Hoc inRole={['setting student']}>
       <Row id="pdf-element">
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
@@ -120,7 +120,7 @@ const StudentProfile = () => {
                   <p>{student.Zip}</p>
                 </div>
               </Col>
-              <h2>Personal Information</h2>
+              <h2>parent Information</h2>
 
               <hr></hr>
               <Col md={4}>
@@ -136,18 +136,6 @@ const StudentProfile = () => {
                   <p>{student.FatherPhone}</p>
                 </div>
               </Col>
-              <Col md={4}>
-                <div className="profilContent">
-                  <b> Mother Name:</b>
-                  <p>{student.MotherName}</p>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="profilContent">
-                  <b> Mother Phone:</b>
-                  <p>{student.MotherPhone}</p>
-                </div>
-              </Col>
               <hr></hr>
               <h2>Class Information</h2>
               <Col md={4}>
@@ -156,6 +144,7 @@ const StudentProfile = () => {
                   <p>{student.class}</p>
                 </div>
               </Col>
+
               <Col md={4}>
                 <div className="profilContent">
                   <b> Class Name:</b>

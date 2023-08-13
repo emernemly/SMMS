@@ -3,11 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { Col, Row } from 'react-bootstrap';
-const EditHeterogeneity = () => {
+import { useDispatch } from 'react-redux';
+import { updateHeterogeneity } from '../../Redux/Action/HeterogeneityAction';
+const EditHeterogeneity = ({ Heterogeneity }) => {
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const distapch = useDispatch();
+  const handleClose = () => setLgShow(false);
   const handleShow = () => setShow(true);
   const {
     register,
@@ -15,7 +17,8 @@ const EditHeterogeneity = () => {
     formState: { errors },
   } = useForm();
   const onSubmits = (data) => {
-    console.log(data);
+    distapch(updateHeterogeneity(Heterogeneity.id, data));
+    handleClose();
   };
   return (
     <>
@@ -51,10 +54,8 @@ const EditHeterogeneity = () => {
                         type="text"
                         name="studentNumber"
                         {...register('studentNumber')}
+                        defaultValue={Heterogeneity.studentNumber}
                       />
-                      <p className="err">
-                        {errors.studentNumber && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
@@ -65,10 +66,8 @@ const EditHeterogeneity = () => {
                         type="text"
                         name="student"
                         {...register('student')}
+                        defaultValue={Heterogeneity.student}
                       />
-                      <p className="err">
-                        {errors.Class && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -78,10 +77,12 @@ const EditHeterogeneity = () => {
                     <div className="inputType">
                       <b>class</b>
 
-                      <input type="text" name="class" {...register('class')} />
-                      <p className="err">
-                        {errors.class && '! this field is required'}
-                      </p>
+                      <input
+                        type="text"
+                        name="class"
+                        {...register('class')}
+                        defaultValue={Heterogeneity.class}
+                      />
                     </div>
                   </Col>
                   <Col md={6}>
@@ -92,10 +93,8 @@ const EditHeterogeneity = () => {
                         type="text"
                         name=" className "
                         {...register('className')}
+                        defaultValue={Heterogeneity.className}
                       />
-                      <p className="err">
-                        {errors.className && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -109,10 +108,8 @@ const EditHeterogeneity = () => {
                         type="text"
                         name="Heterogeneity"
                         {...register('Heterogeneity')}
+                        defaultValue={Heterogeneity.Heterogeneity}
                       />
-                      <p className="err">
-                        {errors.Heterogeneity && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
                   <Col md={6}>
@@ -124,14 +121,12 @@ const EditHeterogeneity = () => {
                         type="text"
                         name="SituationDetails"
                         {...register('SituationDetails')}
+                        defaultValue={Heterogeneity.SituationDetails}
                       />
-                      <p className="err">
-                        {errors.SituationDetails && '! this field is required'}
-                      </p>
                     </div>
                   </Col>
 
-                  {/*                    <Col md={6}>
+                  <Col md={6}>
                     {' '}
                     <div className="inputType">
                       <b>
@@ -139,14 +134,12 @@ const EditHeterogeneity = () => {
                       </b>
                       <input
                         type="text"
-                        name="date"
-                        {...register('date', { required: true })}
+                        name="TimeRegistration"
+                        {...register('TimeRegistration', { required: true })}
+                        defaultValue={Heterogeneity.TimeRegistration}
                       />
-                      <p className="err">
-                        {errors.date && '! this field is required'}
-                      </p>
                     </div>
-                  </Col>  */}
+                  </Col>
                 </Row>
                 <button type="sumbit"> Save</button>{' '}
               </Row>

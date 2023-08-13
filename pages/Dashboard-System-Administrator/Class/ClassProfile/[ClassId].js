@@ -37,7 +37,7 @@ const ClassProfile = () => {
   const Ownclass = useSelector((state) => state.ClassesReducer.OwnClass);
   console.log(id);
   return (
-    <Hoc inRole={['admin', 'headTeacher']}>
+    <Hoc inRole={['class schedules']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">

@@ -5,19 +5,22 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../Redux/Action/UserActions';
 const Navbarcomponent = () => {
+  const dispatch = useDispatch();
   const [path, setpath] = useState(null);
   const router = useRouter();
-  console.log(router.pathname);
+
   useEffect(() => {
     setpath(router.pathname);
-    console.log(path);
   }, [router.pathname]);
+
   return (
     <Navbar bg="light" expand="lg" className="Navbarcomponent">
       <Container>
         {' '}
-        <Link href="http://localhost:3000">
+        <Link href="http://localhost:8080">
           <h3>SMMS</h3>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

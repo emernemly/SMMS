@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -7,17 +7,12 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Hoc from '../../../Components/HOC/Hoc';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRoles } from '../../../Redux/Action/RolesAction';
 const HeadTeacher = () => {
   const animatedComponents = makeAnimated();
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
+  const dispatch = useDispatch();
 
-    { title: 'import users', role: 'headTeacher' },
-
-    { title: 'import users', role: 'teacher' },
-
-    { title: 'import users', role: 'student' },
-  ];
   const [Rolevalue, setRolevalue] = useState('');
 
   const changeHandler = (Rolevalue) => {
@@ -47,8 +42,13 @@ const HeadTeacher = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    dispatch(getRoles());
+  }, []);
+  const Role = useSelector((state) => state.RolesReducer.Role);
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Registration']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="sidebarcontainer pd-l parentcontainer">
@@ -309,8 +309,8 @@ const HeadTeacher = () => {
                     <Select
                       closeMenuOnSelect={false}
                       components={animatedComponents}
-                      options={Permissions.map((el) => {
-                        return { value: el.role, label: el.role };
+                      options={Role.map((el) => {
+                        return { value: el.Role, label: el.Role };
                       })}
                       onChange={changeHandler}
                     />

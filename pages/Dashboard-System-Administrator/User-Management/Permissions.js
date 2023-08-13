@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SideBarSA from '../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
@@ -7,21 +7,12 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ReactToPrint from 'react-to-print';
 import Hoc from '../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../../Redux/Action/UserActions';
+import { getRoleByName } from '../../../Redux/Action/RolesAction';
 const Permissions = () => {
   const [search, setsearch] = useState('');
-  const Permissions = [
-    { title: 'import users' },
-    { title: 'set permissions' },
-    { title: 'import basic student data' },
-    { title: 'import teacher' },
-    { title: 'class schedules' },
-    { title: 'manage the overall moral education system' },
-    { title: 'defining roles ' },
-    { title: 'managing the system information' },
-    { title: 'database management' },
-    { title: 'log management' },
-    { title: 'maintaining the security' },
-  ];
+  const dispatch = useDispatch();
   const downloadPDF = () => {
     const input = document.getElementById('pdf-element');
     html2canvas(document.body, { scale: 2 }).then((canvas) => {
@@ -39,8 +30,18 @@ const Permissions = () => {
     });
   };
   const componentRef = useRef();
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+  const user = useSelector((state) => state.UserRedcuer.user);
+
+  useEffect(() => {
+    user && dispatch(getRoleByName(user.Role));
+  }, [user]);
+  const Permissions = useSelector((state) => state.RolesReducer.checkRole);
+
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Management']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -71,26 +72,19 @@ const Permissions = () => {
                 {' '}
                 <tr>
                   <th>Title</th>
-
-                  <th>Setting</th>
                 </tr>{' '}
               </thead>
               <tbody>
-                {Permissions.filter((el) =>
-                  el.title.toLowerCase().includes(search.toLowerCase())
-                ).map((titles, i) => {
-                  return (
-                    <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                      <td>{titles.title}</td>
-                      <td>
-                        <PermissionModel titles={titles} />{' '}
-                        <button className="bg-danger btn-Setting">
-                          Delete
-                        </button>{' '}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {Permissions &&
+                  Permissions[0].Permissions.filter((el) =>
+                    el.value.toLowerCase().includes(search.toLowerCase())
+                  ).map((titles, i) => {
+                    return (
+                      <tr className={i % 2 === 0 && `bg-ver`} key={i}>
+                        <td>{titles.value}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </section>

@@ -10,7 +10,7 @@ import StudentMoralEducation from '../../../Components/MoralEducationManagementO
 import Hoc from '../../../Components/HOC/Hoc';
 const MoralEducationScores = () => {
   return (
-    <Hoc inRole={['admin', 'headTeacher']}>
+    <Hoc inRole={['see Molar Education history']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">

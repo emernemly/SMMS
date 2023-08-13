@@ -1,49 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBarSA from '../../../../../Components/SideBarSA';
 import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../../../Components/RegistrationComponente/NavbarR';
-
+import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Hoc from '../../../../../Components/HOC/Hoc';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addRoles,
+  getPermissions,
+} from '../../../../../Redux/Action/RolesAction';
 const AddRole = () => {
   const animatedComponents = makeAnimated();
+  const [Permissions, setPermissions] = useState('');
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  useEffect(() => {
+    dispatch(getPermissions());
+  }, []);
 
-  const Permissions = [
-    { title: 'import users', role: 'admin' },
-    { title: 'set permissions', role: 'admin' },
-    { title: 'import basic student data', role: 'admin' },
-    { title: 'import teacher', role: 'admin' },
-    { title: 'class schedules', role: 'admin' },
-    { title: 'manage the overall moral education system', role: 'admin' },
-    { title: 'defining roles ', role: 'admin' },
-    { title: 'managing the system information', role: 'admin' },
-    { title: 'database management', role: 'admin' },
-    { title: 'log management', role: 'admin' },
-    { title: 'maintaining the security', role: 'admin' },
-
-    { title: 'import users', role: 'HeadTeacher' },
-    { title: 'set permissions', role: 'HeadTeacher' },
-    { title: 'import basic student data', role: 'HeadTeacher' },
-    { title: 'import teacher', role: 'HeadTeacher' },
-    { title: 'class schedules', role: 'HeadTeacher' },
-    {
-      title: 'manage the overall moral education system',
-      role: 'HeadTeacher',
-    },
-
-    { title: 'import users', role: 'Teacher' },
-    { title: 'set permissions', role: 'Teacher' },
-    { title: 'import basic student data', role: 'Teacher' },
-    { title: 'import teacher', role: 'Teacher' },
-
-    { title: 'import users', role: 'Student' },
-    { title: 'set permissions', role: 'Student' },
-    { title: 'import basic student data', role: 'Student' },
-  ];
-
+  const Permissionss = useSelector((state) => state.RolesReducer.Permission);
+  const changeHandler = (Permissions) => {
+    setPermissions(Permissions);
+  };
+  console.log(Permissionss);
+  const onSubmits = async (data) => {
+    dispatch(addRoles({ ...data, Permissions: Permissions }));
+  };
   return (
-    <Hoc inRole={['admin']}>
+    <Hoc inRole={['User Management']}>
       <Row>
         {' '}
         <Col lg={2} md={2} className="pd-l parentcontainer">
@@ -51,29 +41,34 @@ const AddRole = () => {
         </Col>
         <Col lg={10} className="dashboardContent">
           <NavbarR />
-          <section className="tableDashboard role-card">
-            <div className="title">
-              {' '}
-              <h3>Add New Role</h3>
-            </div>
-            <div className="role-card-body">
-              <div className="role-input">
-                <label>
-                  <b>
-                    {' '}
-                    Title<sup>*</sup>
-                  </b>
-                </label>
-                <input type="text" name="Title" />
+          <form onSubmit={handleSubmit(onSubmits)}>
+            <section className="tableDashboard role-card">
+              <div className="title">
+                {' '}
+                <h3>Add New Role</h3>
               </div>
-              <div className="role-input">
-                <label>
-                  <b>
-                    {' '}
-                    Permissions<sup>*</sup>
-                  </b>
-                </label>
-                {/*  <select name="Title" />
+              <div className="role-card-body">
+                <div className="role-input">
+                  <label>
+                    <b>
+                      {' '}
+                      Title<sup>*</sup>
+                    </b>
+                  </label>
+                  <input
+                    type="text"
+                    name="Title"
+                    {...register('Role', { required: true })}
+                  />
+                </div>
+                <div className="role-input">
+                  <label>
+                    <b>
+                      {' '}
+                      Permissions<sup>*</sup>
+                    </b>
+                  </label>
+                  {/*  <select name="Title" />
               <span className="selection">
                 <span
                   className="select2-selection"
@@ -94,18 +89,20 @@ const AddRole = () => {
                   </ul>
                 </span>
               </span> */}{' '}
+                </div>
+                <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  isMulti
+                  options={Permissionss.map((el) => {
+                    return { value: el.title, label: el.title };
+                  })}
+                  onChange={changeHandler}
+                />
+                <button type="sumbit">Save</button>
               </div>
-              <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                isMulti
-                options={Permissions.map((el) => {
-                  return { value: el.title, label: el.title };
-                })}
-              />
-              <button type="sumbit">Save</button>
-            </div>
-          </section>
+            </section>
+          </form>
         </Col>
       </Row>
     </Hoc>

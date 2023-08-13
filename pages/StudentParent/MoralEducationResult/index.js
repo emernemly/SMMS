@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import NavbarR from '../../../Components/RegistrationComponente/NavbarR';
 import SideBarStudent from '../../../Components/SideBarStudent';
 import StudentResult from '../../../Components/StudentComponent/StudentResult';
+import NavBarStudent from '../../../Components/NavBarStudent';
 
 const MoralEducationResult = () => {
   return (
@@ -12,7 +13,7 @@ const MoralEducationResult = () => {
         <SideBarStudent />
       </Col>
       <Col lg={10} className="dashboardContent">
-        <NavbarR />
+        <NavBarStudent />
         <StudentResult />
       </Col>
     </Row>
