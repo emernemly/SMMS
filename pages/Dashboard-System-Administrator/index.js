@@ -120,50 +120,13 @@ const DashboardSA = () => {
               </Col>
             </Row>
             <Row>
-              <Col md={6}>
+              <Col md={12}>
                 <div className="lineBar">
                   {' '}
                   <LineChart />
                 </div>
               </Col>
-              <Col md={6}>
-                {' '}
-                <div className="tableLogDashboard">
-                  <div className="titleDashboard">
-                    <h3>System Logs</h3>
-                    <input
-                      type="search"
-                      placeholder="search Backup"
-                      onChange={(e) => setsearch(e.target.value)}
-                    />
-                  </div>
-                  <table className="Table">
-                    <thead>
-                      {' '}
-                      <tr>
-                        <th>last user</th>
-                        <th>access time</th>
-                        <th>operation</th>
-                      </tr>{' '}
-                    </thead>
-                    <tbody>
-                      {log
-                        .filter((el) =>
-                          el.user.toUpperCase().includes(search.toUpperCase())
-                        )
-                        .map((log, i) => {
-                          return (
-                            <tr className={i % 2 === 0 && `bg-ver`} key={i}>
-                              <td>{log.user}</td>
-                              <td>{log.time}</td>
-                              <td>{log.operation}</td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
-              </Col>{' '}
+
               <Col md={12}>
                 <div className="lineBar espace">
                   <BarChart />
