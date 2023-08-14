@@ -5,13 +5,13 @@ export const signIn = (datas, naviget) => async (dispatch) => {
     const { userName, password } = datas;
 
     const found = await axios.get(
-      `http://localhost:3000/User?userName=${userName}`
+      `https://projectdata-0i86.onrender.com/User?userName=${userName}`
     );
     console.log(found);
     if (found.data[0]) {
       if (password === found.data[0].password) {
         dispatch({ type: 'SIGNIN', payload: found.data[0] });
-        await axios.post('http://localhost:3000/logs', {
+        await axios.post('https://projectdata-0i86.onrender.com/logs', {
           user: found.data[0].userName,
           accessTime: new Date().toISOString(),
           operation: 'modifications',
@@ -32,7 +32,9 @@ export const getUser = () => async (dispatch) => {
   try {
     const id = localStorage.getItem('token');
 
-    const data = await axios.get(`http://localhost:3000/User/${id}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/User/${id}`
+    );
 
     dispatch({ type: 'GETUSER', payload: data.data });
   } catch (error) {
