@@ -3,7 +3,10 @@ import axios from 'axios';
 export const addUserBackup = () => async (dispatch) => {
   try {
     const data = await axios.get('http://localhost:3000/User');
-    await axios.post('http://localhost:1000/api/backup/user', data.data);
+    await axios.post(
+      'https://smmsbackend.onrender.com/api/backup/user',
+      data.data
+    );
     await axios.post('http://localhost:3000/backUp', {
       Status: 'completed',
       database: 'Users',
@@ -18,7 +21,10 @@ export const addUserBackup = () => async (dispatch) => {
 export const addStudentsBackup = () => async (dispatch) => {
   try {
     const data = await axios.get('http://localhost:3000/Students');
-    await axios.post('http://localhost:1000/api/backup/students', data.data);
+    await axios.post(
+      'https://smmsbackend.onrender.com/api/backup/user/api/backup/students',
+      data.data
+    );
     await axios.post('http://localhost:3000/backUp', {
       Status: 'completed',
       database: 'Students',
@@ -33,7 +39,10 @@ export const addStudentsBackup = () => async (dispatch) => {
 export const addClassesBackup = () => async (dispatch) => {
   try {
     const data = await axios.get('http://localhost:3000/classes');
-    await axios.post('http://localhost:1000/api/backup/classes', data.data);
+    await axios.post(
+      'https://smmsbackend.onrender.com/api/backup/user/api/backup/classes',
+      data.data
+    );
     await axios.post('http://localhost:3000/backUp', {
       Status: 'completed',
       database: 'Classes',
