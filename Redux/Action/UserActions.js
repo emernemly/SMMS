@@ -5,13 +5,13 @@ export const signIn = (datas, naviget) => async (dispatch) => {
     const { userName, password } = datas;
 
     const found = await axios.get(
-      `https://smms-itm97m90p-emernemly.vercel.app/User?userName=${userName}`
+      `http://localhost:3000/User?userName=${userName}`
     );
     console.log(found);
     if (found.data[0]) {
       if (password === found.data[0].password) {
         dispatch({ type: 'SIGNIN', payload: found.data[0] });
-        await axios.post('https://smms-itm97m90p-emernemly.vercel.app/logs', {
+        await axios.post('http://localhost:3000/logs', {
           user: found.data[0].userName,
           accessTime: new Date().toISOString(),
           operation: 'modifications',
