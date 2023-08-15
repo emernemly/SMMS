@@ -20,7 +20,7 @@ const Navbarcomponent = () => {
     <Navbar bg="light" expand="lg" className="Navbarcomponent">
       <Container>
         {' '}
-        <Link href="http://localhost:8080">
+        <Link href="/">
           <h3>SMMS</h3>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
