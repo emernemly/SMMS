@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getHeterogeneity = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/Heterogeneity');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/Heterogeneity'
+    );
     dispatch({ type: 'GETHETEROGENEITY', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -10,7 +12,10 @@ export const getHeterogeneity = () => async (dispatch) => {
 };
 export const AddHeterogeneitys = (datas) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3000/Heterogeneity', datas);
+    await axios.post(
+      'https://projectdata-0i86.onrender.com/Heterogeneity',
+      datas
+    );
     dispatch(getHeterogeneity());
   } catch (error) {
     console.log(error);
@@ -18,7 +23,9 @@ export const AddHeterogeneitys = (datas) => async (dispatch) => {
 };
 export const getOwnHeterogeneity = (id) => async (dispatch) => {
   try {
-    const data = await axios.get(`http://localhost:3000/Heterogeneity/${id}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/Heterogeneity/${id}`
+    );
     dispatch({ type: 'GETOWNHETEROGENEITY', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -26,7 +33,10 @@ export const getOwnHeterogeneity = (id) => async (dispatch) => {
 };
 export const updateHeterogeneity = (id, datas) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:3000/Heterogeneity/${id}`, datas);
+    await axios.put(
+      `https://projectdata-0i86.onrender.com/Heterogeneity/${id}`,
+      datas
+    );
     dispatch(getHeterogeneity());
   } catch (error) {
     console.log(error);
@@ -34,7 +44,10 @@ export const updateHeterogeneity = (id, datas) => async (dispatch) => {
 };
 export const deleteHeterogeneity = (id, datas) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3000/Heterogeneity/${id}`, datas);
+    await axios.delete(
+      `https://projectdata-0i86.onrender.com/Heterogeneity/${id}`,
+      datas
+    );
     dispatch(getHeterogeneity());
   } catch (error) {
     console.log(error);

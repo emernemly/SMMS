@@ -27,10 +27,10 @@ const HeadTeacher = () => {
   const onSubmits = async (data) => {
     try {
       const found = await axios.get(
-        `http://localhost:3000/User?userName=${data.userName}`
+        `https://projectdata-0i86.onrender.com/User?userName=${data.userName}`
       );
       if (!found.data.length) {
-        await axios.post('http://localhost:3000/User', {
+        await axios.post('https://projectdata-0i86.onrender.com/User', {
           ...data,
           Role: Rolevalue.value,
         });

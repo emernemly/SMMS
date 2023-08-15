@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getClassMorningCheck = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/ClassMorningCheck');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/ClassMorningCheck'
+    );
     dispatch({ type: 'GETCLASSMORNIGCHECK', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -10,7 +12,10 @@ export const getClassMorningCheck = () => async (dispatch) => {
 };
 export const addClassMorningCheck = (data) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3000/ClassMorningCheck', data);
+    await axios.post(
+      'https://projectdata-0i86.onrender.com/ClassMorningCheck',
+      data
+    );
     dispatch(getClassMorningCheck());
   } catch (error) {
     console.log(error);
@@ -19,7 +24,7 @@ export const addClassMorningCheck = (data) => async (dispatch) => {
 export const getOwnClassMorningCheck = (id) => async (dispatch) => {
   try {
     const data = await axios.get(
-      `http://localhost:3000/ClassMorningCheck/${id}`
+      `https://projectdata-0i86.onrender.com/ClassMorningCheck/${id}`
     );
     dispatch({ type: 'GETOWNCLASSMORNINGCKECK', payload: data.data });
   } catch (error) {
@@ -29,7 +34,10 @@ export const getOwnClassMorningCheck = (id) => async (dispatch) => {
 
 export const updateOwnClassMorningCheck = (id, data) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:3000/ClassMorningCheck/${id}`, data);
+    await axios.put(
+      `https://projectdata-0i86.onrender.com/ClassMorningCheck/${id}`,
+      data
+    );
     dispatch(getClassMorningCheck());
   } catch (error) {
     console.log(error);
@@ -37,7 +45,9 @@ export const updateOwnClassMorningCheck = (id, data) => async (dispatch) => {
 };
 export const deleteOwnClassMorningCheck = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3000/ClassMorningCheck/${id}`);
+    await axios.delete(
+      `https://projectdata-0i86.onrender.com/ClassMorningCheck/${id}`
+    );
     dispatch(getClassMorningCheck());
   } catch (error) {
     console.log(error);

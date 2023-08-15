@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getDeductionScores = () => async (dispatch) => {
   try {
-    const data = await axios('http://localhost:3000/deductionScores');
+    const data = await axios(
+      'https://projectdata-0i86.onrender.com/deductionScores'
+    );
     dispatch({ type: 'GETDEDUCTIONSCORES', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -10,11 +12,14 @@ export const getDeductionScores = () => async (dispatch) => {
 };
 export const deductionScores = (_id, datas) => async (dispatch) => {
   try {
-    const data = await axios.post('http://localhost:3000/deductionScores', {
-      ...datas,
-      reviews: 'waiting',
-      studentId: _id,
-    });
+    const data = await axios.post(
+      'https://projectdata-0i86.onrender.com/deductionScores',
+      {
+        ...datas,
+        reviews: 'waiting',
+        studentId: _id,
+      }
+    );
     console.log(_id);
     dispatch(getDeductionScores());
   } catch (error) {
@@ -24,7 +29,7 @@ export const deductionScores = (_id, datas) => async (dispatch) => {
 export const OwnDeductionScores = (_id) => async (dispatch) => {
   try {
     const data = await axios.get(
-      `http://localhost:3000/deductionScores/${_id}`
+      `https://projectdata-0i86.onrender.com/deductionScores/${_id}`
     );
     dispatch({ type: 'OWNDEDUCTIONS', payload: data.data });
   } catch (error) {
@@ -38,17 +43,17 @@ export const StatusDeductionScores =
         console.log(review);
         if (reviewsCheck === 'approved') {
           const data = await axios.get(
-            `http://localhost:3000/Students/${review.studentId}`
+            `https://projectdata-0i86.onrender.com/Students/${review.studentId}`
           );
           await axios.put(
-            `http://localhost:3000/Students/${review.studentId}`,
+            `https://projectdata-0i86.onrender.com/Students/${review.studentId}`,
             {
               ...data.data,
               Score: 0,
             }
           );
           await axios.put(
-            `http://localhost:3000/deductionScores/${review.id}`,
+            `https://projectdata-0i86.onrender.com/deductionScores/${review.id}`,
             {
               ...review,
               reviews: 'approved',
@@ -56,7 +61,7 @@ export const StatusDeductionScores =
           );
         } else if (reviewsCheck === 'Refused') {
           await axios.put(
-            `http://localhost:3000/deductionScores/${review.id}`,
+            `https://projectdata-0i86.onrender.com/deductionScores/${review.id}`,
             {
               ...review,
               reviews: 'Refused',
@@ -67,17 +72,17 @@ export const StatusDeductionScores =
         console.log(review);
         if (reviewsCheck === 'approved') {
           const data = await axios.get(
-            `http://localhost:3000/Students/${review.studentId}`
+            `https://projectdata-0i86.onrender.com/Students/${review.studentId}`
           );
           await axios.put(
-            `http://localhost:3000/Students/${review.studentId}`,
+            `https://projectdata-0i86.onrender.com/Students/${review.studentId}`,
             {
               ...data.data,
               Score: data.data.Score - review.points,
             }
           );
           await axios.put(
-            `http://localhost:3000/deductionScores/${review.id}`,
+            `https://projectdata-0i86.onrender.com/deductionScores/${review.id}`,
             {
               ...review,
               reviews: 'approved',
@@ -85,7 +90,7 @@ export const StatusDeductionScores =
           );
         } else if (reviewsCheck === 'Refused') {
           await axios.put(
-            `http://localhost:3000/deductionScores/${review.id}`,
+            `https://projectdata-0i86.onrender.com/deductionScores/${review.id}`,
             {
               ...review,
               reviews: 'Refused',

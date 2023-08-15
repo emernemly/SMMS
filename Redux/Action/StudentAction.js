@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getStudents = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/Students');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/Students'
+    );
     dispatch({ type: 'STUDENTS', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -10,7 +12,9 @@ export const getStudents = () => async (dispatch) => {
 };
 export const OwnStudents = (id) => async (dispatch) => {
   try {
-    const data = await axios.get(`http://localhost:3000/Students/${id}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/Students/${id}`
+    );
     dispatch({ type: 'OWNSTUDENTS', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -20,7 +24,7 @@ export const OwnStudents = (id) => async (dispatch) => {
 export const changeStudent = (datas, _id) => async (dispatch) => {
   try {
     const data = await axios.put(
-      `http://localhost:3000/Students/${_id}`,
+      `https://projectdata-0i86.onrender.com/Students/${_id}`,
       datas
     );
     dispatch(getStudents());
@@ -30,7 +34,9 @@ export const changeStudent = (datas, _id) => async (dispatch) => {
 };
 export const deleteStudent = (_id) => async (dispatch) => {
   try {
-    const data = await axios.delete(`http://localhost:3000/Students/${_id}`);
+    const data = await axios.delete(
+      `https://projectdata-0i86.onrender.com/Students/${_id}`
+    );
     dispatch(getStudents());
   } catch (error) {
     console.log(error);
@@ -40,7 +46,7 @@ export const deleteStudent = (_id) => async (dispatch) => {
 export const getstudentByClass = (className) => async (dispatch) => {
   try {
     const data = await axios.get(
-      `http://localhost:3000/Students?className=${className}`
+      `https://projectdata-0i86.onrender.com/Students?className=${className}`
     );
     dispatch({ type: 'GETSTUDENTBYCLASS', payload: data.data });
   } catch (error) {
@@ -53,13 +59,13 @@ export const signInStudent = (datas, naviget) => async (dispatch) => {
     const { userName, password } = datas;
 
     const found = await axios.get(
-      `http://localhost:3000/Students?userName=${userName}`
+      `https://projectdata-0i86.onrender.com/Students?userName=${userName}`
     );
     console.log(found);
     if (found.data[0]) {
       if (password === found.data[0].password) {
         dispatch({ type: 'SIGNINSTUDENT', payload: found.data[0] });
-        await axios.post('http://localhost:3000/logs', {
+        await axios.post('https://projectdata-0i86.onrender.com/logs', {
           user: found.data[0].userName,
           accessTime: new Date().toISOString(),
           operation: 'modifications',
@@ -78,7 +84,9 @@ export const signInStudent = (datas, naviget) => async (dispatch) => {
 export const getStudent = () => async (dispatch) => {
   try {
     const id = localStorage.getItem('tokenStudent');
-    const data = await axios.get(`http://localhost:3000/Students/${id}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/Students/${id}`
+    );
     dispatch({ type: 'OWNSTUDENTS', payload: data.data });
   } catch (error) {
     console.log(error);

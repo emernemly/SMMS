@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const getClasses = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/classes');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/classes'
+    );
     dispatch({ type: 'GETCLASS', payload: data.data });
   } catch (error) {
     console.log(error);
@@ -11,7 +13,7 @@ export const getClasses = () => async (dispatch) => {
 
 export const addClasses = (data) => (dispatch) => {
   try {
-    axios.post('http://localhost:3000/classes', data);
+    axios.post('https://projectdata-0i86.onrender.com/classes', data);
     dispatch(getClasses());
   } catch (error) {
     console.log(error);
@@ -19,7 +21,9 @@ export const addClasses = (data) => (dispatch) => {
 };
 export const getOwnClass = (_id) => async (dispatch) => {
   try {
-    const data = await axios.get(`http://localhost:3000/classes/${_id}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/classes/${_id}`
+    );
     console.log(_id);
     dispatch({ type: 'OWNCLASS', payload: data.data });
   } catch (error) {
@@ -29,7 +33,10 @@ export const getOwnClass = (_id) => async (dispatch) => {
 
 export const updateClass = (id, data) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:3000/classes/${id}`, data);
+    await axios.put(
+      `https://projectdata-0i86.onrender.com/classes/${id}`,
+      data
+    );
     dispatch(getClasses());
   } catch (error) {
     console.log(error);
@@ -37,7 +44,7 @@ export const updateClass = (id, data) => async (dispatch) => {
 };
 export const DeleteClass = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3000/classes/${id}`);
+    await axios.delete(`https://projectdata-0i86.onrender.com/classes/${id}`);
     dispatch(getClasses());
   } catch (error) {
     console.log(error);
@@ -45,7 +52,9 @@ export const DeleteClass = (id) => async (dispatch) => {
 };
 export const findOwnClass = (name) => async (dispatch) => {
   try {
-    const data = await axios.get(`http://localhost:3000/classes?Class=${name}`);
+    const data = await axios.get(
+      `https://projectdata-0i86.onrender.com/classes?Class=${name}`
+    );
     dispatch({ type: 'FINDOWNCLASS', payload: data.data });
   } catch (error) {
     console.log(error);

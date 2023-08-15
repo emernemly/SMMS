@@ -34,7 +34,7 @@ const Students = () => {
   } = useForm();
   const onSubmits = async (data) => {
     try {
-      await axios.post('http://localhost:3000/Students', {
+      await axios.post('https://projectdata-0i86.onrender.com/Students', {
         ...data,
         class: classValue.value,
         className: className.value,

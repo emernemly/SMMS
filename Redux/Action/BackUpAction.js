@@ -2,12 +2,12 @@ import axios from 'axios';
 
 export const addUserBackup = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/User');
+    const data = await axios.get('https://projectdata-0i86.onrender.com/User');
     await axios.post(
       'https://smmsbackend.onrender.com/api/backup/user',
       data.data
     );
-    await axios.post('http://localhost:3000/backUp', {
+    await axios.post('https://projectdata-0i86.onrender.com/backUp', {
       Status: 'completed',
       database: 'Users',
       location: 'mongoDb',
@@ -20,12 +20,14 @@ export const addUserBackup = () => async (dispatch) => {
 };
 export const addStudentsBackup = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/Students');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/Students'
+    );
     await axios.post(
       'https://smmsbackend.onrender.com/api/backup/user/api/backup/students',
       data.data
     );
-    await axios.post('http://localhost:3000/backUp', {
+    await axios.post('https://projectdata-0i86.onrender.com/backUp', {
       Status: 'completed',
       database: 'Students',
       location: 'mongoDb',
@@ -38,12 +40,14 @@ export const addStudentsBackup = () => async (dispatch) => {
 };
 export const addClassesBackup = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/classes');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/classes'
+    );
     await axios.post(
       'https://smmsbackend.onrender.com/api/backup/user/api/backup/classes',
       data.data
     );
-    await axios.post('http://localhost:3000/backUp', {
+    await axios.post('https://projectdata-0i86.onrender.com/backUp', {
       Status: 'completed',
       database: 'Classes',
       location: 'mongoDb',
@@ -57,7 +61,9 @@ export const addClassesBackup = () => async (dispatch) => {
 
 export const getBackUp = () => async (dispatch) => {
   try {
-    const data = await axios.get('http://localhost:3000/backUp');
+    const data = await axios.get(
+      'https://projectdata-0i86.onrender.com/backUp'
+    );
     dispatch({ type: 'GETBACKUP', payload: data.data });
   } catch (error) {
     console.log(error);

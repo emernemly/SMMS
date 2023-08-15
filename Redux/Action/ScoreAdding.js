@@ -3,9 +3,9 @@ import axios from 'axios';
 export const ScoreAdding = (data, studentID) => async (dispatch) => {
   try {
     const student = await axios.get(
-      `http://localhost:3000/Students/${studentID}`
+      `https://projectdata-0i86.onrender.com/Students/${studentID}`
     );
-    await axios.post('http://localhost:3000/addScore', {
+    await axios.post('https://projectdata-0i86.onrender.com/addScore', {
       ...data,
       UserId: student.data,
       reviews: 'waiting',
@@ -18,7 +18,9 @@ export const ScoreAdding = (data, studentID) => async (dispatch) => {
 
 export const GetScore = () => async (dispatch) => {
   try {
-    const MoralScore = await axios.get('http://localhost:3000/addScore');
+    const MoralScore = await axios.get(
+      'https://projectdata-0i86.onrender.com/addScore'
+    );
     dispatch({ type: 'GETSCORE', payload: MoralScore.data });
   } catch (error) {
     console.log(error);
@@ -27,7 +29,9 @@ export const GetScore = () => async (dispatch) => {
 
 export const GetOwnScore = (_id) => async (dispatch) => {
   try {
-    const MoralScore = await axios.get(`http://localhost:3000/addScore/${_id}`);
+    const MoralScore = await axios.get(
+      `https://projectdata-0i86.onrender.com/addScore/${_id}`
+    );
     dispatch({ type: 'GETOWNSCORE', payload: MoralScore.data });
   } catch (error) {
     console.log(error);
@@ -38,19 +42,28 @@ export const StatusAdding = (review, reviewsCheck) => async (dispatch) => {
     if (review.status === 'add') {
       console.log(review);
       if (reviewsCheck === 'approved') {
-        await axios.put(`http://localhost:3000/Students/${review.UserId.id}`, {
-          ...review.UserId,
-          Score: review.score,
-        });
-        await axios.put(`http://localhost:3000/addScore/${review.id}`, {
-          ...review,
-          reviews: 'approved',
-        });
+        await axios.put(
+          `https://projectdata-0i86.onrender.com/Students/${review.UserId.id}`,
+          {
+            ...review.UserId,
+            Score: review.score,
+          }
+        );
+        await axios.put(
+          `https://projectdata-0i86.onrender.com/addScore/${review.id}`,
+          {
+            ...review,
+            reviews: 'approved',
+          }
+        );
       } else if (reviewsCheck === 'Refused') {
-        await axios.put(`http://localhost:3000/addScore/${review.id}`, {
-          ...review,
-          reviews: 'Refused',
-        });
+        await axios.put(
+          `https://projectdata-0i86.onrender.com/addScore/${review.id}`,
+          {
+            ...review,
+            reviews: 'Refused',
+          }
+        );
       }
     }
     dispatch(GetScore());
@@ -62,7 +75,7 @@ export const addingBystudents = () => async (dispatch) => {
   try {
     const id = localStorage.getItem('tokenStudent');
     const data = await axios.get(
-      `http://localhost:3000/addScore?UserId.id=${id}`
+      `https://projectdata-0i86.onrender.com/addScore?UserId.id=${id}`
     );
     dispatch({ type: 'GETSCORE', payload: data.data });
   } catch (error) {

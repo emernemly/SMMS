@@ -14,7 +14,7 @@ const Parent = () => {
   } = useForm();
   const onSubmits = async (data) => {
     try {
-      await axios.post('http://localhost:3000/Parent', data);
+      await axios.post('https://projectdata-0i86.onrender.com/Parent', data);
       alert('add Parent secc');
     } catch (error) {
       console.log(error);
